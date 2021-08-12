@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './Components/Sidebar.js';
+import Sidebar from './Components/layout/Sidebar';
 //import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //import Login from './componets/auth/Login';
 //import Signup from './componets/auth/Signup';

@@ -1,8 +1,8 @@
-import { Icon } from '@material-ui/core';
+//import { Icon } from '@material-ui/core';
 import React from 'react';
-import '../css/Sidebar.css';
+import '../../css/Sidebar.css';
 import {SidebarData} from './SidebarData';
-import ComputerIcon from '@material-ui/icons/DesktopWindows';
+//import ComputerIcon from '@material-ui/icons/DesktopWindows';
 
 //Obtiene datos de SidebarData.js para construir el Menu
 function Sidebar() {
@@ -17,7 +17,7 @@ function Sidebar() {
                         return(
                         <li key={key} 
                             className='Modulos'
-                            id={window.location.pathname == val.Link ? "activo" : ""}
+                            id={window.location.pathname === val.Link ? "activo" : ""}
                             onClick={ ()=> window.location.pathname = val.Link }> 
                                 <div id='Icono'>{val.Icono}</div>
                                 <div id='Nombre'>{val.Modulo}</div>
