@@ -14,10 +14,10 @@ const Login = () => {
     return ( 
         <div className="">
             <div className="">
-                <h1>Inicia Sesión</h1>
+                <h1 style={{color:'red'}}>Inicia Sesión</h1>
 
                 <form>
-                    <div className="">
+                    <div className="text-success">
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
