@@ -11,6 +11,11 @@ Phoenix Front-End para el proyecto de observatorio de la UAC.<br>
 
 - Clonar el repositorio
 - Ejecutar " npm i " o " npm install " en la terminal en la raiz del proyecto
+- En caso de no tener las siguientes paquetes de dependencias:
+ - npm i react-router
+ - npm install --save cdbreact 
+ - npm install @material-ui/core
+ - npm install @material-ui/icons
 - Para correr el proyecto se ejecuta " npm start " en la raiz del proyecto (rama de desarrollo).
 
 # Reglas
