@@ -1,0 +1,41 @@
+.SidebarContenedor {
+  display: flex;
+  height: 100vh;
+  overflow: scroll initial;
+}
+
+.SidebarContenedor .Sidebar {
+  color: white;
+  background-color: #2f4050;
+}
+
+.headerSidebar .titulo {
+  color: white;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.headerSidebar .titulo:hover {
+  /*Titulo */
+  color: rgb(92, 203, 255);
+}
+.Modulo:hover {
+  /*Modulos*/
+  color: rgb(136, 217, 255);
+}
+
+.sidebar-content .active {
+  /*MOdulos Activos
+  color: rgb(75, 189, 241);
+  */
+  color: rgb(79, 43, 209);
+}
+
+.Login {
+  text-align: center;
+  padding: 20px 5px;
+  /*background-color: #293846;*/
+}

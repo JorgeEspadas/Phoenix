@@ -1,31 +1,44 @@
-import React from 'react'
-import HomeIcon from '@material-ui/icons/Home';
-import EstadisticasIcon from '@material-ui/icons/Equalizer';
-import InfoIcon from '@material-ui/icons/ImportContacts';
-import ContactoIcon from '@material-ui/icons/Mail';
+import React from 'react';
 
 
 export const SidebarData = [
     {
         Modulo: "Home",
-        Icono: <HomeIcon/>,
-        Link: "/HomePage"
+        Icono: "home",
+        Link: "/",
+        Activo: true
     },
     {
         Modulo: "Estadisticas",
-        Icono: <EstadisticasIcon/>,
-        Link: "/EstadisticasPage"
+        Icono: "chart-line",
+        Link: "/Estadisticas",
+        Activo: true
     },
     {
         Modulo: "Info",
-        Icono: <InfoIcon/>,
-        Link: "/InfoPage"
+        Icono: "question-circle",
+        Link: "/Info",
+        Activo: true
     },
     {
         Modulo: "Contactanos",
-        Icono: <ContactoIcon/>,
-        Link: "/ContactoPage"
-    }
+        Icono: "envelope",
+        Link: "/Contactanos",
+        Activo: true
+    },
+    {
+        Modulo: "Encuesta",
+        Icono: "file-alt",
+        Link: "/Encuestas",
+        Activo: true
+    },
+    {
+        Modulo: "Administrador",
+        Icono: "tools",
+        Link: "/Administrador",
+        Activo: false
+    },
+
 ];
     
 

@@ -1,35 +1,55 @@
-//import { Icon } from '@material-ui/core';
 import React from 'react';
-import '../../css/Sidebar.css';
+import {
+  CDBSidebar,
+  CDBSidebarContent,
+  CDBSidebarFooter,
+  CDBSidebarHeader,
+  CDBSidebarMenu,
+  CDBSidebarMenuItem
+} from 'cdbreact';
+import { NavLink } from 'react-router-dom';
 import {SidebarData} from './SidebarData';
-//import ComputerIcon from '@material-ui/icons/DesktopWindows';
+import '../../css/AppSidebar.css';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-//Obtiene datos de SidebarData.js para construir el Menu
-function Sidebar() {
-    return (
-        <div className='Sidebar'>
-            <div className='NombreProyecto'>
-                <h3>Observatorio</h3>
-            </div>
-            <div>
-                <ul className='SidebarModulos'>
-                    {SidebarData.map((val, key) => {
-                        return(
-                        <li key={key} 
-                            className='Modulos'
-                            id={window.location.pathname === val.Link ? "activo" : ""}
-                            onClick={ ()=> window.location.pathname = val.Link }> 
-                                <div id='Icono'>{val.Icono}</div>
-                                <div id='Nombre'>{val.Modulo}</div>
-                        </li>);
-                    })}
-                </ul>
-            </div>
-            
-        </div>
-    )
-}
+const Sidebar = () => {
+  return (
+    <div>
+      <CDBSidebar className="Sidebar" style={{ background:"linear-gradient(0deg, rgba(37,212,214,1) 0%, rgba(110,112,200,1) 100%)" }} >
+        
+        <CDBSidebarHeader className='headerSidebar' prefix={<i className="fa fa-bars fa-large"></i>}>
+          <NavLink exact to="/">
+          <a className='titulo' >
+                INSOFCAM
+          </a>
+          </NavLink>
+        </CDBSidebarHeader>
 
-export default Sidebar
+        <CDBSidebarContent className="sidebar-content">
+            <CDBSidebarMenu>
+            {SidebarData.map((val, key) => {
+                    return(
+                        <NavLink key={key} 
+                                  className='Modulo'
+                                 exact to={val.Link}
+                                 activeClassName="active">
+                                <CDBSidebarMenuItem icon={val.Icono}>
+                                    {val.Modulo}
+                                </CDBSidebarMenuItem>
+                        </NavLink>
+                    );                    
+            })}
+            </CDBSidebarMenu>
+        </CDBSidebarContent>
 
+        <CDBSidebarFooter className='Login'>
+            <NavLink exact to='/login'>
+            <AccountCircleIcon fontSize='large' style={{color: 'white'}}/>
+            </NavLink> 
+        </CDBSidebarFooter>
+      </CDBSidebar>
+    </div>
+  );
+};
 
+export default Sidebar;
