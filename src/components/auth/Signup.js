@@ -4,15 +4,13 @@ import clientAxios from '../../config/axios';
 const Singup = () => {
 
     const [ user, saveUser] = useState({
-        name: '',
+        telefono: '',
         email:'',
         password:'',
         confirmPass:''
     });
 
-    const { name, email, password, confirmPass } = user;
-
-    const handleChance = e => {
+    const handleChange = e => {
         saveUser({
             ...user,
             [e.target.name]: e.target.value
@@ -21,7 +19,7 @@ const Singup = () => {
 
     const registerUser = async data => {
         try{
-            const response = await clientAxios.post('api/user', data);
+            const response = await clientAxios.post('auth/signup', data);
             console.log(response);
         }catch (error){
             console.log("error");
@@ -29,26 +27,26 @@ const Singup = () => {
     };
 
 
-    const handleSubmint = () => {
-        if(name.trim()==="" || email.trim() ==="" || password.trim() === "" || confirmPass.trim()===""){
+    const handleSubmit = () => {
+        if(user.telefono.trim()==="" || user.email.trim() ==="" || user.password.trim() === "" || user.confirmPass.trim()===""){
             console.log("campos obligatorios");
             return;
         }
 
-        if(password.length < 8){
+        if(user.password.length < 8){
             console.log("la contraseña debe tener almenos 8 caracteres");
             return;
         }
 
-        if(password !== confirmPass){
+        if(user.password !== user.confirmPass){
             console.log("las contraseñas no coinciden");
             return;
         }
         
         const userSend = {
-            name: name,
-            email: email,
-            password: password
+            telefono: user.telefono,
+            email: user.email,
+            password: user.password
         }  
 
         registerUser(userSend);
@@ -60,20 +58,15 @@ const Singup = () => {
        
     <div className="">  
         <h1>Registrate</h1>
-
-        <form
-            onSubmit={handleSubmint}
-        >
-
             <div className="">
-                <label htmlFor="name">Nombres</label>
+                <label htmlFor="telefono">Telefono</label>
                 <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Nombres"
-                    value={name}
-                    onChange={handleChance}
+                    type="phone"
+                    id="telefono"
+                    name="telefono"
+                    placeholder="Telefono"
+                    value={user.telefono}
+                    onChange={handleChange}
                 />
             </div>
 
@@ -86,8 +79,8 @@ const Singup = () => {
                     id="email"
                     name="email"
                     placeholder="Tú email"
-                    value={email}
-                    onChange={handleChance}
+                    value={user.email}
+                    onChange={handleChange}
                 />
                 </div>
             <br></br>
@@ -99,8 +92,8 @@ const Singup = () => {
                     id="password"
                     name="password"
                     placeholder="contraseña"
-                    value={password}
-                    onChange={handleChance}
+                    value={user.password}
+                    onChange={handleChange}
                 />
             </div>
 
@@ -112,21 +105,16 @@ const Singup = () => {
                     id="confirmPass"
                     name="confirmPass"
                     placeholder="Confirmar contraseña"
-                    value={confirmPass}
-                    onChange={handleChance}
+                    value={user.confirmPass}
+                    onChange={handleChange}
                 />
             </div>
 
 
             <br></br>
             <div className="">
-                <input 
-                    type="submit"
-                    className=""
-                    value="registrarse"
-                />
+                <button onClick={handleSubmit}>Registrarse</button>
             </div>
-        </form>
     </div> 
     );
 }
