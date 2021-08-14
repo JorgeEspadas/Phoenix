@@ -19,7 +19,7 @@ const Sidebar = () => {
         
         <CDBSidebarHeader className='headerSidebar' prefix={<i className="fa fa-bars fa-large"></i>}>
           <NavLink exact to="/">
-          <a className='titulo' >
+          <a className='titulo' href='#'>
                 INSOFCAM
           </a>
           </NavLink>
