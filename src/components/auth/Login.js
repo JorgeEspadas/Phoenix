@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
     const [ user, saveUser ] = useState({
-        mail: '',
+        email: '',
         password: ''
     });
 
-    const onChance = () => {
+    const { email, password } = user;
+    const handleChance = e => {
+        saveUser({
+            ...user,
+            [e.target.name]: e.target.value
+        });
+    }
+    //cuando el usuario quiera iniciar sesión
+    const handleSubmint = () => {
 
     }
     return ( 
         <div className="">
-            <div className="">
+            <div className="">  
                 <h1>Inicia Sesión</h1>
 
-                <form>
+                <form
+                    onSubmit={handleSubmint}
+                >
                     <div className="">
                         <label htmlFor="email">Email</label>
                         <input
@@ -24,18 +34,22 @@ const Login = () => {
                             id="email"
                             name="email"
                             placeholder="Tú email"
-                            onChange={onChance}
+                            value={email}
+                            onChange={handleChance}
                         />
                     </div>
+                    <br></br>
 
                     <div className="">
                         <label htmlFor="password">Contraseña</label>
+                        
                         <input
                             type="password"
                             id="password"
                             name="password"
                             placeholder="contraseña"
-                            onChange={onChance}
+                            value={password}
+                            onChange={handleChance}
                         />
                     </div>
 
@@ -47,6 +61,7 @@ const Login = () => {
                         />
                     </div>
                 </form>
+                <Link to="/signup">Registrarse</Link>
             </div>
         </div>
     );
