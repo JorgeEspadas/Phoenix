@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
 import clientAxios from '../../config/axios';
+import MsgSnackBar from '../MsgSnackBar';
 
 const Singup = () => {
 
@@ -9,6 +10,8 @@ const Singup = () => {
         password:'',
         confirmPass:''
     });
+
+    let [ message, setMessage ] = useState('');
 
     const handleChange = e => {
         saveUser({
@@ -28,9 +31,11 @@ const Singup = () => {
 
 
     const handleSubmit = () => {
+
         if(user.telefono.trim()==="" || user.email.trim() ==="" || user.password.trim() === "" || user.confirmPass.trim()===""){
-            console.log("campos obligatorios");
+            
             return;
+
         }
 
         if(user.password.length < 8){
