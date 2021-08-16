@@ -1,15 +1,17 @@
-import { Redirect, Route } from "react-router-dom";
-
-//Variables para simulacion de Login falta la creacion de UserAuth y AuthProvider
-const user = null; //Como Usuario no Logeado
-//const user = { id: 1, username: "Majo" }; //Como usuario Logiado
+import { Redirect, Route, useLocation } from "react-router-dom";
+import useAuth from "../Components/auth/useAuth";
 
 export default function PrivateRoute({ component: Component, ...rest }) {
+  const auth = useAuth();
+  const location = useLocation();
+
   return (
-    <Route
-      {...rest} /* Recibe : exact={props.exact} path={props.path} component={props.component}*/
-    >
-      {user ? <Component /> : <Redirect to="/Login" />}
+    <Route {...rest}>
+      {auth.user ? (
+        <Component />
+      ) : (
+        <Redirect to={{ pathname: "/login", state: { from: location } }} />
+      )}
     </Route>
   );
 }
