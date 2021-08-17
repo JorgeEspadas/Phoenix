@@ -1,8 +1,11 @@
-import React,{ useState } from 'react';
+import React,{ useState, useRef } from 'react';
 import clientAxios from '../../config/axios';
 import MsgSnackBar from '../MsgSnackBar';
 
 const Singup = () => {
+
+    const snackBarRef = useRef(null);
+
 
     const [ user, saveUser] = useState({
         telefono: '',
@@ -33,7 +36,8 @@ const Singup = () => {
     const handleSubmit = () => {
 
         if(user.telefono.trim()==="" || user.email.trim() ==="" || user.password.trim() === "" || user.confirmPass.trim()===""){
-            
+            if(message) snackBarRef.current.showMessage();
+            setMessage("Todos los campos son obligatorios");
             return;
 
         }
@@ -120,6 +124,15 @@ const Singup = () => {
             <div className="">
                 <button onClick={handleSubmit}>Registrarse</button>
             </div>
+
+            {message &&
+                <MsgSnackBar
+                    ref={snackBarRef}
+                    message={message}
+                    type="error"
+                    duration={1000}
+                />
+            }
     </div> 
     );
 }

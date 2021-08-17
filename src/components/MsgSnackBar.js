@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -8,8 +8,14 @@ function Alert(props) {
 }
 
 
-const MsgSnackBar = ({message, type, duration}) => {
+const MsgSnackBar = forwardRef((props, ref) => {
     const [open, setOpen] = useState(true);
+
+    useImperativeHandle(ref, () => ({
+        showMessage(){
+            setOpen(true);
+        },
+    }));
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -20,12 +26,12 @@ const MsgSnackBar = ({message, type, duration}) => {
 
 
     return (
-        <Snackbar open={open} autoHideDuration={duration} onClose={handleClose}>
-            <Alert onClose={handleClose} severity={type}>
-                {message}
+        <Snackbar open={open} autoHideDuration={props.duration} onClose={handleClose}>
+            <Alert onClose={handleClose} severity={props.type}>
+                {props.message}
             </Alert>
         </Snackbar>
     );
-};
+});
 
 export default MsgSnackBar;
