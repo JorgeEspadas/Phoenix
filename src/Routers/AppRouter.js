@@ -1,7 +1,9 @@
 import React from "react";
 import Sidebar from "../Components/layout/Sidebar";
+import "../css/AppSidebar.css";
 import {
   BrowserRouter as Router,
+  Link,
   Redirect,
   Route,
   Switch,
@@ -20,22 +22,19 @@ import FormPage from "../Pages/FormPage";
 import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 
+import IMGprincipal from "../IMG/IconoApp.svg";
+
 export default function AppRouter() {
   return (
     <Router>
       <div className="SidebarContenedor">
         <Sidebar />
-        <div className="container-fluid">
-          <nav
-            className="navbar navbar-light"
-            style={{ background: "#e3f2fd" }}
-          >
-            <div className="container-fluid justify-content-end">
-              <a class="navbar-brand" href="#">
-                Aqui debe ir algo Bonito
-              </a>
-            </div>
-          </nav>
+        <div className="container-fluid" id="contenedorPrincipal">
+          <div className="header">
+            <Link to="/" className="iconoApp">
+              <img src={IMGprincipal} alt="" />
+            </Link>
+          </div>
 
           <Switch>
             <Route exact path="/" component={HomePage} />

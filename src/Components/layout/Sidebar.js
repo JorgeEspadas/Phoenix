@@ -9,7 +9,6 @@ import {
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
-import "../../css/AppSidebar.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import useAuth from "../auth/useAuth";
@@ -19,20 +18,14 @@ const Sidebar = () => {
 
   return (
     <div>
-      <CDBSidebar
-        className="Sidebar"
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(37,212,214,1) 0%, rgba(110,112,200,1) 100%)",
-        }}
-      >
+      <CDBSidebar className="Sidebar">
         <CDBSidebarHeader
           className="headerSidebar"
           prefix={<i className="fa fa-bars fa-large"></i>}
         >
           <NavLink exact to="/">
             <a className="titulo" href="#">
-              INSOFCAM
+              INSOFTCAM
             </a>
           </NavLink>
         </CDBSidebarHeader>
@@ -57,10 +50,13 @@ const Sidebar = () => {
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
-        <CDBSidebarFooter className="Login">
+        <CDBSidebarFooter className="LoginFooter">
           {!auth.isLogged() && (
             <NavLink exact to="/login" title="Iniciar Sesion">
-              <AccountCircleIcon fontSize="large" style={{ color: "white" }} />
+              <AccountCircleIcon
+                className="InicioSesionIcono"
+                fontSize="large"
+              />
             </NavLink>
           )}
           {auth.isLogged() && (

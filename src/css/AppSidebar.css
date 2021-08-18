@@ -1,42 +1,67 @@
 .SidebarContenedor {
   display: flex;
   height: 100vh;
-  overflow: scroll initial;
+  overflow: hidden;
+  margin: 0px auto0;
 }
 
+/*Color de Sidebar*/
 .SidebarContenedor .Sidebar {
   color: white;
-  background-color: #2f4050;
+  background: linear-gradient(
+    0deg,
+    rgba(37, 212, 214, 1) 0%,
+    rgb(132, 134, 230) 70%
+  );
 }
-
-.headerSidebar .titulo {
-  color: white;
-  
-}
+/*Titulo del Sidebar*/
 a:link {
   text-decoration: none;
 }
 a:hover {
   text-decoration: none;
 }
-.headerSidebar .titulo:hover {
-  /*Titulo */
-  color: rgb(92, 203, 255);
+.headerSidebar .titulo {
+  color: white;
 }
+
+/*Modulos*/
 .Modulo:hover {
   /*Modulos*/
-  color: rgb(136, 217, 255);
+  color: rgb(172, 229, 255);
 }
-
 .sidebar-content .active {
-  /*MOdulos Activos
-  color: rgb(75, 189, 241);
-  */
-  color: rgb(79, 43, 209);
+  color: #1e4fa3;
 }
 
-.Login {
+/*Icono de Login*/
+.LoginFooter {
   text-align: center;
   padding: 20px 5px;
   /*background-color: #293846;*/
+}
+.LoginFooter .InicioSesionIcono {
+  color: white;
+}
+.LoginFooter .InicioSesionIcono:hover {
+  color: #1e4fa3;
+}
+
+/*Barra Superior*/
+#contenedorPrincipal {
+  background-color: #eaeef4;
+  padding: 0%;
+  position: inherit;
+  overflow: scroll;
+}
+.header {
+  background-color: white;
+  box-shadow: 0px 2px 5px #c9cacc;
+  padding-right: 3%;
+  height: 74px;
+}
+.header .iconoApp img {
+  margin: 12px;
+  height: 50px;
+  float: right;
 }
