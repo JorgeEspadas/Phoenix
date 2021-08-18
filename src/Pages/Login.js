@@ -1,5 +1,9 @@
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import useAuth from "../Components/auth/useAuth";
+/*Styles*/
+import ImageLogin from "../IMG/Principal.svg";
+import "../css/LoginPage.css";
+import "animate.css";
 
 export default function Login() {
   const history = useHistory();
@@ -13,54 +17,49 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <div class="card text-center">
-        <div class="card-header">
-          <h1>Iniciar Sesion</h1>
-        </div>
-        <div class="card-body">
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-            <div id="emailHelp" class="form-text">
-              We'll never share your email with anyone else.
+    <div className="contenedorLoginPage">
+      <div className="container">
+        <div className=" rowLogin row g-0 ">
+          <div className="loginContenedorImagen col-lg-5">
+            <img id="imgLogin" src={ImageLogin} alt="" />
+          </div>
+          <div className="LoginForm col-lg-7 text-center py-5">
+            <h1 className="animate__animated animate__bounce">Welcome Back</h1>
+            <div className="form">
+              <div className="form-row py-3 pt-4">
+                <div className="offset-1 col-lg-10">
+                  <input
+                    type="email"
+                    className="inputLogin px-3"
+                    placeholder="Correo Electronico"
+                  />
+                </div>
+              </div>
+              <div className="form-row py-3">
+                <div className="offset-1 col-lg-10">
+                  <input
+                    type="password"
+                    className="inputLogin px-3"
+                    placeholder="Contraseña"
+                  />
+                </div>
+              </div>
+              <div className="form-row py-3">
+                <div className="offset-1 col-lg-10">
+                  <button class="btnLogin" onClick={handleLogin}>
+                    Iniciar Sesion
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <span>¿No tienes Cuenta? </span>
+              <NavLink exact to="/Signup">
+                <a>Registrate</a>
+              </NavLink>
             </div>
           </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div class="mb-3 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="exampleCheck1"
-            />
-            <label class="form-check-label" for="exampleCheck1">
-              Check me out
-            </label>
-          </div>
-          <button class="btn btn-primary" onClick={handleLogin}>
-            Iniciar Session
-          </button>
-          <NavLink exact to="/Signup" title="Iniciar Sesion">
-            <p>Registrate</p>
-          </NavLink>
         </div>
-        <div class="card-footer text-muted">2 days ago</div>
       </div>
     </div>
   );

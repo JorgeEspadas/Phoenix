@@ -32,21 +32,47 @@ const Sidebar = () => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            {SidebarData.map((val, key) => {
-              return (
-                <NavLink
-                  key={key}
-                  className="Modulo"
-                  exact
-                  to={val.Link}
-                  activeClassName="active"
-                >
-                  <CDBSidebarMenuItem icon={val.Icono}>
-                    {val.Modulo}
-                  </CDBSidebarMenuItem>
-                </NavLink>
-              );
-            })}
+            <>
+              {SidebarData.map((val, key) => {
+                return (
+                  <NavLink
+                    key={key}
+                    className="Modulo"
+                    exact
+                    to={val.Link}
+                    activeClassName="active"
+                  >
+                    <CDBSidebarMenuItem icon={val.Icono}>
+                      {val.Modulo}
+                    </CDBSidebarMenuItem>
+                  </NavLink>
+                );
+              })}
+              {auth.isLogged() && (
+                <>
+                  <NavLink
+                    className="Modulo"
+                    exact
+                    to="/Encuestas"
+                    activeClassName="active"
+                  >
+                    <CDBSidebarMenuItem icon="file-alt">
+                      Encuestas
+                    </CDBSidebarMenuItem>
+                  </NavLink>
+                  <NavLink
+                    className="Modulo"
+                    exact
+                    to="/Administrador"
+                    activeClassName="active"
+                  >
+                    <CDBSidebarMenuItem icon="tools">
+                      Administrador
+                    </CDBSidebarMenuItem>
+                  </NavLink>
+                </>
+              )}
+            </>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

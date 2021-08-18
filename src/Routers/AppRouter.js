@@ -30,7 +30,7 @@ export default function AppRouter() {
       <div className="SidebarContenedor">
         <Sidebar />
         <div className="container-fluid" id="contenedorPrincipal">
-          <div className="header">
+          <div className="header ">
             <Link to="/" className="iconoApp">
               <img src={IMGprincipal} alt="" />
             </Link>

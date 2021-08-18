@@ -25,16 +25,4 @@ export const SidebarData = [
     Link: "/Contactanos",
     Activo: true,
   },
-  {
-    Modulo: "Encuesta",
-    Icono: "file-alt",
-    Link: "/Encuestas",
-    Activo: true,
-  },
-  {
-    Modulo: "Administrador",
-    Icono: "tools",
-    Link: "/Administrador",
-    Activo: false,
-  },
 ];
