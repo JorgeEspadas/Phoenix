@@ -1,17 +1,49 @@
 import { NavLink, useHistory, useLocation } from "react-router-dom";
+import React, { useState, useRef } from "react";
 import useAuth from "../Components/auth/useAuth";
+import Snack_Bar from "../Components/layout/Snack_Bar";
 /*Styles*/
 import ImageLogin from "../IMG/Principal.svg";
 import "../css/LoginPage.css";
 import "animate.css";
 
 export default function Login() {
+
+  const sbr = useRef(null);
+
+  const [ user, saveUser] = useState({
+      email:'',
+      password:''
+  });
+
+  const [message, setMessage ] = useState({
+    msg:  '',
+    type: '',
+    duration:0
+  });
+
+  const handleChange = e => {
+    saveUser({
+        ...user,
+        [e.target.name]: e.target.value
+    });
+}
+
   const history = useHistory();
   const location = useLocation();
   const previusLocation = location.state?.from; //Trae la Url de la pagina Anterior.
 
   const auth = useAuth();
   const handleLogin = () => {
+    if(user.email.trim() === "" || user.password.trim() === ""){
+      if(message) sbr.current.showMessage();       
+      setMessage({
+        msg:'Todos los campos son obligatorios',
+        type:"error",
+        duration:2000
+      });
+      return;
+    }
     auth.Login();
     history.push(previusLocation || "/");
   };
@@ -32,6 +64,9 @@ export default function Login() {
                     type="email"
                     className="inputLogin px-3"
                     placeholder="Correo Electronico"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -41,6 +76,9 @@ export default function Login() {
                     type="password"
                     className="inputLogin px-3"
                     placeholder="Contraseña"
+                    name="password"
+                    value={user.password}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -61,6 +99,14 @@ export default function Login() {
           </div>
         </div>
       </div>
+      {message &&
+        <Snack_Bar
+          ref={sbr}
+          message={message.msg}
+          type={message.type}
+          duration={message.duration}
+          />
+            }
     </div>
   );
 }
