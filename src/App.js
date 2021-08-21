@@ -1,5 +1,6 @@
 import AuthProvider from "./Components/auth/AuthProvider";
 import AppRouter from "./Routers/AppRouter";
+require('dotenv').config();
 
 function App() {
   return (

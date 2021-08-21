@@ -1,9 +1,58 @@
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
+import useAuth from "../Components/auth/useAuth";
+import Snack_Bar from "../Components/layout/Snack_Bar";
 import "../css/SignUpPage.css";
 import ImageSignUp from "../IMG/Principal.svg";
 import "animate.css";
+import NetworkManager from "../Backend/util/http";
 
 export default function Signup() {
+
+  const history = useHistory();
+  const location = useLocation();
+  const previusLocation = location.state?.from; //Trae la Url de la pagina Anterior.
+  const auth = useAuth();
+  
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    telefono: ''
+  });
+  
+  const handleChange = e =>{
+    setUser({
+      ...user,
+      [e.target.name] : e.target.value
+    });
+  }
+  
+  const handleSignup = async () => {
+    // logica del registro // validacion y axios
+    // TODO: insertar logica de registro
+
+    //odio react.
+    var net = new NetworkManager('http://localhost/');
+    var response = await net.globalPost('auth/signup',user);
+    var body = response.data;
+
+    if(body.response === "OK"){
+      // recibimos el token, rol
+      var token = body.data.token;
+      var rol = body.data.rol;
+      //hacemos set del usuario y mandamos el payload o auth.login();
+      var userData = {
+        'email' : user.email,
+        'token' : token,
+        'rol' : rol
+      };
+      auth.Login(userData);
+    }else{
+      //MANDAS SNACKBAR.
+    }
+  }
+  
+
   return (
     <div className="contenedorSignUpPage">
       <div className="container">
@@ -19,7 +68,10 @@ export default function Signup() {
                   <input
                     type="text"
                     className="inputSignUp px-3"
-                    placeholder="Nombre de Empresa o Institución"
+                    placeholder="Telefono"
+                    name="telefono"
+                    value={user.telefono}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -29,6 +81,9 @@ export default function Signup() {
                     type="email"
                     className="inputSignUp px-3"
                     placeholder="Correo Electronico"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -38,6 +93,9 @@ export default function Signup() {
                     type="password"
                     className="inputSignUp px-3"
                     placeholder="Contraseña"
+                    name="password"
+                    value={user.password}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -52,7 +110,7 @@ export default function Signup() {
               </div>
               <div className="form-row py-3">
                 <div className="offset-1 col-lg-10">
-                  <button class="btnSignUp">Registrate</button>
+                  <button class="btnSignUp" onClick={handleSignup}>Registrate</button>
                 </div>
               </div>
             </div>

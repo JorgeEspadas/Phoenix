@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
@@ -18,9 +19,9 @@ const AuthProvider = ({ children }) => {
 
   const contextValue = {
     user,
-    Login() {
+    Login(payload) {
       //Conenctado a la base de datos: primero hacemos la verificacion de Autentificacion y luego se pasaria la info al useState
-      setUser({ id: 1, username: "Majo" });
+      setUser(payload);
     },
     Logout() {
       // Se haria la peticion y si resulta exitosa
