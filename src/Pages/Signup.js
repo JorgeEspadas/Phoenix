@@ -9,6 +9,12 @@ import NetworkManager from "../Backend/util/http";
 
 export default function Signup() {
 
+  const sbr = useRef(null);
+  const [message, setMessage ] = useState({
+    msg:  '',
+    type: '',
+    duration:0
+  });
   const history = useHistory();
   const location = useLocation();
   const previusLocation = location.state?.from; //Trae la Url de la pagina Anterior.
@@ -32,7 +38,7 @@ export default function Signup() {
     // TODO: insertar logica de registro
 
     //odio react.
-    var net = new NetworkManager('http://localhost/');
+    var net = new NetworkManager();
     var response = await net.globalPost('auth/signup',user);
     var body = response.data;
 
@@ -49,6 +55,12 @@ export default function Signup() {
       auth.Login(userData);
     }else{
       //MANDAS SNACKBAR.
+      if(message) sbr.current.showMessage();       
+      setMessage({
+        msg: body.data.exception.message,
+        type:"error",
+        duration:2000
+      });
     }
   }
   
@@ -123,6 +135,14 @@ export default function Signup() {
           </div>
         </div>
       </div>
+      {message &&
+        <Snack_Bar
+          ref={sbr}
+          message={message.msg}
+          type={message.type}
+          duration={message.duration}
+          />
+      }
     </div>
   );
 }

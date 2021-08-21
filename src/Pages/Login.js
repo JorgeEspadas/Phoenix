@@ -6,9 +6,9 @@ import Snack_Bar from "../Components/layout/Snack_Bar";
 import ImageLogin from "../IMG/Principal.svg";
 import "../css/LoginPage.css";
 import "animate.css";
+import NetworkManager from "../Backend/util/http";
 
 export default function Login() {
-
   const sbr = useRef(null);
 
   const [ user, saveUser] = useState({
@@ -34,7 +34,7 @@ export default function Login() {
   const previusLocation = location.state?.from; //Trae la Url de la pagina Anterior.
 
   const auth = useAuth();
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if(user.email.trim() === "" || user.password.trim() === ""){
       if(message) sbr.current.showMessage();       
       setMessage({
@@ -44,8 +44,33 @@ export default function Login() {
       });
       return;
     }
-    auth.Login();
-    history.push(previusLocation || "/");
+
+    var net = new NetworkManager();
+    var response = await net.globalPost('auth/login',user);
+    var body = response.data;
+    console.log(response);
+
+    if(body.response === "OK"){
+      // recibimos el token, rol
+      var token = body.data.token;
+      var rol = body.data.rol;
+      //hacemos set del usuario y mandamos el payload o auth.login();
+      var userData = {
+        'email' : user.email,
+        'token' : token,
+        'rol' : rol
+      };
+      auth.Login(userData);
+      history.push(previusLocation || "/");
+    }else{
+      if(message) sbr.current.showMessage();       
+      setMessage({
+        msg: body.data.exception.message,
+        type:"error",
+        duration:2000
+      });
+    }
+    
   };
 
   return (

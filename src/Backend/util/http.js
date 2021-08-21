@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 class NetworkManager {
-    constructor(url){
-        this.__axios = axios.create({baseURL: url});
+    constructor(){
+        this.__axios = axios.create({baseURL: process.env.REACT_APP_BACKEND_URL});
     }
 
     globalPost = async (endpoint, payload) =>{
