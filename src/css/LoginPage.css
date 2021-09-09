@@ -1,0 +1,95 @@
+.contenedorLoginPage {
+  padding: 2%;
+}
+.rowLogin {
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 12px 12px 22px rgb(186, 184, 189);
+}
+.loginContenedorImagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background: linear-gradient(
+    0deg,
+    rgba(37, 212, 214, 1) 0%,
+    rgb(132, 134, 230) 70%
+  );
+}
+.loginContenedorImagen #imgLogin {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.LoginForm {
+  height: 32.7em;
+  justify-content: center;
+  align-items: center;
+}
+.rowLogin h1 {
+  font-size: 4rem;
+  font-weight: 500;
+  font-family: "Pacifico";
+  color: #133775;
+}
+.inputLogin {
+  height: 3.125em;
+  width: 70%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+}
+
+.btnLogin {
+  height: 3.125em;
+  width: 50%;
+  border: none;
+  outline: none;
+  border-radius: 60px;
+  color: white;
+  font-weight: 700;
+  /*font-family: "Pacifico";*/
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+  background-color: #3b4859;
+}
+.btnLogin:hover {
+  background: linear-gradient(
+    to right,
+    rgba(37, 212, 214, 1) 0%,
+    rgb(132, 134, 230) 70%
+  );
+}
+
+@media (max-width: 1200px) {
+  .rowLogin h1 {
+    font-size: 3em;
+  }
+}
+@media (max-width: 992px) {
+  .loginContenedorImagen {
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 0px;
+  }
+  .loginContenedorImagen #imgLogin {
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 0px;
+  }
+}
+@media (max-width: 768px) {
+  .rowLogin h1 {
+    font-size: 3em;
+  }
+}
+@media (max-width: 576px) {
+  .rowLogin h1 {
+    font-size: 2em;
+  }
+  .inputLogin {
+    height: 2.5em;
+  }
+  .btnLogin {
+    height: 2.5em;
+  }
+}

@@ -1,0 +1,83 @@
+.SidebarContenedor {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0px auto0;
+}
+
+/*Color de Sidebar*/
+.SidebarContenedor .Sidebar {
+  color: white;
+  background: linear-gradient(
+    0deg,
+    rgba(37, 212, 214, 1) 0%,
+    rgb(132, 134, 230) 70%
+  );
+}
+/*Titulo del Sidebar*/
+a:link {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.headerSidebar .titulo {
+  color: white;
+}
+
+/*Modulos*/
+.Modulo:hover {
+  /*Modulos*/
+  color: rgb(172, 229, 255);
+}
+.sidebar-content .active {
+  color: #1e4fa3;
+}
+
+/*Icono de Login*/
+.LoginFooter {
+  text-align: center;
+  padding: 20px 5px;
+  /*background-color: #293846;*/
+}
+.LoginFooter .InicioSesionIcono {
+  color: white;
+}
+.LoginFooter .InicioSesionIcono:hover {
+  color: #1e4fa3;
+}
+
+/*Barra Superior*/
+#contenedorPrincipal {
+  background-color: #eaeef4;
+  padding: 0%;
+  position: inherit;
+  overflow: scroll;
+}
+.header {
+  background-color: white;
+  box-shadow: 0px 2px 5px #c9cacc;
+  padding-right: 3%;
+  height: 74px;
+}
+.header .iconoApp img {
+  margin: 12px;
+  height: 50px;
+  float: right;
+}
+
+@font-face {
+  font-family: "RobotoC";
+  src: local("RobotoC"),
+    url(../fonts/RobotoCondensed-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Narrow";
+  src: local("Narrow"),
+    url("../fonts/ArchivoNarrow-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Pacifico";
+  src: local("Pacifico"),
+    url("../fonts/Pacifico-Regular.ttf") format("truetype");
+}
