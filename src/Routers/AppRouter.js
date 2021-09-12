@@ -23,6 +23,7 @@ import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 
 import IMGprincipal from "../IMG/IconoApp.svg";
+import AgregarPregunta from "../Preguntas/AgregarPregunta";
 
 export default function AppRouter() {
   return (
@@ -50,7 +51,7 @@ export default function AppRouter() {
 
             <PrivateRoute exact path="/Encuestas" component={FormPage} />
             <PrivateRoute exact path="/Administrador" component={AdminPage} />
-
+            <PrivateRoute exact path="/agregar-pregunta" component={AgregarPregunta} />
             <Route exact path="*" component={NotFoundPage} />
           </Switch>
         </div>

@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export default function AdminPage() {
   return (
     <div style={{ padding: "2%" }}>
@@ -14,9 +16,9 @@ export default function AdminPage() {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <NavLink  exact to="/agregar-pregunta" class="nav-link" href="#">
             Modificacion
-          </a>
+          </NavLink>
         </li>
         <li class="nav-item">
           <a
