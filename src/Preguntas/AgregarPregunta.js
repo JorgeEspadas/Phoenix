@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Respuesta from './Respuesta';
 import ReactDOM from 'react-dom';
-import NetworkManager from "../Backend/util/http";
-import { ContactSupportOutlined } from '@material-ui/icons';
 
 let cont = 1
 
@@ -15,10 +13,13 @@ let cont = 1
  */
 
 
-const AgregarPregunta = () => {
-    var categories;
-    var secciones = [];
-    let categorie = [];
+const AgregarPregunta = (props) => {
+    
+     let categorie = [];
+     var categories = props.categories;
+     
+    var secciones = props.secciones;
+    
     const [ pregunta, registrar ] = useState({
         texto: "",
         tipo:"",
@@ -30,38 +31,10 @@ const AgregarPregunta = () => {
 
    const [ numRespuestas, guardar ] = useState(1);
 
-   var net = new NetworkManager();
-
-const recibirCategorias = async () => {
-    var response = await net.globalGet('/admin/categorias'); 
-    console.log(response);
-    var rawData = await response.data.data;
-
-    categories = rawData;
-
-    //id categoria es el nombre de la seccion
-    //contiene categorias
-
-        for(var i in rawData){
-            await secciones.push(
-                <option value={i} key={rawData[i].id_categoria} name={rawData[i].id_categoria}
-                >{rawData[i].id_categoria}</option>
-            );
-        }
-        ReactDOM.render(secciones, document.getElementById('selectSecciones'));
-    }
-    
-    useEffect ( () => {
-        // El useEffect recibe un parametro vacio o con alguna dependencia (como por ejemplo ajustar valores de retorno)
-        // Si no se tiene un parametro indicador al final ([]) esto refrescara el estado y rerenderizara la pantalla. pendejo.
-        recibirCategorias();
-    }, []);
-
-    
-
-    const handleSeccion = e =>{
+    const handleSeccion = e => {
         let section = parseInt(e.target.value,10);
         categorie = [];
+        
         for(var i in categories[section].categorias){
             categorie.push(
                 <option value="categoria" key={categories[section].categorias[i].titulo}>{categories[section].categorias[i].titulo}</option>
@@ -123,6 +96,7 @@ const recibirCategorias = async () => {
                     <select name="tipo"
                     id="selectSecciones"
                     onChange={handleSeccion}>
+                        {secciones}
                     </select>
                     </div>  
 
