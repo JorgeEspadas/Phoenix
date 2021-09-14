@@ -1,10 +1,28 @@
 import React, { useState } from 'react';
 import Respuesta from './Respuesta';
 import ReactDOM from 'react-dom';
+import NetworkManager from "../Backend/util/http";
 
-let cont = 1;
+let cont = 1
+let categorie =  [];
+var categories;
 const AgregarPregunta = () => {
-    //admin/preguntas/agregar
+    var net = new NetworkManager();
+ /*
+    const recibirCategorias = async () => {
+        var response = await net.globalGet('/admin/categorias/IES');    
+        categories = await response.data.data.categorias;
+        categories.map( async (cat) =>{
+            await categorie.push(cat);
+        })
+
+        console.log(categorie);
+
+    }
+
+    recibirCategorias();
+*/
+
     const [ pregunta, registrar ] = useState({
         texto: "",
         tipo:"",

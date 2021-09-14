@@ -17,7 +17,7 @@ export default function AdminPage() {
         </li>
         <li class="nav-item">
           <NavLink  exact to="/agregar-pregunta" class="nav-link" href="#">
-            Modificacion
+            Modificación
           </NavLink>
         </li>
         <li class="nav-item">

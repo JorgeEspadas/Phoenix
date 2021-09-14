@@ -5,6 +5,7 @@ class NetworkManager {
         this.__axios = axios.create({baseURL: process.env.REACT_APP_BACKEND_URL});
     }
 
+
     globalPost = async (endpoint, payload) =>{
         let config = {
             headers: {
@@ -14,6 +15,11 @@ class NetworkManager {
         };
 
         var result = await this.__axios.post(endpoint, payload, config);
+        return result;
+    }
+
+    globalGet = async (endpoint) => {
+        var result = await this.__axios.get(endpoint);
         return result;
     }
 }
