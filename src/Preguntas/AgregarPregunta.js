@@ -31,7 +31,7 @@ const AgregarPregunta = (props) => {
 
    const [ numRespuestas, guardar ] = useState(1);
 
-    const handleSeccion = e => {
+    /* const handleSeccion = e => {
         let section = parseInt(e.target.value,10);
         categorie = [];
         
@@ -43,7 +43,7 @@ const AgregarPregunta = (props) => {
         ReactDOM.render(
             categorie,
             document.getElementById('selectCategories')); 
-    }
+    } */
 
     const handleChange = (e) => {
         let valor;
@@ -51,6 +51,19 @@ const AgregarPregunta = (props) => {
             valor = true;
         }else if(e.target.value === "false"){
             valor = false;
+        }else if(e.target.name === "tipo"){
+            console.log(pregunta.tipo)
+            let section = parseInt(e.target.value,10);
+            categorie = [];
+            valor = categories[section].id_categoria;
+            for(var i in categories[section].categorias){
+                categorie.push(
+                    <option value={categories[section].categorias[i].titulo} key={categories[section].categorias[i].titulo}>{categories[section].categorias[i].titulo}</option>
+                );
+            }
+            ReactDOM.render(
+                categorie,
+                document.getElementById('selectCategories')); 
         }else{
             valor = e.target.value;
         }
@@ -71,6 +84,10 @@ const AgregarPregunta = (props) => {
         guardar(cont);
     }
    
+
+    const handleState = () => {
+        console.log(pregunta);
+    }
 
     return (
         <div className="" >
@@ -95,7 +112,7 @@ const AgregarPregunta = (props) => {
                        </label>
                     <select name="tipo"
                     id="selectSecciones"
-                    onChange={handleSeccion}>
+                    onChange={handleChange}>
                         {secciones}
                     </select>
                     </div>  
@@ -150,6 +167,12 @@ const AgregarPregunta = (props) => {
 
                     </div>
                 </form>
+
+                <button
+                name="btn"
+                onClick={handleState}>
+                    estado actual
+                </button>
             </div>
         </div>
     );   
