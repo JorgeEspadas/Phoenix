@@ -9,6 +9,7 @@ import "animate.css";
 import NetworkManager from "../Backend/util/http";
 
 export default function Login() {
+  console.log("ad");
   const sbr = useRef(null);
 
   const [ user, saveUser] = useState({

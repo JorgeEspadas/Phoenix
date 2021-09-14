@@ -1,28 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Respuesta from './Respuesta';
 import ReactDOM from 'react-dom';
 import NetworkManager from "../Backend/util/http";
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 let cont = 1
-let categorie =  [];
-var categories;
+
+/**
+ *           LLAVE
+ * data.data.0|1.
+ * 
+ * Seccion: data.data.i.id_categoria <- i
+ * Categorias
+ */
+
+
 const AgregarPregunta = () => {
-    var net = new NetworkManager();
- /*
-    const recibirCategorias = async () => {
-        var response = await net.globalGet('/admin/categorias/IES');    
-        categories = await response.data.data.categorias;
-        categories.map( async (cat) =>{
-            await categorie.push(cat);
-        })
-
-        console.log(categorie);
-
-    }
-
-    recibirCategorias();
-*/
-
+    var categories;
+    var secciones = [];
+    let categorie = [];
     const [ pregunta, registrar ] = useState({
         texto: "",
         tipo:"",
@@ -31,9 +27,52 @@ const AgregarPregunta = () => {
         multiples:false,
         respuestas:[]
     });
+
    const [ numRespuestas, guardar ] = useState(1);
 
-    const handleChange = e => {
+   var net = new NetworkManager();
+
+const recibirCategorias = async () => {
+    var response = await net.globalGet('/admin/categorias'); 
+    console.log(response);
+    var rawData = await response.data.data;
+
+    categories = rawData;
+
+    //id categoria es el nombre de la seccion
+    //contiene categorias
+
+        for(var i in rawData){
+            await secciones.push(
+                <option value={i} key={rawData[i].id_categoria} name={rawData[i].id_categoria}
+                >{rawData[i].id_categoria}</option>
+            );
+        }
+        ReactDOM.render(secciones, document.getElementById('selectSecciones'));
+    }
+    
+    useEffect ( () => {
+        // El useEffect recibe un parametro vacio o con alguna dependencia (como por ejemplo ajustar valores de retorno)
+        // Si no se tiene un parametro indicador al final ([]) esto refrescara el estado y rerenderizara la pantalla. pendejo.
+        recibirCategorias();
+    }, []);
+
+    
+
+    const handleSeccion = e =>{
+        let section = parseInt(e.target.value,10);
+        categorie = [];
+        for(var i in categories[section].categorias){
+            categorie.push(
+                <option value="categoria" key={categories[section].categorias[i].titulo}>{categories[section].categorias[i].titulo}</option>
+            );
+        }
+        ReactDOM.render(
+            categorie,
+            document.getElementById('selectCategories')); 
+    }
+
+    const handleChange = (e) => {
         let valor;
         if (e.target.value === "true"){
             valor = true;
@@ -47,13 +86,10 @@ const AgregarPregunta = () => {
             ...pregunta,
             [e.target.name]: valor
         });
-
     }
     
     
     const handleClick = () => {
-        
-        console.log(numRespuestas)
         ReactDOM.render(
         <Respuesta numbers={numRespuestas} />,
           document.getElementById('respuestas')
@@ -85,9 +121,8 @@ const AgregarPregunta = () => {
                         Sección:
                        </label>
                     <select name="tipo"
-                    onChange={handleChange}>
-                        <option value="IES">IES</option>
-                        <option value="Empresa" selected>Empresa</option>
+                    id="selectSecciones"
+                    onChange={handleSeccion}>
                     </select>
                     </div>  
 
@@ -96,9 +131,10 @@ const AgregarPregunta = () => {
                             className=" px-3">
                         Categoría:
                        </label>
-                        <select name="categoria"
-                        onChange={handleChange}>
-                            <option value="categoria">Categoría</option>
+                       <select 
+                            name="categoria"
+                            id="selectCategories"
+                            onChange={handleChange}>
                         </select>
                     </div>         
                                 
