@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Respuesta from './Respuesta';
 import ReactDOM from 'react-dom';
-
-let cont = 1
+import NetworkManager from '../Backend/util/http';
 
 /**
  *           LLAVE
@@ -12,14 +11,29 @@ let cont = 1
  * Categorias
  */
 
+ let cont = 1
+ var categories = [];
+ var secciones = [];
+ let categorie = [];
 
-const AgregarPregunta = (props) => {
-    
-     let categorie = [];
-     var categories = props.categories;
-     
-    var secciones = props.secciones;
-    
+ var net = new NetworkManager();
+
+ const recibirCategorias = async () => {
+    var response = await net.globalGet('/admin/categorias'); 
+    console.log(response);
+    var rawData = await response.data.data;
+    categories = rawData;
+    //id categoria es el nombre de la seccion
+    //contiene categorias
+
+    categories.map((item, i) => {
+        secciones.push(<option key={i} value = {i}>{item.id_categoria}</option>);
+    })
+}
+recibirCategorias();
+
+const AgregarPregunta = () => {
+
     const [ pregunta, registrar ] = useState({
         texto: "",
         tipo:"",
@@ -29,41 +43,30 @@ const AgregarPregunta = (props) => {
         respuestas:[]
     });
 
-   const [ numRespuestas, guardar ] = useState(1);
+    const [ numRespuestas, guardar ] = useState(1);
+    const [ categoriaValor, setCategoria ] = useState(0);
 
-    /* const handleSeccion = e => {
-        let section = parseInt(e.target.value,10);
-        categorie = [];
-        
-        for(var i in categories[section].categorias){
-            categorie.push(
-                <option value="categoria" key={categories[section].categorias[i].titulo}>{categories[section].categorias[i].titulo}</option>
-            );
-        }
-        ReactDOM.render(
-            categorie,
-            document.getElementById('selectCategories')); 
-    } */
+    const pintarCategorias = (section) => {
+       categorie = [];
+       for(var i in categories[section].categorias){
+           categorie.push(
+               <option value={categories[section].categorias[i].titulo} key={categories[section].categorias[i].titulo}>{categories[section].categorias[i].titulo}</option>
+           );
+       }
+       return categorie;
+    }
 
     const handleChange = (e) => {
+       
         let valor;
         if (e.target.value === "true"){
             valor = true;
         }else if(e.target.value === "false"){
             valor = false;
         }else if(e.target.name === "tipo"){
-            console.log(pregunta.tipo)
-            let section = parseInt(e.target.value,10);
-            categorie = [];
-            valor = categories[section].id_categoria;
-            for(var i in categories[section].categorias){
-                categorie.push(
-                    <option value={categories[section].categorias[i].titulo} key={categories[section].categorias[i].titulo}>{categories[section].categorias[i].titulo}</option>
-                );
-            }
-            ReactDOM.render(
-                categorie,
-                document.getElementById('selectCategories')); 
+            setCategoria(parseInt(e.target.value,10));
+            valor = categories[parseInt(e.target.value,10)].id_categoria;
+            pintarCategorias(categoriaValor);
         }else{
             valor = e.target.value;
         }
@@ -74,17 +77,15 @@ const AgregarPregunta = (props) => {
         });
     }
     
-    
     const handleClick = () => {
         ReactDOM.render(
-        <Respuesta numbers={numRespuestas} />,
+                <Respuesta numbers={numRespuestas} />,
           document.getElementById('respuestas')
         );
         cont+=1;
         guardar(cont);
     }
    
-
     const handleState = () => {
         console.log(pregunta);
     }
@@ -126,6 +127,7 @@ const AgregarPregunta = (props) => {
                             name="categoria"
                             id="selectCategories"
                             onChange={handleChange}>
+                                {pintarCategorias(categoriaValor)}
                         </select>
                     </div>         
                                 
