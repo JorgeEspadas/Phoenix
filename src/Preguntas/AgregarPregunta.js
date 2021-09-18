@@ -12,10 +12,10 @@ import NetworkManager from '../Backend/util/http';
  */
 
  let cont = 1
- var categories = [];
+ var categories = null;
  var secciones = [];
  let categorie = [];
- const isData = false;
+ let isData = false;
 
 const AgregarPregunta = () => {
     var net = new NetworkManager();
@@ -40,9 +40,9 @@ const AgregarPregunta = () => {
             var response = await net.globalGet('/admin/categorias'); 
             console.log(response)
             var rawData = await response.data.data;
-            
-            if(data !== null){
-                categories = await rawData;
+            categories = await rawData;
+            if(categories !== null){
+                
             //id categoria es el nombre de la seccion
             //contiene categorias
                 secciones = []
@@ -53,12 +53,11 @@ const AgregarPregunta = () => {
                 //setIsData(true);
                 setData(categories);
                 isData = true;
-                setCategoria(categoriaValor+1);
-                
-                ReactDOM.render(
+                /* ReactDOM.render(
                     secciones,
                     document.getElementById("selectSecciones")
-                )
+                ) */
+                setCategoria(categoriaValor+1);
             }
            
         }
@@ -73,10 +72,10 @@ const AgregarPregunta = () => {
                <option value={data[section].categorias[i].titulo} key={data[section].categorias[i].titulo}>{data[section].categorias[i].titulo}</option>
            );
        }
-       ReactDOM.render(
+       /* ReactDOM.render(
         categorie,
         document.getElementById("selectCategories")
-    )
+    ) */
     }
     
     const handleChange = (e) => {
@@ -137,6 +136,7 @@ const AgregarPregunta = () => {
                     <select name="tipo"
                     id="selectSecciones"
                     onChange={handleChange}>
+                        {secciones}
                     </select>
                     </div>  
 
@@ -149,7 +149,7 @@ const AgregarPregunta = () => {
                             name="categoria"
                             id="selectCategories"
                             onChange={handleChange}>
-                                {}
+                                {categorie}
                         </select>
                     </div>         
                                 
