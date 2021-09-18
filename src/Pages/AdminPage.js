@@ -5,12 +5,11 @@ import { NavLink } from 'react-router-dom';
 export default function AdminPage() {
   
   const handleClick = (e) => {
-    if(e.target.value ==="agregar_pregunta"){  
+    if(e.target.value === "agregar_pregunta"){  
       ReactDOM.render(
         <AgregarPregunta />,
         document.getElementById('adminContainer')
      ); 
-     
     }else if(e.target.value=== "config"){
       ReactDOM.render(
         <span></span>,
@@ -47,7 +46,7 @@ export default function AdminPage() {
         </li>
         <li class="nav-item">
           <NavLink
-            exact to=""
+            exact to="/agregar-pregunta"
             className="nav-link"
             href="#"
             tabindex="-1"

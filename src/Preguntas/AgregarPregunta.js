@@ -15,11 +15,9 @@ import NetworkManager from '../Backend/util/http';
  var categories = [];
  var secciones = [];
  let categorie = [];
+ const isData = false;
 
 const AgregarPregunta = () => {
-
-   
-
     var net = new NetworkManager();
     const [ pregunta, registrar ] = useState({
         texto: "",
@@ -32,9 +30,9 @@ const AgregarPregunta = () => {
 
     const [ numRespuestas, guardar ] = useState(1);
     const [ categoriaValor, setCategoria ] = useState(0);
-    const [ section , setSection ] = useState(secciones);
-    const [ data, setData ] = useState(categories);
-    const [ isData, setIsData ] = useState(false);
+    const [ data, setData ] = useState(null);
+    //const [ isData, setIsData ] = useState(false);
+    
     const recibirCategorias = async () => {
         console.log(isData)
         if(!isData){
@@ -42,23 +40,27 @@ const AgregarPregunta = () => {
             var response = await net.globalGet('/admin/categorias'); 
             console.log(response)
             var rawData = await response.data.data;
-            categories = await rawData;
+            
+            if(data !== null){
+                categories = await rawData;
             //id categoria es el nombre de la seccion
             //contiene categorias
-            secciones = []
-            categories.map((item, i) => {
-                secciones.push(<option key={i} value = {i}>{item.id_categoria}</option>);
-            })
-            pintarCategorias(categoriaValor,categories)
-            setIsData(true);
-            setData(categories);
-            setSection(secciones);
-            setCategoria(categoriaValor+1);
-            
-            ReactDOM.render(
-                secciones,
-                document.getElementById("selectSecciones")
-            )
+                secciones = []
+                categories.map((item, i) => {
+                    secciones.push(<option key={i} value = {i}>{item.id_categoria}</option>);
+                })
+                pintarCategorias(categoriaValor,categories)
+                //setIsData(true);
+                setData(categories);
+                isData = true;
+                setCategoria(categoriaValor+1);
+                
+                ReactDOM.render(
+                    secciones,
+                    document.getElementById("selectSecciones")
+                )
+            }
+           
         }
     }
 
