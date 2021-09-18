@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-let user = JSON.parse(localStorage.getItem('user'));
-let token = user.token;
-
 class NetworkManager {
     constructor(){
         this.__axios = axios.create({baseURL: process.env.REACT_APP_BACKEND_URL});
@@ -22,6 +19,9 @@ class NetworkManager {
     }
 
     globalGet = async (endpoint) => {
+        
+        let user = JSON.parse(localStorage.getItem('user'));
+        let token = user.token;
         let config = {
             headers: {
                 'auth-token': token
