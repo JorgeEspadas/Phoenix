@@ -16,24 +16,11 @@ import NetworkManager from '../Backend/util/http';
  var secciones = [];
  let categorie = [];
 
- var net = new NetworkManager();
-
- const recibirCategorias = async () => {
-    var response = await net.globalGet('/admin/categorias'); 
-    console.log(response);
-    var rawData = await response.data.data;
-    categories = rawData;
-    //id categoria es el nombre de la seccion
-    //contiene categorias
-
-    categories.map((item, i) => {
-        secciones.push(<option key={i} value = {i}>{item.id_categoria}</option>);
-    })
-}
-recibirCategorias();
-
 const AgregarPregunta = () => {
 
+   
+
+    var net = new NetworkManager();
     const [ pregunta, registrar ] = useState({
         texto: "",
         tipo:"",
@@ -45,17 +32,51 @@ const AgregarPregunta = () => {
 
     const [ numRespuestas, guardar ] = useState(1);
     const [ categoriaValor, setCategoria ] = useState(0);
-
-    const pintarCategorias = (section) => {
-       categorie = [];
-       for(var i in categories[section].categorias){
-           categorie.push(
-               <option value={categories[section].categorias[i].titulo} key={categories[section].categorias[i].titulo}>{categories[section].categorias[i].titulo}</option>
-           );
-       }
-       return categorie;
+    const [ section , setSection ] = useState(secciones);
+    const [ data, setData ] = useState(categories);
+    const [ isData, setIsData ] = useState(false);
+    const recibirCategorias = async () => {
+        console.log(isData)
+        if(!isData){
+            console.log("estoy aqui")
+            var response = await net.globalGet('/admin/categorias'); 
+            console.log(response)
+            var rawData = await response.data.data;
+            categories = await rawData;
+            //id categoria es el nombre de la seccion
+            //contiene categorias
+            secciones = []
+            categories.map((item, i) => {
+                secciones.push(<option key={i} value = {i}>{item.id_categoria}</option>);
+            })
+            pintarCategorias(categoriaValor,categories)
+            setIsData(true);
+            setData(categories);
+            setSection(secciones);
+            setCategoria(categoriaValor+1);
+            
+            ReactDOM.render(
+                secciones,
+                document.getElementById("selectSecciones")
+            )
+        }
     }
 
+    recibirCategorias();
+
+    const pintarCategorias = (section,data) => {
+       categorie = [];
+       for(var i in data[section].categorias){
+           categorie.push(
+               <option value={data[section].categorias[i].titulo} key={data[section].categorias[i].titulo}>{data[section].categorias[i].titulo}</option>
+           );
+       }
+       ReactDOM.render(
+        categorie,
+        document.getElementById("selectCategories")
+    )
+    }
+    
     const handleChange = (e) => {
        
         let valor;
@@ -64,13 +85,13 @@ const AgregarPregunta = () => {
         }else if(e.target.value === "false"){
             valor = false;
         }else if(e.target.name === "tipo"){
+            valor = data[parseInt(e.target.value,10)].id_categoria;
+            pintarCategorias(categoriaValor,data);
             setCategoria(parseInt(e.target.value,10));
-            valor = categories[parseInt(e.target.value,10)].id_categoria;
-            pintarCategorias(categoriaValor);
         }else{
             valor = e.target.value;
         }
-
+        
         registrar({
             ...pregunta,
             [e.target.name]: valor
@@ -114,7 +135,6 @@ const AgregarPregunta = () => {
                     <select name="tipo"
                     id="selectSecciones"
                     onChange={handleChange}>
-                        {secciones}
                     </select>
                     </div>  
 
@@ -127,7 +147,7 @@ const AgregarPregunta = () => {
                             name="categoria"
                             id="selectCategories"
                             onChange={handleChange}>
-                                {pintarCategorias(categoriaValor)}
+                                {}
                         </select>
                     </div>         
                                 
