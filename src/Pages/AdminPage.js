@@ -1,8 +1,6 @@
 import AgregarPregunta from '../Preguntas/AgregarPregunta';
 import UserEditor from '../Components/Admin/Usuarios';
 import ReactDOM from 'react-dom';
-import { NavLink } from 'react-router-dom';
-import { grey } from '@material-ui/core/colors';
 
 export default function AdminPage() {
   

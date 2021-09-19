@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import ModifyUser from './components/ModifyUser';
 import CreateUser from './components/UserCreate';
 
 function UserEditor() {
-    const [menu, setMenu] = useState("main");
-
     const handleClick = (e) =>{
         switch(e.target.value){
             case 'create':
@@ -12,7 +11,19 @@ function UserEditor() {
                     <CreateUser/>,
                     document.getElementById('editorContainer')
                  ); 
-                break;
+            break;
+            case 'modificar':
+                ReactDOM.render(
+                    <ModifyUser/>,
+                    document.getElementById('editorContainer')
+                 ); 
+            break;
+            default:
+                ReactDOM.render(
+                    <p>Selecciona alguna opcion :D</p>,
+                    document.getElementById('editorContainer')
+                    ); 
+            break;
         }
     }
 
@@ -25,7 +36,7 @@ function UserEditor() {
                             <button className="nav-link" href="#" onClick={handleClick} value="create">
                                 Crear
                             </button>
-                            <button className="nav-link" href="#" onClick={handleClick} value="create">
+                            <button className="nav-link" href="#" onClick={handleClick} value="modificar">
                                 Modificar
                             </button>
                         </li>

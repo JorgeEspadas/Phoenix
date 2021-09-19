@@ -1,25 +1,19 @@
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import React, { useState, useRef } from "react";
-import useAuth from "../Components/auth/useAuth";
-import Snack_Bar from "../Components/layout/Snack_Bar";
+import useAuth from "../Components/auth/useAuth"; // TO BE REPLACED
+
+import {useSnackbar} from 'react-simple-snackbar;'
 /*Styles*/
 import ImageLogin from "../IMG/Principal.svg";
 import "../css/LoginPage.css";
 import "animate.css";
-import NetworkManager from "../Backend/util/http";
+import NetworkManager from "../Backend/util/Http";
 
 export default function Login(){
-  const sbr = useRef(null);
-
+  const [openSnackbar, closeSnackbar] = useSnackbar();
   const [ user, saveUser] = useState({
       email:'',
       password:''
-  });
-
-  const [message, setMessage ] = useState({
-    msg:  '',
-    type: '',
-    duration:0
   });
 
   const handleChange = e => {
@@ -36,12 +30,7 @@ export default function Login(){
   const auth = useAuth();
   const handleLogin = async () => {
     if(user.email.trim() === "" || user.password.trim() === ""){
-      if(message) sbr.current.showMessage();       
-      setMessage({
-        msg:'Todos los campos son obligatorios',
-        type:"error",
-        duration:2000
-      });
+      openSnackbar('Porfavor llena los campos');
       return;
     }
 
@@ -63,12 +52,7 @@ export default function Login(){
       auth.Login(userData);
       history.push(previusLocation || "/");
     }else{
-      if(message) sbr.current.showMessage();       
-      setMessage({
-        msg: body.data.exception.message,
-        type:"error",
-        duration:2000
-      });
+      // error de request
     }
     
   };
@@ -118,20 +102,12 @@ export default function Login(){
             <div className="text-center">
               <span>¿No tienes Cuenta? </span>
               <NavLink exact to="/Signup">
-                <a>Registrate</a>
+                Registrate
               </NavLink>
             </div>
           </div>
         </div>
       </div>
-      {message &&
-        <Snack_Bar
-          ref={sbr}
-          message={message.msg}
-          type={message.type}
-          duration={message.duration}
-          />
-            }
     </div>
   );
 }

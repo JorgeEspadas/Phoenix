@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import NetworkManager from '../../../Backend/util/http';
+import NetworkManager from '../../../Backend/util/Http';
 
 function CreateUser() {
     const roles = [
@@ -47,7 +47,7 @@ function CreateUser() {
 
     const handleSubmit = async () => {
         let nm = new NetworkManager();
-        if((state.password == state.passwordConfirmation) && (state.password.length > 6) && (state.passwordConfirmation.length > 6)){
+        if((state.password === state.passwordConfirmation) && (state.password.length > 6) && (state.passwordConfirmation.length > 6)){
             var payload = {
                 nombre: state.nombre,
                 email: state.email,
@@ -94,6 +94,7 @@ function CreateUser() {
                 </div>
                 <div class="form-group">
                     <label for="rol">Que rol ocupara esta cuenta? </label>
+                    <div></div>
                     <select name="rol" onChange={handleChange}>
                         {roles.map((rol)=>(
                             <option key={rol.value} value={rol.value}>{rol.label}</option>

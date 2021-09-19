@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Respuesta from './Respuesta';
 import ReactDOM from 'react-dom';
-import NetworkManager from '../Backend/util/http';
+import NetworkManager from '../Backend/util/Http';
 
 
  let cont = 1
