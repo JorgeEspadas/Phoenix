@@ -1,6 +1,8 @@
 import AgregarPregunta from '../Preguntas/AgregarPregunta';
+import UserEditor from '../Components/Admin/Usuarios';
 import ReactDOM from 'react-dom';
 import { NavLink } from 'react-router-dom';
+import { grey } from '@material-ui/core/colors';
 
 export default function AdminPage() {
   
@@ -16,14 +18,15 @@ export default function AdminPage() {
         document.getElementById('adminContainer'));
     }else if(e.target.value === "usuario"){
       ReactDOM.render(
-        <span></span>,
+        <UserEditor/>,
         document.getElementById('adminContainer'))
     }
   }
 
 
   return (
-    <div style={{ padding: "2%" }}>
+    <div>
+    <div style={{ padding: "2%", }}>
       <h1>Administrador</h1>
       <ul className="nav nav-tabs">
         <li className="nav-item">
@@ -44,19 +47,9 @@ export default function AdminPage() {
             Modificación
           </button>
         </li>
-        <li class="nav-item">
-          <NavLink
-            exact to="/agregar-pregunta"
-            className="nav-link"
-            href="#"
-            tabindex="-1"
-            aria-disabled="true"
-          >
-            CRACKS
-          </NavLink>
-        </li>
       </ul>
       <div id="adminContainer"></div>
+    </div>
     </div>
   ); /// abuebo abuebo
 }

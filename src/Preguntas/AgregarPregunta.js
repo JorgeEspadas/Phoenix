@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Respuesta from './Respuesta';
 import ReactDOM from 'react-dom';
 import NetworkManager from '../Backend/util/http';
 
-/**
- *           LLAVE
- * data.data.0|1.
- * 
- * Seccion: data.data.i.id_categoria <- i
- * Categorias
- */
 
  let cont = 1
  var categories = null;
@@ -45,6 +38,7 @@ const AgregarPregunta = () => {
                 
             //id categoria es el nombre de la seccion
             //contiene categorias
+            // https://stackoverflow.com/questions/62653450/how-to-fix-expected-to-return-a-value-in-arrow-function-with-reactjs
                 secciones = []
                 categories.map((item, i) => {
                     secciones.push(<option key={i} value = {i}>{item.id_categoria}</option>);

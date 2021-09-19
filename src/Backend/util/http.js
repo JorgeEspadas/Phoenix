@@ -5,12 +5,13 @@ class NetworkManager {
         this.__axios = axios.create({baseURL: process.env.REACT_APP_BACKEND_URL});
     }
 
-
-    globalPost = async (endpoint, payload) =>{
+    post = async (endpoint, payload) =>{
+        let userLog = JSON.parse(localStorage.getItem('user'));
         let config = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Accept' : 'application/json'
+                'Accept' : 'application/json',
+                'auth-token' : (userLog.token) ?? ''
             }
         };
 
@@ -18,6 +19,7 @@ class NetworkManager {
         return result;
     }
 
+    //cambiar a get
     globalGet = async (endpoint) => {
         
         let user = JSON.parse(localStorage.getItem('user'));

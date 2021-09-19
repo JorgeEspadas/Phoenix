@@ -1,4 +1,4 @@
-import { Redirect, Route, useLocation } from "react-router-dom";
+import { Redirect, Route} from "react-router-dom";
 import useAuth from "../Components/auth/useAuth";
 
 export default function PublicRoute({ component: Component, ...rest }) {
