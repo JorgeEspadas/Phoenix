@@ -1,16 +1,17 @@
 import { NavLink, useHistory, useLocation } from "react-router-dom";
-import React, { useState, useRef } from "react";
-import useAuth from "../Components/auth/useAuth"; // TO BE REPLACED
+import React, { useContext, useState } from "react";
 
-import {useSnackbar} from 'react-simple-snackbar;'
+import {useSnackbar} from 'react-simple-snackbar';
+
 /*Styles*/
-import ImageLogin from "../IMG/Principal.svg";
+import ImageLogin from "../Images/Principal.svg";
 import "../css/LoginPage.css";
 import "animate.css";
 import NetworkManager from "../Backend/util/Http";
+import { AuthContext } from "../Components/auth/AuthProvider";
 
 export default function Login(){
-  const [openSnackbar, closeSnackbar] = useSnackbar();
+  const [openSnackbar] = useSnackbar();
   const [ user, saveUser] = useState({
       email:'',
       password:''
@@ -23,11 +24,11 @@ export default function Login(){
     });
 }
 
+  const auth = useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
   const previusLocation = location.state?.from; //Trae la Url de la pagina Anterior.
 
-  const auth = useAuth();
   const handleLogin = async () => {
     if(user.email.trim() === "" || user.password.trim() === ""){
       openSnackbar('Porfavor llena los campos');
@@ -35,7 +36,7 @@ export default function Login(){
     }
 
     var net = new NetworkManager();
-    var response = await net.globalPost('auth/login',user);
+    var response = await net.post('auth/login',user);
     var body = response.data;
     console.log(response);
 
@@ -53,6 +54,7 @@ export default function Login(){
       history.push(previusLocation || "/");
     }else{
       // error de request
+      openSnackbar(body.data.message);
     }
     
   };

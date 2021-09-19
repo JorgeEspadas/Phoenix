@@ -1,4 +1,4 @@
-import imagen from "../IMG/backgroud-acuarela.svg";
+import imagen from "../Images/backgroud-acuarela.svg";
 
 export default function ContactPage() {
   return (

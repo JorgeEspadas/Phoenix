@@ -1,22 +1,15 @@
 import axios from 'axios';
+import Util from './Util';
 
 class NetworkManager {
     constructor(){
-        this.__axios = axios.create({baseURL: process.env.REACT_APP_BACKEND_URL});
+        this.__axios = axios.create({baseURL: Util.Config.backendURL});
     }
 
     post = async (endpoint, payload) =>{
-        let userLog = JSON.parse(localStorage.getItem('user'));
-        let config = {
-            headers: {
-                'Content-Type' : 'application/json',
-                'Accept' : 'application/json',
-                'auth-token' : (userLog.token) ?? ''
-            }
-        };
-
-        var result = await this.__axios.post(endpoint, payload, config);
-        return result;
+        let local = localStorage.getItem("user");
+        console.log(local);
+        return Util.Error.errorResponse;
     }
 
     //cambiar a get

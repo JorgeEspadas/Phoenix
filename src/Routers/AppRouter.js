@@ -21,7 +21,7 @@ import FormPage from "../Pages/FormPage";
 import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 
-import IMGprincipal from "../IMG/IconoApp.svg";
+import IMGprincipal from "../Images/IconoApp.svg";
 
 export default function AppRouter() {
   return (
