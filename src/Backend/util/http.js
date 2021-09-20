@@ -13,10 +13,8 @@ class NetworkManager {
         headers['auth-token']=token;
         var result = await this.__axios.post(endpoint, payload, headers).then((response) =>{
             if(response.status != 200){
-                console.log('Failed to connect');
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
-                console.log(response.data);
                 return response.data;
             }
         }, (error) =>{

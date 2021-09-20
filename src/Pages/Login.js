@@ -1,8 +1,6 @@
 import { useHistory, useLocation } from "react-router-dom";
 import React, { useContext, useState } from "react";
-
 import {useSnackbar} from 'react-simple-snackbar';
-
 /*Styles*/
 import ImageLogin from "../Images/Principal.svg";
 import "../css/LoginPage.css";
@@ -33,16 +31,18 @@ export default function Login(){
       openSnackbar('Porfavor llena todos los campos');
       return;
     }
-
+    user.password = Util.Hash(user.password);
+    console.log(user.password);
     var net = new NetworkManager();
     var response = await net.post('auth/login',user);
-
+    console.log(response);
     if(response.response === "OK"){
       // recibimos el token, rol
       var token = response.data.token;
       var rol = response.data.rol;
       //hacemos set del usuario y mandamos el payload o auth.login();
       var userData = {
+        'nombre' : response.data.nombre,
         'email' : user.email,
         'token' : token,
         'rol' : rol
@@ -50,7 +50,7 @@ export default function Login(){
       auth.Login(userData);
       history.push(location.state?.from || "/");
     }else{
-      openSnackbar(response.data.exception.message);
+      openSnackbar('Error de Servicio');
     }
   };
 

@@ -1,3 +1,5 @@
+import md5 from 'md5';
+
 export default class Util {
     static Config = {
         backendURL: 'http://localhost/',
@@ -6,13 +8,23 @@ export default class Util {
             'Accept' : 'application/json'
         }
     }
+    
+    static Hash = (string) => {
+        return md5(string);
+    }
+    
+    static nukeAndRedirect =()=>{
+
+    }
 
     static Error = (message) => {
         let errorResponse = {
             data: {
                 response: "BAD",
                 data: {
-                    message: message
+                    exception: {
+                        message: 'Error de Servicio'
+                    }
                 }
             }
         }

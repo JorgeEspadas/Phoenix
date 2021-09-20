@@ -1,8 +1,11 @@
 import AgregarPregunta from '../Preguntas/AgregarPregunta';
 import UserEditor from '../Components/Admin/Usuarios';
 import ReactDOM from 'react-dom';
+import {useSnackbar} from 'react-simple-snackbar';
+import Util from '../Backend/util/Util';
 
 export default function AdminPage() {
+  const [open] = useSnackbar(Util.snackbarConfig.options);
   
   const handleClick = (e) => {
     if(e.target.value === "agregar_pregunta"){  
@@ -16,7 +19,7 @@ export default function AdminPage() {
         document.getElementById('adminContainer'));
     }else if(e.target.value === "usuario"){
       ReactDOM.render(
-        <UserEditor/>,
+        <UserEditor snackbar={open}/>,
         document.getElementById('adminContainer'))
     }
   }

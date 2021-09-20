@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import NetworkManager from '../../../Backend/util/Http';
 
-function CreateUser() {
+function CreateUser({snackbar}) {
     const roles = [
         {
             label: "IES",
@@ -66,7 +66,7 @@ function CreateUser() {
             }
         }else{
             // snackbar, las contrasenas no coinciden?
-            console.log('Las contrasenas no coinciden culero');
+            snackbar('Las PWD no coinciden');
         }
     }
 
@@ -101,7 +101,9 @@ function CreateUser() {
                         ))}
                     </select>
                 </div>
-                <button className="btn btn-primary" onClick={handleSubmit}>Registrar?</button>
+                <center>
+                <button className="btn btn-primary" onClick={handleSubmit}>Registrate</button>
+                </center>
         </div>
     );
 }
