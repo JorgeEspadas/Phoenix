@@ -16,6 +16,7 @@ class NetworkManager {
                 console.log('Failed to connect');
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
+                console.log(response.data);
                 return response.data;
             }
         }, (error) =>{

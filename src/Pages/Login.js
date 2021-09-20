@@ -36,13 +36,11 @@ export default function Login(){
 
     var net = new NetworkManager();
     var response = await net.post('auth/login',user);
-    var body = response.data;
-    console.log(response);
 
-    if(body.response === "OK"){
+    if(response.response === "OK"){
       // recibimos el token, rol
-      var token = body.data.token;
-      var rol = body.data.rol;
+      var token = response.data.token;
+      var rol = response.data.rol;
       //hacemos set del usuario y mandamos el payload o auth.login();
       var userData = {
         'email' : user.email,
@@ -52,8 +50,7 @@ export default function Login(){
       auth.Login(userData);
       history.push(location.state?.from || "/");
     }else{
-      // error de request
-      openSnackbar(body.data.message);
+      openSnackbar(response.data.exception.message);
     }
   };
 
