@@ -1,4 +1,4 @@
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import React, { useContext, useState } from "react";
 
 import {useSnackbar} from 'react-simple-snackbar';
@@ -9,9 +9,13 @@ import "../css/LoginPage.css";
 import "animate.css";
 import NetworkManager from "../Backend/util/Http";
 import { AuthContext } from "../Components/auth/AuthProvider";
+import Util from "../Backend/util/Util";
 
 export default function Login(){
-  const [openSnackbar] = useSnackbar();
+  const auth = useContext(AuthContext);
+  const history = useHistory();
+  const location = useLocation();
+  const [openSnackbar] = useSnackbar(Util.snackbarConfig.options);
   const [ user, saveUser] = useState({
       email:'',
       password:''
@@ -22,16 +26,11 @@ export default function Login(){
         ...user,
         [e.target.name]: e.target.value
     });
-}
-
-  const auth = useContext(AuthContext);
-  const history = useHistory();
-  const location = useLocation();
-  const previusLocation = location.state?.from; //Trae la Url de la pagina Anterior.
+  }
 
   const handleLogin = async () => {
     if(user.email.trim() === "" || user.password.trim() === ""){
-      openSnackbar('Porfavor llena los campos');
+      openSnackbar('Porfavor llena todos los campos');
       return;
     }
 
@@ -51,12 +50,11 @@ export default function Login(){
         'rol' : rol
       };
       auth.Login(userData);
-      history.push(previusLocation || "/");
+      history.push(location.state?.from || "/");
     }else{
       // error de request
       openSnackbar(body.data.message);
     }
-    
   };
 
   return (
@@ -95,17 +93,11 @@ export default function Login(){
               </div>
               <div className="form-row py-3">
                 <div className="offset-1 col-lg-10">
-                  <button class="btnLogin" onClick={handleLogin}>
+                  <button className="btnLogin" onClick={handleLogin}>
                     Iniciar Sesion
                   </button>
                 </div>
               </div>
-            </div>
-            <div className="text-center">
-              <span>¿No tienes Cuenta? </span>
-              <NavLink exact to="/Signup">
-                Registrate
-              </NavLink>
             </div>
           </div>
         </div>

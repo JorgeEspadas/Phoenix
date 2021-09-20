@@ -1,11 +1,13 @@
 
 export default function NotFoundPage() {
     return (
-        <div>
-            <h1>404 Not Found</h1>
+        <center>
+        <div style={{padding: '20px'}}>
+            <h1>404 Amiguito</h1>
             <p>
                 ¿A donde? ):v
             </p>
         </div>
+        </center>
     )
 }

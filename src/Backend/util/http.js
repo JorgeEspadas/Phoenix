@@ -8,8 +8,20 @@ class NetworkManager {
 
     post = async (endpoint, payload) =>{
         let local = localStorage.getItem("user");
-        console.log(local);
-        return Util.Error.errorResponse;
+        let token = (local == "null") ? 'notoken' : local.token;
+        var headers = Util.Config.headers;
+        headers['auth-token']=token;
+        var result = await this.__axios.post(endpoint, payload, headers).then((response) =>{
+            if(response.status != 200){
+                console.log('Failed to connect');
+                return Util.Error('Error de Conexion, Codigo: '+response.status);
+            }else{
+                return response.data;
+            }
+        }, (error) =>{
+            return Util.Error('Error de Red');
+        });
+        return result;
     }
 
     //cambiar a get

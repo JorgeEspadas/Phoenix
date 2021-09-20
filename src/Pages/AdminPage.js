@@ -28,7 +28,7 @@ export default function AdminPage() {
       <h1>Administrador</h1>
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <button class="nav-link " aria-current="page" href="#"
+          <button className="nav-link " aria-current="page" href="#"
           onClick={handleClick} value="config">
             Configuracion
           </button>

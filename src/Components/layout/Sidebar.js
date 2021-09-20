@@ -86,7 +86,7 @@ const Sidebar = () => {
             </NavLink>
           )}
           {auth.isLogged() && (
-            <a onClick={auth.Logout} title="Cerrar Sesion">
+            <a href="#" onClick={auth.Logout} title="Cerrar Sesion">
               <ExitToAppIcon fontSize="large" style={{ color: "white" }} />
             </a>
           )}

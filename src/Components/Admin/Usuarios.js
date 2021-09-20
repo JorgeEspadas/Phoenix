@@ -28,10 +28,10 @@ function UserEditor() {
     }
 
     return (
-        <div class="container-fluid">
-            <div class="row">
-                <div class='col-1'>
-                    <ul class="nav nav-tabs flex-column" style={{'border-bottom' : '0px'}}>
+        <div className="container-fluid">
+            <div className="row">
+                <div className='col-1'>
+                    <ul className="nav nav-tabs flex-column" style={{'border-bottom' : '0px'}}>
                         <li className="nav-item">
                             <button className="nav-link" href="#" onClick={handleClick} value="create">
                                 Crear
@@ -42,8 +42,8 @@ function UserEditor() {
                         </li>
                     </ul>
                 </div>
-                <div class="col">
-                    <div class="container" >
+                <div className="col">
+                    <div className="container" >
                         <div id="editorContainer"></div>
                     </div>
                 </div>

@@ -72,27 +72,27 @@ function CreateUser() {
 
     return(
         <div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="nombre">Nombre de la institucion</label>
-                    <input type="text" id="nombre" autoComplete="off" name="nombre" class="form-control" onChange={handleChange} value={state.nombre} required/>
+                    <input type="text" id="nombre" autoComplete="off" name="nombre" className="form-control" onChange={handleChange} value={state.nombre} required/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="email">Correo Electronico</label>
-                    <input type="email" autoComplete="off" id="email" name="email" class="form-control" onChange={handleChange} value={state.email} required/>
+                    <input type="email" autoComplete="off" id="email" name="email" className="form-control" onChange={handleChange} value={state.email} required/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="telefono">Telefono de contacto</label>
-                    <input type="text" id="telefono" autoComplete="off" name="telefono" class="form-control" onChange={handleChange} value={state.telefono} required/>
+                    <input type="text" id="telefono" autoComplete="off" name="telefono" className="form-control" onChange={handleChange} value={state.telefono} required/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="password">Contrasena</label>
-                    <input type="password" autoComplete="off" id="password" name="password" class="form-control" onChange={handleChange} value={state.password} required/>
+                    <input type="password" autoComplete="off" id="password" name="password" className="form-control" onChange={handleChange} value={state.password} required/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="passwordConfirmation">Confirmar contrasena</label>
-                    <input type="password" autoComplete="off" id="passwordConfirmation" name="passwordConfirmation" class="form-control" onChange={handleChange} value={state.passwordConfirmation} required/>
+                    <input type="password" autoComplete="off" id="passwordConfirmation" name="passwordConfirmation" className="form-control" onChange={handleChange} value={state.passwordConfirmation} required/>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="rol">Que rol ocupara esta cuenta? </label>
                     <div></div>
                     <select name="rol" onChange={handleChange}>
@@ -101,7 +101,7 @@ function CreateUser() {
                         ))}
                     </select>
                 </div>
-                <button class="btn btn-primary" onClick={handleSubmit}>Registrar?</button>
+                <button className="btn btn-primary" onClick={handleSubmit}>Registrar?</button>
         </div>
     );
 }
