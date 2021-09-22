@@ -17,6 +17,9 @@ export default class Util {
 
     }
 
+    static delay = ms => new Promise(res => setTimeout(res, ms));
+    static decode = jwt => JSON.parse(jwt.split('.').map((part) => Buffer.from(part.replace(/-/g, '+').replace(/_/g, '/'),'base64').toString())[1]);
+
     static Error = (message) => {
         let errorResponse = {
             data: {

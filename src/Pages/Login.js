@@ -39,13 +39,13 @@ export default function Login(){
     if(response.response === "OK"){
       // recibimos el token, rol
       var token = response.data.token;
-      var rol = response.data.rol;
+      var decoded = Util.decode(token);
       //hacemos set del usuario y mandamos el payload o auth.login();
       var userData = {
-        'nombre' : response.data.nombre,
-        'email' : user.email,
+        'nombre' : decoded[1].nombre,
+        'email' : decoded[1].email,
         'token' : token,
-        'rol' : rol
+        'rol' : decoded[1].rol
       };
       auth.Login(userData);
       history.push(location.state?.from || "/");

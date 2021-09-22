@@ -14,7 +14,7 @@ function UserEditor({snackbar}) {
             break;
             case 'modificar':
                 ReactDOM.render(
-                    <ModifyUser/>,
+                    <ModifyUser snackbar={snackbar}/>,
                     document.getElementById('editorContainer')
                  ); 
             break;
