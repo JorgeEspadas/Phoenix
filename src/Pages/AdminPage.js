@@ -1,13 +1,13 @@
-import AgregarPregunta from '../Preguntas/AgregarPregunta';
+import Preguntas from '../Preguntas/Preguntas';
 import ReactDOM from 'react-dom';
-import { NavLink } from 'react-router-dom';
+import Signup from './Signup';
 
 export default function AdminPage() {
-  
   const handleClick = (e) => {
     if(e.target.value === "agregar_pregunta"){  
+
       ReactDOM.render(
-        <AgregarPregunta />,
+        <Preguntas />,
         document.getElementById('adminContainer')
      ); 
     }else if(e.target.value=== "config"){
@@ -17,6 +17,10 @@ export default function AdminPage() {
     }else if(e.target.value === "usuario"){
       ReactDOM.render(
         <span></span>,
+        document.getElementById('adminContainer'))
+    }else if(e.target.value === "signup"){
+      ReactDOM.render(
+        <Signup />,
         document.getElementById('adminContainer'))
     }
   }
@@ -44,16 +48,11 @@ export default function AdminPage() {
             Modificación
           </button>
         </li>
-        <li class="nav-item">
-          <NavLink
-            exact to="/agregar-pregunta"
-            className="nav-link"
-            href="#"
-            tabindex="-1"
-            aria-disabled="true"
-          >
-            CRACKS
-          </NavLink>
+        <li className="nav-item">
+          <button exact to="/Signup" className="nav-link " href="#" value="signup"
+          onClick={handleClick}>
+            Registrar usuario
+          </button>
         </li>
       </ul>
       <div id="adminContainer"></div>

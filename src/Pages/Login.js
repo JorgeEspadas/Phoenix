@@ -44,7 +44,6 @@ export default function Login(){
       });
       return;
     }
-
     var net = new NetworkManager();
     var response = await net.globalPost('auth/login',user);
     var body = response.data;
@@ -115,12 +114,12 @@ export default function Login(){
                 </div>
               </div>
             </div>
-            <div className="text-center">
+            {/* <div className="text-center">
               <span>¿No tienes Cuenta? </span>
               <NavLink exact to="/Signup">
                 <a>Registrate</a>
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

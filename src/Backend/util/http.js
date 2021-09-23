@@ -7,10 +7,12 @@ class NetworkManager {
 
 
     globalPost = async (endpoint, payload) =>{
+        //let user = JSON.parse(localStorage.getItem('user'));
         let config = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Accept' : 'application/json'
+                'Accept' : 'application/json',
+                 //'auth-token':user.token
             }
         };
 
@@ -20,11 +22,11 @@ class NetworkManager {
 
     globalGet = async (endpoint) => {
         
-        let user = JSON.parse(localStorage.getItem('user'));
-        let token = user.token;
+        //let user = JSON.parse(localStorage.getItem('user'));
+        
         let config = {
             headers: {
-                'auth-token': token
+                //'auth-token':user.token
             }
         };
         var result = await this.__axios.get(endpoint,config);
