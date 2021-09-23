@@ -42,10 +42,10 @@ export default function Login(){
       var decoded = Util.decode(token);
       //hacemos set del usuario y mandamos el payload o auth.login();
       var userData = {
-        'nombre' : decoded[1].nombre,
-        'email' : decoded[1].email,
+        'nombre' : decoded.nombre,
+        'email' : decoded.email,
         'token' : token,
-        'rol' : decoded[1].rol
+        'rol' : decoded.rol
       };
       auth.Login(userData);
       history.push(location.state?.from || "/");
@@ -76,6 +76,8 @@ export default function Login(){
                       type="email"
                       className="inputLogin px-3"
                       placeholder="Correo Electronico"
+                      name="email"
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -85,13 +87,15 @@ export default function Login(){
                       type="password"
                       className="inputLogin px-3"
                       placeholder="Contraseña"
+                      name="password"
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
                 <div className="form-row py-3">
                   <div className="offset-1 col-lg-10">
                     <button class="btnLogin" onClick={handleLogin}>
-                      Iniciar Sesion
+                      Iniciar Sesión
                     </button>
                   </div>
                 </div>

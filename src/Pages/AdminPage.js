@@ -1,4 +1,4 @@
-import Preguntas from '../Preguntas/Preguntas';
+import Preguntas from '../Components/Preguntas/Preguntas';
 import UserEditor from '../Components/Admin/Usuarios';
 import ReactDOM from 'react-dom';
 import {useSnackbar} from 'react-simple-snackbar';
