@@ -9,8 +9,9 @@ export default function AdminPage() {
   
   const handleClick = (e) => {
     if(e.target.value === "agregar_pregunta"){  
+
       ReactDOM.render(
-        <AgregarPregunta />,
+        <Preguntas />,
         document.getElementById('adminContainer')
      ); 
     }else if(e.target.value=== "config"){
@@ -20,6 +21,10 @@ export default function AdminPage() {
     }else if(e.target.value === "usuario"){
       ReactDOM.render(
         <UserEditor snackbar={open}/>,
+        document.getElementById('adminContainer'))
+    }else if(e.target.value === "signup"){
+      ReactDOM.render(
+        <Signup />,
         document.getElementById('adminContainer'))
     }
   }
@@ -47,6 +52,15 @@ export default function AdminPage() {
             Modificación
           </button>
         </li>
+<<<<<<< HEAD
+=======
+        <li className="nav-item">
+          <button exact to="/Signup" className="nav-link " href="#" value="signup"
+          onClick={handleClick}>
+            Registrar usuario
+          </button>
+        </li>
+>>>>>>> 7114c858581514492d000399560bbab136099e6f
       </ul>
       <div id="adminContainer"></div>
     </div>

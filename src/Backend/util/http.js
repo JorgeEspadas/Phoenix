@@ -43,11 +43,11 @@ class NetworkManager {
     //cambiar a get
     globalGet = async (endpoint) => {
         
-        let user = JSON.parse(localStorage.getItem('user'));
-        let token = user.token;
+        //let user = JSON.parse(localStorage.getItem('user'));
+        
         let config = {
             headers: {
-                'auth-token': token
+                //'auth-token':user.token
             }
         };
         var result = await this.__axios.get(endpoint,config);
