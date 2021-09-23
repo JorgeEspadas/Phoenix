@@ -1,5 +1,7 @@
 import React from "react";
-import Sidebar from "../Components/layout/Sidebar";
+import Sidebar from "../Components/layout/Sidebar.js";
+import "../css/AppSidebar.css";
+import "../css/LayoutConfiguration.css";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -9,9 +11,6 @@ import {
 
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
-
-import Login from "../Pages/Login";
-import Signup from "../Pages/Signup";
 import HomePage from "../Pages/HomePage";
 import AnaliticsPage from "../Pages/AnaliticsPage";
 import InfoPage from "../Pages/InfoPage";
@@ -20,40 +19,39 @@ import FormPage from "../Pages/FormPage";
 import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 
+
 export default function AppRouter() {
   return (
     <Router>
-      <div className="SidebarContenedor">
-        <Sidebar />
-        <div className="container-fluid">
-          <nav
-            className="navbar navbar-light"
-            style={{ background: "#e3f2fd" }}
-          >
-            <div className="container-fluid justify-content-end">
-              <a class="navbar-brand" href="#">
-                Aqui debe ir algo Bonito
-              </a>
-            </div>
-          </nav>
+      <div class="container-fluid overflow-hidden">
+        <div class="row vh-100 overflow-auto">
+          <Sidebar />
+          <div class="col d-flex flex-column h-sm-100">
+            <main className="row overflow-auto">
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route exact path="/Estadisticas" component={AnaliticsPage} />
+                <Route exact path="/Info" component={InfoPage} />
+                <Route exact path="/Contactanos" component={ContactPage} />
 
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/Estadisticas" component={AnaliticsPage} />
-            <Route exact path="/Info" component={InfoPage} />
-            <Route exact path="/Contactanos" component={ContactPage} />
+                <PublicRoute exact path="/Singin">
+                  <Redirect to="/" />
+                </PublicRoute>
 
-            <PublicRoute exact path="/Singin">
-              <Redirect to="/Login" />
-            </PublicRoute>
-            <PublicRoute exact path="/Login" component={Login} />
-            <PublicRoute exact path="/Signup" component={Signup} />
+                <PrivateRoute exact path="/Encuestas" component={FormPage} />
+                <PrivateRoute
+                  exact
+                  path="/Administrador"
+                  component={AdminPage}
+                />
 
-            <PrivateRoute exact path="/Encuestas" component={FormPage} />
-            <PrivateRoute exact path="/Administrador" component={AdminPage} />
-
-            <Route exact path="*" component={NotFoundPage} />
-          </Switch>
+                <Route exact path="*" component={NotFoundPage} />
+              </Switch>
+            </main>
+            <footer class=" footer row py-4 mt-auto">
+              <div class="col"> JAM | 2021 </div>
+            </footer>
+          </div>
         </div>
       </div>
     </Router>

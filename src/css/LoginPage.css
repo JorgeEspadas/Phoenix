@@ -1,0 +1,97 @@
+.contenedorLoginPage {
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.LoginForm {
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5vh;
+}
+.inputLogin {
+  height: 3.125em;
+  width: 80%;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+}
+.btnLogin {
+  height: 3.125em;
+  width: 55%;
+  border: none;
+  outline: none;
+  border-radius: 60px;
+  color: white;
+  font-weight: 700;
+  /*font-family: "Pacifico";*/
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+  background-color: var(--main-bg-primary-color);
+}
+.btnLogin:hover {
+  background: var(--main-bg-contrast-color);
+}
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 992px) {
+  .contenedorLoginPage {
+    display: inline;
+  }
+}
+@media (max-width: 768px) {
+  .rowLogin h1 {
+    font-size: 3em;
+  }
+}
+@media (max-width: 576px) {
+  .offset-1 {
+    margin-left: 0px;
+  }
+  .rowLogin h1 {
+    font-size: 2em;
+  }
+  .inputLogin {
+    font-size: 1em;
+    height: 2.5em;
+    width: 80%;
+  }
+  .form-row {
+    padding-bottom: 0.5em;
+  }
+  .btnLogin {
+    font-size: 1em;
+    height: 2.5em;
+    width: 80%;
+  }
+  .contactLogin {
+    font-size: 0.75em;
+  }
+}
+@media (max-width: 576px), (max-height: 492px) {
+  .LoginForm {
+    height: 60vh;
+  }
+  .rowLogin h1 {
+    font-size: 2em;
+  }
+  .inputLogin {
+    font-size: 1em;
+    height: 2.5em;
+    width: 80%;
+  }
+  .form-row {
+    padding-bottom: 0.5em;
+  }
+  .btnLogin {
+    font-size: 0.75em;
+    height: 2.5em;
+    width: 80%;
+  }
+  .contactLogin {
+    font-size: 0.75em;
+  }
+}

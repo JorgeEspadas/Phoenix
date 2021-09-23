@@ -1,57 +1,110 @@
-import { NavLink, useHistory, useLocation } from "react-router-dom";
-import useAuth from "../Components/auth/useAuth";
+import { useHistory, useLocation, NavLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import {useSnackbar} from 'react-simple-snackbar';
+/*Styles*/
+import LogoIcono from "../Images/LogoIcono.svg";
+import "../css/LoginPage.css";
+import "animate.css";
+import NetworkManager from "../Backend/util/http";
+import { AuthContext } from "../Components/auth/AuthProvider";
+import Util from "../Backend/util/Util";
 
-export default function Login() {
+export default function Login(){
+  const auth = useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
-  const previusLocation = location.state?.from; //Trae la Url de la pagina Anterior.
+  const [openSnackbar] = useSnackbar(Util.snackbarConfig.options);
+  const [ user, saveUser] = useState({
+      email:'',
+      password:''
+  });
 
-  const auth = useAuth();
-  const handleLogin = () => {
-    auth.Login();
-    history.push(previusLocation || "/");
+  const handleChange = e => {
+    saveUser({
+        ...user,
+        [e.target.name]: e.target.value
+    });
+  }
+
+  const handleLogin = async () => {
+    if(user.email.trim() === "" || user.password.trim() === ""){
+      openSnackbar('Porfavor llena todos los campos');
+      return;
+    }
+    user.password = Util.Hash(user.password);
+    console.log(user.password);
+    var net = new NetworkManager();
+    var response = await net.post('auth/login',user);
+    console.log(response);
+    if(response.response === "OK"){
+      // recibimos el token, rol
+      var token = response.data.token;
+      var decoded = Util.decode(token);
+      //hacemos set del usuario y mandamos el payload o auth.login();
+      var userData = {
+        'nombre' : decoded[1].nombre,
+        'email' : decoded[1].email,
+        'token' : token,
+        'rol' : decoded[1].rol
+      };
+      auth.Login(userData);
+      history.push(location.state?.from || "/");
+    }else{
+      openSnackbar('Error de Servicio');
+    }
   };
 
   return (
-    <div>
-      <h1>Iniciar Sesion</h1>
-
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">
-          Email address
-        </label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-        <div id="emailHelp" class="form-text">
-          We'll never share your email with anyone else.
+      <div className="contenedorLoginPage">
+        <div className="contLogin container">
+          <div className=" rowLogin row g-0 ">
+            <div className="LoginForm  text-center">
+              <div className="animate__animated animate__bounce">
+                <a className="logoPrincipal" href="/" align="center">
+                  <img
+                    src={LogoIcono}
+                    alt=""
+                    align="center"
+                    style={{ width: "20%" }}
+                  />
+                </a>
+              </div>
+              <div className="form">
+                <div className="form-row py-2 pt-4">
+                  <div className="offset-1 col-lg-10">
+                    <input
+                      type="email"
+                      className="inputLogin px-3"
+                      placeholder="Correo Electronico"
+                    />
+                  </div>
+                </div>
+                <div className="form-row py-2">
+                  <div className="offset-1 col-lg-10">
+                    <input
+                      type="password"
+                      className="inputLogin px-3"
+                      placeholder="Contraseña"
+                    />
+                  </div>
+                </div>
+                <div className="form-row py-3">
+                  <div className="offset-1 col-lg-10">
+                    <button class="btnLogin" onClick={handleLogin}>
+                      Iniciar Sesion
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="contactLogin text-center">
+                <span>¿No tienes Cuenta? </span>
+                <NavLink exact to="/Contactanos">
+                  <a id="linkContactanos">Contactanos</a>
+                </NavLink>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          class="form-control"
-          id="exampleInputPassword1"
-        />
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">
-          Check me out
-        </label>
-      </div>
-      <button class="btn btn-primary" onClick={handleLogin}>
-        Iniciar Session
-      </button>
-      <NavLink exact to="/Signup" title="Iniciar Sesion">
-        <p>Registrate</p>
-      </NavLink>
-    </div>
   );
 }

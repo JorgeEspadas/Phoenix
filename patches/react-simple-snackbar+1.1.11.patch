@@ -1,0 +1,55 @@
+diff --git a/node_modules/react-simple-snackbar/package.json b/node_modules/react-simple-snackbar/package.json
+index 3f55094..b33d6cd 100644
+--- a/node_modules/react-simple-snackbar/package.json
++++ b/node_modules/react-simple-snackbar/package.json
+@@ -1,26 +1,30 @@
+ {
+-  "_from": "https://registry.npmjs.org/react-simple-snackbar/-/react-simple-snackbar-1.1.11.tgz",
++  "_from": "react-simple-snackbar@^1.1.11",
+   "_id": "react-simple-snackbar@1.1.11",
+   "_inBundle": false,
+   "_integrity": "sha512-l+RMkIoqnOXBQaQbirk4yGaEH5Jeynup/AQBGaq7hCPIIraOQi2RFVthZIM4Ms6sFtdSYxQ8emN4/jI30l7gXw==",
+   "_location": "/react-simple-snackbar",
+-  "_phantomChildren": {},
++  "_phantomChildren": {
++    "regenerator-runtime": "0.13.9"
++  },
+   "_requested": {
+-    "type": "remote",
+-    "raw": "react-simple-snackbar@https://registry.npmjs.org/react-simple-snackbar/-/react-simple-snackbar-1.1.11.tgz",
++    "type": "range",
++    "registry": true,
++    "raw": "react-simple-snackbar@^1.1.11",
+     "name": "react-simple-snackbar",
+     "escapedName": "react-simple-snackbar",
+-    "rawSpec": "https://registry.npmjs.org/react-simple-snackbar/-/react-simple-snackbar-1.1.11.tgz",
+-    "saveSpec": "https://registry.npmjs.org/react-simple-snackbar/-/react-simple-snackbar-1.1.11.tgz",
+-    "fetchSpec": "https://registry.npmjs.org/react-simple-snackbar/-/react-simple-snackbar-1.1.11.tgz"
++    "rawSpec": "^1.1.11",
++    "saveSpec": null,
++    "fetchSpec": "^1.1.11"
+   },
+   "_requiredBy": [
++    "#USER",
+     "/"
+   ],
+   "_resolved": "https://registry.npmjs.org/react-simple-snackbar/-/react-simple-snackbar-1.1.11.tgz",
+   "_shasum": "e1470f49d04f8e1e941e62f459cca27d1b2167a1",
+-  "_spec": "react-simple-snackbar@https://registry.npmjs.org/react-simple-snackbar/-/react-simple-snackbar-1.1.11.tgz",
+-  "_where": "C:\\Users\\Jorge\\AppData\\Local\\Temp\\tmp-9352LqaKFoG6Su4P",
++  "_spec": "react-simple-snackbar@^1.1.11",
++  "_where": "D:\\Development\\uac\\Phoenix",
+   "author": {
+     "name": "Evandro Macedo",
+     "email": "evandro.hcm@gmail.com",
+@@ -107,8 +111,8 @@
+   "module": "dist/index.es.js",
+   "name": "react-simple-snackbar",
+   "peerDependencies": {
+-    "react": "16.x",
+-    "react-dom": "16.x"
++    "react": "17.x",
++    "react-dom": "17.x"
+   },
+   "repository": {
+     "type": "git",

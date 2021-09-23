@@ -1,0 +1,96 @@
+.contenedorSignUpPage {
+  padding: 2%;
+}
+
+.rowSignUp {
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 12px 12px 22px rgb(186, 184, 189);
+}
+.SignUpContenedorImagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background: linear-gradient(
+    0deg,
+    rgba(37, 212, 214, 1) 0%,
+    rgb(132, 134, 230) 70%
+  );
+}
+.SignUpContenedorImagen #imgSignUp {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.SignUpForm {
+  height: 32.7em;
+  justify-content: center;
+  align-items: center;
+}
+.rowSignUp h1 {
+  font-size: 4rem;
+  font-weight: 500;
+  font-family: "Pacifico";
+  color: #133775;
+}
+.inputSignUp {
+  height: 2.5em;
+  width: 70%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+}
+
+.btnSignUp {
+  height: 3em;
+  width: 50%;
+  border: none;
+  outline: none;
+  border-radius: 60px;
+  color: white;
+  font-weight: 700;
+  /*font-family: "Pacifico";*/
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+  background-color: #3b4859;
+}
+.btnSignUp:hover {
+  background: linear-gradient(
+    to right,
+    rgba(37, 212, 214, 1) 0%,
+    rgb(132, 134, 230) 70%
+  );
+}
+
+@media (max-width: 1200px) {
+  .rowSignUp h1 {
+    font-size: 3em;
+  }
+}
+@media (max-width: 992px) {
+  .SignUpContenedorImagen {
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 0px;
+  }
+  .SignUpContenedorImagen #imgLogin {
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 0px;
+  }
+}
+@media (max-width: 768px) {
+  .rowSignUp h1 {
+    font-size: 3em;
+  }
+}
+@media (max-width: 576px) {
+  .rowSignUp h1 {
+    font-size: 2em;
+  }
+  .inputSignUp {
+    height: 2.5em;
+  }
+  .btnSignUp {
+    height: 2.5em;
+  }
+}

@@ -1,40 +1,26 @@
-import React from "react";
-
 export const SidebarData = [
   {
     Modulo: "Home",
-    Icono: "home",
+    Icono: "fa fa-home",
     Link: "/",
     Activo: true,
   },
   {
     Modulo: "Estadisticas",
-    Icono: "chart-line",
+    Icono: "fa fa-bar-chart",
     Link: "/Estadisticas",
     Activo: true,
   },
   {
     Modulo: "Info",
-    Icono: "question-circle",
+    Icono: "fa fa-info-circle",
     Link: "/Info",
     Activo: true,
   },
   {
     Modulo: "Contactanos",
-    Icono: "envelope",
+    Icono: "fa fa-envelope",
     Link: "/Contactanos",
     Activo: true,
-  },
-  {
-    Modulo: "Encuesta",
-    Icono: "file-alt",
-    Link: "/Encuestas",
-    Activo: true,
-  },
-  {
-    Modulo: "Administrador",
-    Icono: "tools",
-    Link: "/Administrador",
-    Activo: false,
   },
 ];
