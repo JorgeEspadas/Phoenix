@@ -19,10 +19,6 @@ import FormPage from "../Pages/FormPage";
 import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 
-<<<<<<< HEAD
-=======
-import IMGprincipal from "../IMG/IconoApp.svg";
->>>>>>> 7114c858581514492d000399560bbab136099e6f
 
 export default function AppRouter() {
   return (
@@ -49,7 +45,6 @@ export default function AppRouter() {
                   component={AdminPage}
                 />
 
-<<<<<<< HEAD
                 <Route exact path="*" component={NotFoundPage} />
               </Switch>
             </main>
@@ -57,12 +52,6 @@ export default function AppRouter() {
               <div class="col"> JAM | 2021 </div>
             </footer>
           </div>
-=======
-            <PrivateRoute exact path="/Encuestas" component={FormPage} />
-            <PrivateRoute exact path="/Administrador" component={AdminPage} />
-            <Route exact path="*" component={NotFoundPage} />
-          </Switch>
->>>>>>> 7114c858581514492d000399560bbab136099e6f
         </div>
       </div>
     </Router>
