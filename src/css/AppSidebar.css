@@ -1,83 +1,102 @@
-.SidebarContenedor {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0px auto0;
+/*Estilo de la Barra Lateral*/
+.bg-color {
+  /*Color y Sombra de la Barra Lateral*/
+  background-color: var(--main-bs-color) !important;
+  background: var(--main-bs-color) !important;
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+}
+.logoPrincipal {
+  align-content: center;
+}
+.rounded-circle {
+  width: 50%;
+}
+.nav-item {
+  /*Separacion del Menu*/
+  padding-bottom: 0.5rem !important;
+}
+.nav-item a:hover ::before {
+  color: var(--main-bg-contrast-color) !important;
+}
+.nav-link i, /*Iconos de la Barra Lateral*/
+.InicioSesionIcono {
+  color: var(--main-bg-primary-color);
+}
+.nav-link span {
+  /*Texto de la Barra Lateral*/
+  color: var(--main-bg-secundary-color);
+  padding-left: 0.5rem;
+}
+/*Boton de Usuario de la Barra Lateral*/
+.InicioSesionIcono:hover,
+.InicioSesionIcono:focus {
+  color: var(--main-bg-contrast-color) !important;
+}
+.dropdown .btn-primary {
+  border-radius: 30px;
+  box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.3);
+  background-color: var(--main-bg-primary-color) !important;
+  border-color: var(--main-bg-primary-color) !important;
+}
+.dropdown .btn-primary:hover,
+.dropdown .show .btn-primary:focus {
+  color: var(--main-bg-primary-color) !important;
+  background-color: var(--main-bg-contrast-color) !important;
+  border-color: var(--main-bg-contrast-color) !important;
+}
+/* END Boton de Usuario de la Barra Lateral*/
+.footer {
+  background-color: var(--main-bs-secundary-color) !important;
+  font-family: var(--font-family-tittle) !important;
+  color: var(--main-bg-secundary-color);
+}
+/*Modal de Inicio de Sesion*/
+.modal-title {
+  font-family: var(--font-family-tittle) !important;
+  color: var(--main-bg-primary-color);
+}
+@media (max-width: 992px) {
+}
+@media (max-width: 768px) {
+  .nav-link span {
+    font-size: 0.8em;
+  }
+  .btn {
+    padding: 0.375rem 0.375rem !important;
+  }
+  .nav-item {
+    padding-bottom: 0.1rem !important;
+  }
+  .dropdown .btn-primary {
+    font-size: 0.8em;
+  }
+  .dropdown .handIcon {
+    display: none !important;
+  }
+}
+@media (max-width: 576px) {
+  .rounded-circle {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .dropdown .btn-primary {
+    color: var(--main-bg-primary-color);
+    border-radius: 0px;
+    box-shadow: none;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+  .dropdown .btn-primary:hover,
+  .dropdown .show .btn-primary:focus {
+    color: var(--main-bg-contrast-color) !important;
+    background-color: var(--main-bs-color) !important;
+    border-color: var(--main-bs-color) !important;
+  }
 }
 
-/*Color de Sidebar*/
-.SidebarContenedor .Sidebar {
-  color: white;
-  background: linear-gradient(
-    0deg,
-    rgba(37, 212, 214, 1) 0%,
-    rgb(132, 134, 230) 70%
-  );
-}
-/*Titulo del Sidebar*/
-a:link {
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: none;
-}
-.headerSidebar .titulo {
-  color: white;
-}
-
-/*Modulos*/
-.Modulo:hover {
-  /*Modulos*/
-  color: rgb(172, 229, 255);
-}
-.sidebar-content .active {
-  color: #1e4fa3;
-}
-
-/*Icono de Login*/
-.LoginFooter {
-  text-align: center;
-  padding: 20px 5px;
-  /*background-color: #293846;*/
-}
-.LoginFooter .InicioSesionIcono {
-  color: white;
-}
-.LoginFooter .InicioSesionIcono:hover {
-  color: #1e4fa3;
-}
-
-/*Barra Superior*/
-#contenedorPrincipal {
-  background-color: #eaeef4;
-  padding: 0%;
-  position: inherit;
-  overflow: scroll;
-}
-.header {
-  background-color: white;
-  box-shadow: 0px 2px 5px #c9cacc;
-  padding-right: 3%;
-  height: 74px;
-}
-.header .iconoApp img {
-  margin: 12px;
-  height: 50px;
-  float: right;
-}
-
-@font-face {
-  font-family: "RobotoC";
-  src: local("RobotoC"),
-    url(../fonts/RobotoCondensed-Bold.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Narrow";
-  src: local("Narrow"),
-    url("../fonts/ArchivoNarrow-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Pacifico";
-  src: local("Pacifico"),
-    url("../fonts/Pacifico-Regular.ttf") format("truetype");
+/* this is needed to make the content scrollable on larger screens */
+@media (min-width: 576px) {
+  .h-sm-100 {
+    height: 100%;
+  }
 }

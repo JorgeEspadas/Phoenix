@@ -1,6 +1,6 @@
 export default function AdminPage() {
   return (
-    <div style={{ padding: "2%" }}>
+    <div className="col pt-4">
       <h1>Administrador</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">

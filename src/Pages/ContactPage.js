@@ -2,7 +2,7 @@ import imagen from "../IMG/backgroud-acuarela.svg";
 
 export default function ContactPage() {
   return (
-    <div style={{ padding: "2%" }}>
+    <div className="col pt-4">
       <h1>Contactanos</h1>
       <br />
       <div class="card mb-3" style={{ maxWidth: "540px" }}>

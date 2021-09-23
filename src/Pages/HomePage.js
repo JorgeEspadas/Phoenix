@@ -3,28 +3,38 @@ import "animate.css";
 
 export default function HomePage() {
   return (
-    <div className="contenedorHomePage">
-      <div>
-        <div className="jumbotron">
-          <h1 className="display-4 animate__animated animate__heartBeat">
-            Welcome
-          </h1>
-          <p className="lead my-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
-          <hr className="my-4" />
-          <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </p>
-          <button className="btnHome">Ver mas</button>
-        </div>
-      </div>
+    <div className="col pt-4">
+      <div></div>
+      <h1>Aqui va cosa Perrona</h1>
+      <p class="lead">
+        An example multi-level sidebar with collasible menu items. The menu
+        functions like an "accordion" where only a single menu is be open at a
+        time.
+      </p>
+      <hr />
+      <h3>Mas cosas Perronas...</h3>
+      <p>
+        Sriracha biodiesel taxidermy organic post-ironic, Intelligentsia salvia
+        mustache 90's code editing brunch. Butcher polaroid VHS art party,
+        hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag wolf squid
+        tote bag. Tote bag cronut semiotics, raw denim deep v taxidermy
+        messenger bag. Tofu YOLO Etsy, direct trade ethical Odd Future jean
+        shorts paleo. Forage Shoreditch tousled aesthetic irony, street art
+        organic Bushwick artisan cliche semiotics ugh synth chillwave
+        meditation. Shabby chic lomo plaid vinyl chambray Vice. Vice sustainable
+        cardigan, Williamsburg master cleanse hella DIY 90's blog.
+      </p>
+      <p>
+        Ethical Kickstarter PBR asymmetrical lo-fi. Dreamcatcher street art
+        Carles, stumptown gluten-free Kickstarter artisan Wes Anderson wolf pug.
+        Godard sustainable you probably haven't heard of them, vegan
+        farm-to-table Williamsburg slow-carb readymade disrupt deep v. Meggings
+        seitan Wes Anderson semiotics, cliche American Apparel whatever.
+        Helvetica cray plaid, vegan brunch Banksy leggings +1 direct trade.
+        Wayfarers codeply PBR selfies. Banh mi McSweeney's Shoreditch selfies,
+        forage fingerstache food truck occupy YOLO Pitchfork fixie iPhone fanny
+        pack art party Portland.
+      </p>
     </div>
   );
 }
