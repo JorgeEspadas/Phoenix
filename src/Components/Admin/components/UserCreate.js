@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import NetworkManager from '../../../Backend/util/Http';
+import NetworkManager from '../../../Backend/util/http';
 
 function CreateUser({snackbar}) {
     const roles = [

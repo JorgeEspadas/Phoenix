@@ -26,8 +26,7 @@ export default function AdminPage() {
 
 
   return (
-    <div>
-    <div style={{ padding: "2%", }}>
+    <div className="col pt-4">
       <h1>Administrador</h1>
       <ul className="nav nav-tabs">
         <li className="nav-item">
@@ -50,7 +49,6 @@ export default function AdminPage() {
         </li>
       </ul>
       <div id="adminContainer"></div>
-    </div>
     </div>
   ); /// abuebo abuebo
 }

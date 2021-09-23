@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Spinner } from 'react-bootstrap';
-import NetworkManager from '../../../Backend/util/Http';
+import NetworkManager from '../../../Backend/util/http';
 import Util from '../../../Backend/util/Util';
 
 function ModifyUser({snackbar}) {

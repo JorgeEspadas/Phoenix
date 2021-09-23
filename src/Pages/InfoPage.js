@@ -1,6 +1,6 @@
 export default function InfoPage() {
   return (
-    <div style={{ padding: "2%" }}>
+    <div className="col pt-4">
       <h1>Pagina de Informacion</h1>
       <br />
       <div className="row">

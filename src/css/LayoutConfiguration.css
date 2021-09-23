@@ -1,0 +1,44 @@
+:root {
+  /*Colores de Principales*/
+  --main-bg-color: #1a1e31;
+  --main-bg-primary-color: #3b4859;
+  --main-bg-secundary-color: #858793;
+  --main-bg-contrast-color: #d7bc31;
+
+  /*Colores de Secundarios*/
+  --main-bs-color: #ffffff;
+  --main-bs-primary-color: #dadadb;
+  --main-bs-secundary-color: #ececec;
+  /*Colores de Basicos*/
+  --primary-color: #4e73df;
+  --secondary-color: #858796;
+  --success-color: #1cc88a;
+  --info-color: #36b9cc;
+  --warning-color: #f6c23e;
+  --danger-color: #e74a3b;
+  /*Tamaños del Responsive*/
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  /*Fuentes*/
+  --font-family-tittle: "Narrow", "ArchivoNarrow-Regular";
+  --Font-family-body: Arial, Helvetica, sans-serif;
+}
+@font-face {
+  font-family: "RobotoC";
+  src: local("RobotoC"),
+    url(../fonts/RobotoCondensed-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Narrow";
+  src: local("Narrow"),
+    url(../fonts/ArchivoNarrow-Regular.ttf) format("truetype");
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-tittle);
+}

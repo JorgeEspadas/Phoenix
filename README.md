@@ -13,6 +13,8 @@ Phoenix Front-End para el proyecto de observatorio de la UAC.<br>
 - Ejecutar " npm i " o " npm install " en la terminal en la raiz del proyecto
 - En caso de no tener los siguientes paquetes de dependencias:
 - npm i react-router
+- npm install bootstrap
+- npm install jquery
 - npm install --save cdbreact
 - npm install @material-ui/core
 - npm install @material-ui/icons
