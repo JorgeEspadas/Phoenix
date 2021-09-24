@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import Preguntas from '../Preguntas/Preguntas';
+import Preguntas from '../Components/Preguntas/Preguntas';
 import UserEditor from '../Components/Admin/Usuarios';
 import {useSnackbar} from 'react-simple-snackbar';
 import Util from '../Backend/util/Util';
