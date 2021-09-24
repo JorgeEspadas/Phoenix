@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import NetworkManager from '../../Backend/util/http';
+import NetworkManager from '../../../Backend/util/http';
 var categories = null;
 var secciones = [];
 let categorie = [];
@@ -22,6 +22,20 @@ const AgregarPregunta =  () => {
     const [ indice, setIndice ] = useState(0);
     const [ res, setRes ] = useState([]);
 
+    const resetPregunta = () =>{
+        registrar({
+            texto: "",
+            tipo:"",
+            modulo:"",
+            categoria:"",
+            multiples:false,
+            respuestas:[{
+                id_respuesta:"",
+                texto:""
+            }]
+        });
+        vaciarRes();
+    }
     const Opciones = (props) => {
         let valor = props.value;
         return(<Fragment key={valor.toString()}>   
@@ -92,7 +106,6 @@ const AgregarPregunta =  () => {
         if(res.length !== 0){
             setRes([]);
             setIndice(0);
-             console.log(res)
         } 
     }
 
@@ -124,6 +137,7 @@ const AgregarPregunta =  () => {
             })
         }else if(pregunta.modulo === "abierta"){
             respuesta.id_respuesta = cont+"";
+            respuesta.texto=" ";
             opciones.push(respuesta);
         }
        
@@ -165,8 +179,10 @@ const AgregarPregunta =  () => {
         }
         pregunta.respuestas = obtenerValores();
         console.log(pregunta)
-        let response = await net.globalPost('/admin/preguntas',pregunta);
-        console.log(response)  
+        let response = await net.post('/admin/preguntas',pregunta);
+        console.log(response)
+        resetPregunta();  
+        console.log(pregunta);
 
     }
 
@@ -175,13 +191,13 @@ const AgregarPregunta =  () => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Pregunta: </label>
                 <div className="col-sm-9">
-                    <input className="form-control" type="text" name="texto" onChange={handleChange} />
+                    <input className="form-control" type="text" name="texto" onChange={handleChange} value={pregunta.texto}/>
                 </div>
             </div>
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Sección: </label>
                 <div className="col-sm-9" >
-                    <select className="form-select" name="tipo" id="selectSecciones" onChange={handleChange}>
+                    <select className="form-select" name="tipo" id="selectSecciones" onChange={handleChange} value={pregunta.tipo}>
                         <option value="" disabled selected>Selecciona una opción:</option>
                         {secciones}
                     </select>
@@ -190,7 +206,7 @@ const AgregarPregunta =  () => {
                 <div className="mb-3 row">
                     <label className="col-sm-3 col-form-label">Categoría: </label>
                     <div  className="col-sm-9">
-                        <select className="form-select" name="categoria" id="selectCategories" onChange={handleChange}>
+                        <select className="form-select" name="categoria" id="selectCategories" onChange={handleChange} value={pregunta.categoria}>
                             <option value="" disabled selected>Selecciona una opción:</option>
                             {categorie}
                         </select>
@@ -199,7 +215,7 @@ const AgregarPregunta =  () => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Tipo de pregunta: </label>
                 <div  className="col-sm-9">
-                    <select className="form-select" name="modulo" onChange={handleChange}>
+                    <select className="form-select" name="modulo" onChange={handleChange} value={pregunta.modulo}>
                         <option value="" disabled selected>Selecciona una opción:</option>
                         <option value="abierta">Abierta</option>
                         <option value="multiple">Opción multiple</option>
@@ -211,7 +227,7 @@ const AgregarPregunta =  () => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Opciones de respuestas: </label>
                     <div className="col-sm-9 mb-3">
-                        <select className="form-select " name="multiples" onChange={handleChange}>
+                        <select className="form-select " name="multiples" onChange={handleChange} value={pregunta.multiples}>
                             <option value={false}>Unica Respuesta</option>
                             <option value={true}>Multiples Respuestas</option>
                         </select>
