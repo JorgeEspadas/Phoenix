@@ -1,17 +1,15 @@
 import React from "react";
 import { SidebarData } from "./SidebarData";
 import Login from "../../Pages/Login";
-import { Dropdown, Modal, Button } from "react-bootstrap";
+import { Dropdown, Modal} from "react-bootstrap";
 import { useState } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import HandIcon from "@material-ui/icons/PanTool";
 import LogoNombre from "../../Images/LogoNombre.svg";
 import LogoIcono from "../../Images/LogoIcono.svg";
 import useAuth from "../auth/useAuth";
 
 const Sidebar = () => {
   const auth = useAuth();
-  const username = "Juan Carlo"; //Estatico por ahora
 
   //======= Validaciones del Modal de Login======
   const [show, setShow] = useState(false); //Estado Incial
@@ -116,12 +114,9 @@ const Sidebar = () => {
               <Dropdown>
                 <Dropdown.Toggle id="">
                   <a>
-                    <HandIcon
-                      className="handIcon ms-1 d-none d-sm-inline"
-                      fontSize="small"
-                    />
+                  <i className="fa fa-user"></i>
                     <span className="username ms-1 d-none d-sm-inline">
-                      Hola {username}!
+                      Mi Perfil
                     </span>
                   </a>
                 </Dropdown.Toggle>

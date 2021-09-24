@@ -35,17 +35,16 @@ export default function Login(){
     console.log(user.password);
     var net = new NetworkManager();
     var response = await net.post('auth/login',user);
-    console.log(response);
     if(response.response === "OK"){
       // recibimos el token, rol
       var token = response.data.token;
       var decoded = Util.decode(token);
       //hacemos set del usuario y mandamos el payload o auth.login();
       var userData = {
-        'nombre' : decoded[1].nombre,
-        'email' : decoded[1].email,
+        'nombre' : decoded.nombre,
+        'email' : decoded.email,
         'token' : token,
-        'rol' : decoded[1].rol
+        'rol' : decoded.rol
       };
       auth.Login(userData);
       history.push(location.state?.from || "/");
@@ -74,8 +73,11 @@ export default function Login(){
                   <div className="offset-1 col-lg-10">
                     <input
                       type="email"
+                      name="email"
                       className="inputLogin px-3"
                       placeholder="Correo Electronico"
+                      onChange={handleChange}
+                      value={user.email}
                     />
                   </div>
                 </div>
@@ -83,8 +85,11 @@ export default function Login(){
                   <div className="offset-1 col-lg-10">
                     <input
                       type="password"
+                      name="password"
                       className="inputLogin px-3"
                       placeholder="Contraseña"
+                      onChange={handleChange}
+                      value={user.password}
                     />
                   </div>
                 </div>

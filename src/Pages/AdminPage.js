@@ -1,30 +1,35 @@
+import {useState} from 'react';
 import Preguntas from '../Preguntas/Preguntas';
 import UserEditor from '../Components/Admin/Usuarios';
-import ReactDOM from 'react-dom';
 import {useSnackbar} from 'react-simple-snackbar';
 import Util from '../Backend/util/Util';
 
 export default function AdminPage() {
   const [open] = useSnackbar(Util.snackbarConfig.options);
+  const [pantallaActual, setPantalla] = useState(0);
   
   const handleClick = (e) => {
     if(e.target.value === "agregar_pregunta"){  
-
-      ReactDOM.render(
-        <Preguntas />,
-        document.getElementById('adminContainer')
-     ); 
+      setPantalla(0);
     }else if(e.target.value=== "config"){
-      ReactDOM.render(
-        <span></span>,
-        document.getElementById('adminContainer'));
+      setPantalla(1);
     }else if(e.target.value === "usuario"){
-      ReactDOM.render(
-        <UserEditor snackbar={open}/>,
-        document.getElementById('adminContainer'))
+      setPantalla(2);
     }
   }
 
+  const moduleRender = (number) =>{
+    switch(number){
+      case 0:
+        return <Preguntas/>
+      case 1:
+        return <span></span>
+      case 2:
+        return <UserEditor snackbar={open}/>
+      default:
+        return <span></span>
+    }
+  }
 
   return (
     <div className="col pt-4">
@@ -49,7 +54,11 @@ export default function AdminPage() {
           </button>
         </li>
       </ul>
-      <div id="adminContainer"></div>
+      <>
+        {
+          moduleRender(pantallaActual)
+        }
+      </>
     </div>
   ); /// abuebo abuebo
 }
