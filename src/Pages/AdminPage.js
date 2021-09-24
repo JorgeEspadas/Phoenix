@@ -10,21 +10,21 @@ export default function AdminPage() {
   
   const handleClick = (e) => {
     if(e.target.value === "agregar_pregunta"){  
-      setPantalla(0);
-    }else if(e.target.value=== "config"){
       setPantalla(1);
-    }else if(e.target.value === "usuario"){
+    }else if(e.target.value=== "config"){
       setPantalla(2);
+    }else if(e.target.value === "usuario"){
+      setPantalla(3);
     }
   }
 
   const moduleRender = (number) =>{
     switch(number){
-      case 0:
-        return <Preguntas/>
       case 1:
-        return <span></span>
+        return <Preguntas/>
       case 2:
+        return <span></span>
+      case 3:
         return <UserEditor snackbar={open}/>
       default:
         return <span></span>
