@@ -9,20 +9,12 @@ const Preguntas = () => {
         switch(e.target.value){
             case 'add':
                 setPantalla(<AgregarPregunta />)
-                /* ReactDOM.render(
-                    <AgregarPregunta />,
-                    document.getElementById('editorContainer')
-                 );  */
             break;
             case 'modificar':
                 setPantalla(<ModificarPregunta /> )
             break;
             default:
                 setPantalla(<span></span>)
-                /* ReactDOM.render(
-                    <p>Selecciona alguna opcion :D</p>,
-                    document.getElementById('editorContainer')
-                    );  */
             break;
         }
     }

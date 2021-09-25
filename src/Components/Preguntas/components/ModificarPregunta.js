@@ -9,7 +9,6 @@ const ModificarPregunta = () => {
     const [ isModify, setModify ] = useState(false);
     const [ question , setQuestion ] = useState({});
     const [ categorias , setCategorias ] = useState([]);
-    const [ categoria , setCategoria ] = useState("");
 
     const modulos = [
         {
@@ -102,7 +101,6 @@ const ModificarPregunta = () => {
                                 </div>
                                 <div className="col-sm-8">
                                     <label className="col-form-label">categoria: {item.categoria}</label>
-                                    
                                 </div>
                             </div>
                             <hr />
@@ -129,7 +127,20 @@ const ModificarPregunta = () => {
                                 }
                             </select>
                         </div>
-                    </div>  
+                    </div> 
+                    <div className="mb-3 row">
+                        <label className="col-sm-3 col-form-label">Categoría: </label>
+                        <div  className="col-sm-9">
+                            <select className="form-select" name="categoria" id="selectCategories">
+                                <option value="" disabled selected>Selecciona una opción:</option>
+                                {
+                                    categorias[0].categorias.map( (item,i) =>{
+                                        return <option value="" >{item.titulo}</option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                    </div> 
                 </div>
             }
         </div>

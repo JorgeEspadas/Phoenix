@@ -1,10 +1,5 @@
-import React, { useState, Fragment } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, Fragment, useEffect } from 'react';
 import NetworkManager from '../../../Backend/util/http';
-var categories = null;
-var secciones = [];
-let categorie = [];
-let isData = false;
 const AgregarPregunta =  () => {
     var net = new NetworkManager();
     const [ pregunta, registrar ] = useState({
@@ -20,7 +15,9 @@ const AgregarPregunta =  () => {
     });
     const [ data, setData ] = useState(null);
     const [ indice, setIndice ] = useState(0);
+    const [ indiceRes , setIndiceRes ] = useState(0);
     const [ res, setRes ] = useState([]);
+    const [ isModificar, setModificar ] = useState(false);
 
     const resetPregunta = () =>{
         registrar({
@@ -52,32 +49,17 @@ const AgregarPregunta =  () => {
     } 
     //recibe las categorias de la base de datos para pintarlas en los selects
     const recibirCategorias = async () => {
-        if(!isData){
+        if(data === null){
             var response = await net.globalGet('/admin/categorias'); 
             console.log(response)
             var rawData = response.data.data;
-            categories = rawData;
-            if(categories !== null){
-                secciones = []
-                categories.map((item, i) => {
-                    secciones.push(<option key={i} value = {i}>{item.id_categoria}</option>);
-                })
-                pintarCategorias(0,categories)
-                isData = true;
-                setData(categories);
-            }
+            setData(rawData);
         }
     }
-    recibirCategorias();//
 
-    const pintarCategorias = (section,data) => {
-       categorie = [];
-       for(var i in data[section].categorias){
-           categorie.push(
-               <option value={data[section].categorias[i].titulo} key={data[section].categorias[i].titulo}>{data[section].categorias[i].titulo}</option>
-           );
-       }
-    } 
+    useEffect( () =>{
+        recibirCategorias();
+    },[])
     
     const handleChange = (e) => {
         let valor;
@@ -87,7 +69,7 @@ const AgregarPregunta =  () => {
             valor = false;
         }else if(e.target.name === "tipo"){
             valor = data[parseInt(e.target.value,10)].id_categoria;
-            pintarCategorias(parseInt(e.target.value,10),data);
+            setIndice(parseInt(e.target.value));
         }else if(e.target.name === "modulo"){
             if(e.target.value != "multiple"){
                 vaciarRes();
@@ -105,7 +87,7 @@ const AgregarPregunta =  () => {
     const vaciarRes = () => {
         if(res.length !== 0){
             setRes([]);
-            setIndice(0);
+            setIndiceRes(0);
         } 
     }
 
@@ -128,7 +110,7 @@ const AgregarPregunta =  () => {
             })
         }else if(pregunta.modulo === "rango"){
             let rangos = document.getElementById("opcionesRango").querySelectorAll("input");
-            rangos.forEach(item => {
+            rangos.forEach( (item) => {
                 respuesta.id_respuesta = cont+"";
                 respuesta.texto = item.value;
                 opciones.push(respuesta);
@@ -144,15 +126,15 @@ const AgregarPregunta =  () => {
         return opciones;
     }
     const handleClick = e => {
-        res.push( <Opciones value = {indice} />); 
-        setIndice(indice+1);
-        ReactDOM.render(res.map((item) => {return item}), document.getElementById('opciones'))
+        res.push(<Opciones value = {indiceRes} />);
+        setIndiceRes(indiceRes+1);
+        setModificar(true);
     }
 
     const handleEliminar = e => {
-        let indice = parseInt(e.target.name,10);
-        delete  res[indice];
-        ReactDOM.render(res.map((item) => {return item}), document.getElementById('opciones'));
+        let deleteIndice = parseInt(e.target.name,10);
+        delete  res[deleteIndice];
+        setModificar(true);
     }
     //Enviara la pregunta
     const handleState = async () => {
@@ -165,17 +147,23 @@ const AgregarPregunta =  () => {
         if(pregunta.modulo === "multiple" || pregunta.modulo === "rango"){
             let opciones = obtenerValores();
             let isVacio = false;
-            opciones.map((item,i) => {
-                if(item.texto.trim().length === 0){
-                    isVacio = true;
-                }
-            });
+            if(opciones.length !== 0){
+                opciones.map((item,i) => {
+                    if(item.texto.trim().length === 0){
+                        isVacio = true;
+                    }
+                });
+            }else{
+                console.log("No se han agregado las opciones de respuesta")
+                return;
+            }
 
             if(isVacio){
                 //Snackbar
                 console.log("rellena todas las opciones");
                 return;
             }
+            
         }
         pregunta.respuestas = obtenerValores();
         console.log(pregunta)
@@ -197,18 +185,26 @@ const AgregarPregunta =  () => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Sección: </label>
                 <div className="col-sm-9" >
-                    <select className="form-select" name="tipo" id="selectSecciones" onChange={handleChange} value={pregunta.tipo}>
+                    <select className="form-select" name="tipo" id="selectSecciones" onChange={handleChange}>
                         <option value="" disabled selected>Selecciona una opción:</option>
-                        {secciones}
+                        {data !== null &&
+                            data.map((item, i) => {
+                                return <option key={i} value ={i}>{item.id_categoria}</option>
+                            })
+                        }
                     </select>
                 </div>
             </div>  
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Categoría: </label>
                 <div  className="col-sm-9">
-                    <select className="form-select" name="categoria" id="selectCategories" onChange={handleChange} value={pregunta.categoria}>
-                        <option value="" disabled selected>Selecciona una opción:</option>
-                        {categorie}
+                    <select className="form-select" name="categoria" id="selectCategories" onChange={handleChange} >
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        {data !== null &&
+                            data[indice].categorias.map((item, i) => {
+                                return <option key={item.titulo} value = {item.titulo}>{item.titulo}</option>
+                            })
+                        }
                     </select>
                 </div>
             </div>               
@@ -237,7 +233,16 @@ const AgregarPregunta =  () => {
                  </div>
             </div>
         }
-        {pregunta.modulo === "multiple" && <div className="form-group" id="opciones"></div>}
+        {pregunta.modulo === "multiple" && 
+            <div className="form-group" id="opciones">
+            {isModificar &&
+            setModificar(false),
+                res.map( (item) => {
+                    return item;
+                })
+            }
+            </div>
+        }
         {pregunta.modulo === "rango" &&
             <div className="mb-3 row" id="opcionesRango">
                 <label className="col-sm-2 col-form-label">Inicio:</label>
