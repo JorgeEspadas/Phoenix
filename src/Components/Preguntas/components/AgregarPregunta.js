@@ -203,14 +203,14 @@ const AgregarPregunta =  () => {
                     </select>
                 </div>
             </div>  
-                <div className="mb-3 row">
-                    <label className="col-sm-3 col-form-label">Categoría: </label>
-                    <div  className="col-sm-9">
-                        <select className="form-select" name="categoria" id="selectCategories" onChange={handleChange} value={pregunta.categoria}>
-                            <option value="" disabled selected>Selecciona una opción:</option>
-                            {categorie}
-                        </select>
-                    </div>
+            <div className="mb-3 row">
+                <label className="col-sm-3 col-form-label">Categoría: </label>
+                <div  className="col-sm-9">
+                    <select className="form-select" name="categoria" id="selectCategories" onChange={handleChange} value={pregunta.categoria}>
+                        <option value="" disabled selected>Selecciona una opción:</option>
+                        {categorie}
+                    </select>
+                </div>
             </div>               
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Tipo de pregunta: </label>

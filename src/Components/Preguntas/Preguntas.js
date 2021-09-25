@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import AgregarPregunta from "./components/AgregarPregunta";
 import ReactDOM from "react-dom";
+import ModificarPregunta from "./components/ModificarPregunta";
 
 const Preguntas = () => {
+    const [ pantalla , setPantalla ] = useState();
     const handleClick = (e) => {
         switch(e.target.value){
             case 'add':
-                ReactDOM.render(
+                setPantalla(<AgregarPregunta />)
+                /* ReactDOM.render(
                     <AgregarPregunta />,
                     document.getElementById('editorContainer')
-                 ); 
+                 );  */
             break;
             case 'modificar':
-                
+                setPantalla(<ModificarPregunta /> )
             break;
             default:
-                ReactDOM.render(
+                setPantalla(<span></span>)
+                /* ReactDOM.render(
                     <p>Selecciona alguna opcion :D</p>,
                     document.getElementById('editorContainer')
-                    ); 
+                    );  */
             break;
         }
     }
@@ -41,7 +45,7 @@ const Preguntas = () => {
                 </div>
                 <div className="col-10">
                     <div className="container-fluid">
-                        <div id="editorContainer"></div>
+                        <div id="editorContainer">{pantalla}</div>
                     </div>
                 </div>
             </div>
