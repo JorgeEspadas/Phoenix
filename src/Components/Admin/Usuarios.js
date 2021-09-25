@@ -1,29 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {useState} from 'react';
 import ModifyUser from './components/ModifyUser';
 import CreateUser from './components/UserCreate'
 
 function UserEditor({snackbar}) {
+
+    const [currentModule, setModule] = useState(0);
+
     const handleClick = (e) =>{
         switch(e.target.value){
             case 'create':
-                ReactDOM.render(
-                    <CreateUser snackbar={snackbar}/>,
-                    document.getElementById('editorContainer')
-                 ); 
+                setModule(1);
             break;
             case 'modificar':
-                ReactDOM.render(
-                    <ModifyUser snackbar={snackbar}/>,
-                    document.getElementById('editorContainer')
-                 ); 
+                setModule(2);
             break;
             default:
-                ReactDOM.render(
-                    <p>Selecciona alguna opcion :D</p>,
-                    document.getElementById('editorContainer')
-                    ); 
+                setModule(0)
             break;
+        }
+    }
+
+    // render switchcase
+
+    const moduleRender = (number) => {
+        switch(number) {
+            case 0:
+                return <span></span>
+            case 1:
+                return <CreateUser snackbar={snackbar}/>
+            case 2:
+                return <ModifyUser snackbar={snackbar}/>
+            case 3:
+                return <span>soon(tm)</span>
+            default:
+                return <span>you should not see this message</span>
         }
     }
 
@@ -46,7 +56,9 @@ function UserEditor({snackbar}) {
                 </div>
                 <div className="col-5">
                     <div className="container" >
-                        <div id="editorContainer"></div>
+                        <>
+                            {moduleRender(currentModule)}
+                        </>
                     </div>
                 </div>
             </div>

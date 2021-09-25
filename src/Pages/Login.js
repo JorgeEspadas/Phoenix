@@ -35,7 +35,6 @@ export default function Login(){
     console.log(user.password);
     var net = new NetworkManager();
     var response = await net.post('auth/login',user);
-    console.log(response);
     if(response.response === "OK"){
       // recibimos el token, rol
       var token = response.data.token;
@@ -74,10 +73,11 @@ export default function Login(){
                   <div className="offset-1 col-lg-10">
                     <input
                       type="email"
+                      name="email"
                       className="inputLogin px-3"
                       placeholder="Correo Electronico"
-                      name="email"
                       onChange={handleChange}
+                      value={user.email}
                     />
                   </div>
                 </div>
@@ -85,10 +85,11 @@ export default function Login(){
                   <div className="offset-1 col-lg-10">
                     <input
                       type="password"
+                      name="password"
                       className="inputLogin px-3"
                       placeholder="Contraseña"
-                      name="password"
                       onChange={handleChange}
+                      value={user.password}
                     />
                   </div>
                 </div>
