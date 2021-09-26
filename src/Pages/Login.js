@@ -49,7 +49,7 @@ export default function Login(){
       auth.Login(userData);
       history.push(location.state?.from || "/");
     }else{
-      openSnackbar('Error de Servicio');
+      openSnackbar(response.data.exception.message);
     }
   };
 

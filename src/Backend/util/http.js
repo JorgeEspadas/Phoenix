@@ -3,15 +3,11 @@ import Util from './Util';
 
 class NetworkManager {
     constructor(){
-        this.__axios = axios.create({baseURL: Util.Config.backendURL});
+        this.__axios = axios.create(Util.Config);
     }
 
     post = async (endpoint, payload) =>{
-        let local = localStorage.getItem("user");
-        let token = (local == "null") ? 'notoken' : local.token;
-        var headers = Util.Config.headers;
-        headers['auth-token']=token;
-        var result = await this.__axios.post(endpoint, payload, headers).then((response) =>{
+        var result = await this.__axios.post(endpoint, payload).then((response) =>{
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
@@ -24,11 +20,7 @@ class NetworkManager {
     }
 
     put = async (endpoint, payload) => {
-        let local = localStorage.getItem("user");
-        let token = (local == "null") ? 'notoken' : local.token;
-        var headers = Util.Config.headers;
-        headers['auth-token']=token;
-        var result = await this.__axios.put(endpoint, payload, headers).then((response) =>{
+        var result = await this.__axios.put(endpoint, payload).then((response) =>{
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
@@ -41,16 +33,16 @@ class NetworkManager {
     }
 
     //cambiar a get
-    globalGet = async (endpoint) => {
-        
-        //let user = JSON.parse(localStorage.getItem('user'));
-        
-        let config = {
-            headers: {
-                //'auth-token':user.token
+    get = async (endpoint) => {
+        var result = await this.__axios.get(endpoint).then((response) => {
+            if(response.status != 200){
+                return Util.Error('Error de Conexion, Codigo: '+response.status);
+            }else{
+                return response.data;
             }
-        };
-        var result = await this.__axios.get(endpoint,config);
+        }, (error) => {
+            return Util.Error('Error de Red');
+        });
         return result;
     }
 }

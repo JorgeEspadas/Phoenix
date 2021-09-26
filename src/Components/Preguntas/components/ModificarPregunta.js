@@ -27,7 +27,7 @@ const ModificarPregunta = () => {
 
     const obtenerPreguntas = async () => {
         if(!isData){
-            let response = await net.globalGet('/admin/preguntas'); 
+            let response = await net.get('/admin/preguntas'); 
             console.log(response);
             setIsData(true);
             setData(response.data.data);
@@ -48,7 +48,7 @@ const ModificarPregunta = () => {
 
     const handleModificar = async (e) => {
         setQuestion(dataFound[parseInt(e.target.value,10)])
-        let response = await net.globalGet('/admin/categorias'); 
+        let response = await net.get('/admin/categorias'); 
         console.log(response)
         setCategorias(response.data.data);
         setModify(true);

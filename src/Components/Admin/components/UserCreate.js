@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
+import { Spinner } from 'react-bootstrap';
 import NetworkManager from '../../../Backend/util/http';
+import Util from '../../../Backend/util/Util';
 
 function CreateUser({snackbar}) {
     const roles = [
@@ -26,6 +28,8 @@ function CreateUser({snackbar}) {
         telefono: ''
     });
 
+    const [loading, setLoading] = useState(false);
+
     const resetState = () => {
         setState({
             email: '',
@@ -47,26 +51,37 @@ function CreateUser({snackbar}) {
 
     const handleSubmit = async () => {
         let nm = new NetworkManager();
-        if((state.password === state.passwordConfirmation) && (state.password.length > 6) && (state.passwordConfirmation.length > 6)){
+        setLoading(true);
+        if((state.password === state.passwordConfirmation) && (state.password.length >= 6) && (state.passwordConfirmation.length >= 6)){
             var payload = {
                 nombre: state.nombre,
                 email: state.email,
-                password: state.password,
+                password: Util.Hash(state.password),
                 rol: state.rol,
                 telefono: state.telefono
             };
 
+            await Util.delay(1000);
             var result = await nm.post('admin/cuentas', payload);
-            if(result.data.response === "OK"){
+            if(result.response === "OK"){
                 //limpiamos el estado
                 resetState();
                 //mostramos snackbar
+                setLoading(false);
+                snackbar(result.data.message);
             }else{
                 //mostramos snackbar igual por que algo fallo alaverga.
+                setLoading(false);
+                snackbar(result.data.exception.message);
             }
         }else{
             // snackbar, las contrasenas no coinciden?
-            snackbar('Las PWD no coinciden');
+            setLoading(false);
+            if(state.password.length < 6 && state.password != state.passwordConfirmation){
+                snackbar('Las contrasenas debe tener 6 o mas caracteres y deben coincidir!');
+            }else{
+                snackbar('La contrasena debe tener mas de 6 caracteres');
+            }
         }
     }
 
@@ -102,7 +117,18 @@ function CreateUser({snackbar}) {
                     </select>
                 </div>
                 <center>
-                <button className="btn btn-primary" onClick={handleSubmit}>Registrate</button>
+                <button className="btn btn-primary" onClick={handleSubmit} disabled={loading}>
+                    {
+                        loading ? 
+                        <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        /> : 'Registrar'
+                    }
+                </button>
                 </center>
         </div>
     );

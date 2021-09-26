@@ -50,7 +50,7 @@ const AgregarPregunta =  () => {
     //recibe las categorias de la base de datos para pintarlas en los selects
     const recibirCategorias = async () => {
         if(data === null){
-            var response = await net.globalGet('/admin/categorias'); 
+            var response = await net.get('/admin/categorias'); 
             console.log(response)
             var rawData = response.data.data;
             setData(rawData);

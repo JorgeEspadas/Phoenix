@@ -40,11 +40,17 @@ function ModifyUser({snackbar}) {
         try{
             setLoading(true);
             await Util.delay(1000);
-            var result = await nm.globalGet('admin/cuentas/'+search,);
-            snackbar('Informacion obtenida');
-            setLoading(false);
-            setEdit(result.data.data.email == local.email);
-            setData(result.data.data);
+            var result = await nm.get('admin/cuentas/'+search,);
+            console.log(result);
+            if(result.response === "OK"){
+                snackbar('Informacion obtenida');
+                setLoading(false);
+                setEdit(result.data.email == local.email);
+                setData(result.data);
+            }else{
+                snackbar(result.data.exception.message);
+                setLoading(false);
+            }
         }catch(error){
             snackbar(error.toString());
             setLoading(false);
@@ -125,7 +131,7 @@ function ModifyUser({snackbar}) {
                 <div className="form-group">
                     <label for="rol">Que rol ocupara esta cuenta? </label>
                     <div></div>
-                    <select name="rol" onChange={handleRolChange} >
+                    <select name="rol" onChange={handleRolChange} disabled={disableEdit}>
                         {roles.map((rol)=>(
                             <option key={rol.value} value={rol.value} selected={(recoveredData.rol == rol.value)}>{rol.label}</option>
                         ))}
