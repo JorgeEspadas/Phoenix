@@ -10,7 +10,8 @@ const AgregarPregunta =  () => {
         multiples:false,
         respuestas:[{
             id_respuesta:"",
-            texto:""
+            texto:"",
+            abierta:false
         }]
     });
     const [ data, setData ] = useState(null);
@@ -18,6 +19,7 @@ const AgregarPregunta =  () => {
     const [ indiceRes , setIndiceRes ] = useState(0);
     const [ res, setRes ] = useState([]);
     const [ isModificar, setModificar ] = useState(false);
+    const [ check, setCheck ] = useState([])
 
     const resetPregunta = () =>{
         registrar({
@@ -28,7 +30,8 @@ const AgregarPregunta =  () => {
             multiples:false,
             respuestas:[{
                 id_respuesta:"",
-                texto:""
+                texto:"",
+                abierta: false
             }]
         });
         vaciarRes();
@@ -36,24 +39,52 @@ const AgregarPregunta =  () => {
     const Opciones = (props) => {
         let valor = props.value;
         return(<Fragment key={valor.toString()}>   
-            <div className="mb-3 row">         
-                <label className="col-sm-2 col-form-label">Opción:</label>
-                <div className="col-sm-8 mb-3">
-                    <input  className="form-control" type="text" name={"respuesta_"+valor} id={"opcion"+valor}/>
-                </div>
-                <div className="col-2">
-                <button type='button' onClick={handleEliminar} name={valor} className="btn btn-danger">Eliminar</button> 
+            <div className="mb-3 row">
+                <div className="row">
+                    <label className="col-sm-3 col-form-label">Opción:</label>
+                    <div className="col-sm-9 mb-3">
+                        <input  className="form-control" type="text" name={"respuesta_"+valor} id={"opcion"+valor}/>
+                    </div>
+                </div>         
+                <div className="mb-2 row">
+                    <label className="col-sm-6 col-form-label" for="abierta">Abierta
+                        <input type="checkbox" id={"abierta_"+valor} className="mx-2" name={"abierta_"+valor} onClick={handleChecked}/>
+                    </label>
+                    <div className="col-sm-6">
+                        <button type='button' onClick={handleEliminar} name={valor} className="btn btn-danger">Eliminar</button> 
+                    </div>
                 </div>
             </div>
         </Fragment>)
     } 
+    const handleChecked = e => {
+        const target = e.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name
+        let abierto = check;
+        if(value){
+            if(check.length === 0){
+                abierto.push(name);
+            }else{
+                if(!abierto.includes(name)){
+                    abierto.push(name);
+                }
+            }
+        }else{
+            abierto.splice(abierto.indexOf(name),1)
+        }
+        setCheck(abierto);
+        console.log(check)
+    }
     //recibe las categorias de la base de datos para pintarlas en los selects
     const recibirCategorias = async () => {
-        if(data === null){
-            var response = await net.get('/admin/categorias'); 
-            console.log(response)
-            var rawData = response.data.data;
+        var response = await net.get('/admin/categorias'); 
+        console.log(response)
+        if(response.response === "OK"){
+            var rawData = response.data;
             setData(rawData);
+        }else{
+            console.log(response.data.data.exception.message)
         }
     }
 
@@ -88,6 +119,7 @@ const AgregarPregunta =  () => {
         if(res.length !== 0){
             setRes([]);
             setIndiceRes(0);
+            setCheck([]);
         } 
     }
 
@@ -96,13 +128,19 @@ const AgregarPregunta =  () => {
         let cont = 0;
         let respuesta = {
             id_respuesta:"",
-            texto:""
+            texto:"",
+            abierta: false
         }
         if(pregunta.modulo === "multiple"){
             res.map( (item, i) => {
                 if(item !== null){
                     respuesta.id_respuesta = cont+"";
                     respuesta.texto = document.getElementById("opcion"+i).value;
+                    if(check.includes("abierta_"+i)){
+                        respuesta.abierta = true;
+                    }else{
+                        respuesta.abierta = false;
+                    }
                     opciones.push(respuesta);
                     respuesta = {};
                     cont++;
@@ -119,6 +157,7 @@ const AgregarPregunta =  () => {
             })
         }else if(pregunta.modulo === "abierta"){
             respuesta.id_respuesta = cont+"";
+            respuesta.abierta = true;
             respuesta.texto=" ";
             opciones.push(respuesta);
         }
@@ -133,7 +172,11 @@ const AgregarPregunta =  () => {
 
     const handleEliminar = e => {
         let deleteIndice = parseInt(e.target.name,10);
+        let abierto = "abierta_"+deleteIndice;
         delete  res[deleteIndice];
+        if(check.includes(abierto)){
+            check.splice(check.indexOf(abierto),1)
+        }
         setModificar(true);
     }
     //Enviara la pregunta
@@ -237,7 +280,7 @@ const AgregarPregunta =  () => {
             <div className="form-group" id="opciones">
             {isModificar &&
             setModificar(false),
-                res.map( (item) => {
+                res.map( (item,i) => {
                     return item;
                 })
             }
