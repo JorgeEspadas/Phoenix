@@ -101,6 +101,7 @@ const AgregarPregunta =  () => {
         }else if(e.target.name === "tipo"){
             valor = data[parseInt(e.target.value,10)].id_categoria;
             setIndice(parseInt(e.target.value));
+            pregunta.categoria = "";
         }else if(e.target.name === "modulo"){
             if(e.target.value != "multiple"){
                 vaciarRes();
@@ -228,7 +229,7 @@ const AgregarPregunta =  () => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Sección: </label>
                 <div className="col-sm-9" >
-                    <select className="form-select" name="tipo" id="selectSecciones" onChange={handleChange}>
+                    <select className="form-select" name="tipo" id="selectSecciones" value={pregunta.tipo} onChange={handleChange}>
                         <option value="" disabled selected>Selecciona una opción:</option>
                         {data !== null &&
                             data.map((item, i) => {
@@ -241,7 +242,7 @@ const AgregarPregunta =  () => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Categoría: </label>
                 <div  className="col-sm-9">
-                    <select className="form-select" name="categoria" id="selectCategories" onChange={handleChange} >
+                    <select className="form-select" name="categoria" id="selectCategories" value = {pregunta.categoria} onChange={handleChange} >
                         <option value="" disabled selected>Selecciona una opción</option>
                         {data !== null &&
                             data[indice].categorias.map((item, i) => {
