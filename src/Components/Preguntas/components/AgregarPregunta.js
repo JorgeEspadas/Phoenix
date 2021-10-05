@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import NetworkManager from '../../../Backend/util/http';
-const AgregarPregunta =  () => {
+const AgregarPregunta =  ({snackbar}) => {
     var net = new NetworkManager();
     const [ pregunta, registrar ] = useState({
         texto: "",
@@ -84,7 +84,7 @@ const AgregarPregunta =  () => {
             var rawData = response.data;
             setData(rawData);
         }else{
-            console.log(response.data.data.exception.message)
+            snackbar(response.data.data.exception.message)
         }
     }
 
@@ -184,7 +184,7 @@ const AgregarPregunta =  () => {
     const handleState = async () => {
         if(pregunta.texto.trim().length === 0 || pregunta.tipo.length === 0 || pregunta.modulo.length === 0 || pregunta.categoria.length === 0){
             //Snackbar
-            console.log("rellena todas los campos");
+            snackbar("rellena todas los campos");
             return;
         }
 
@@ -198,24 +198,26 @@ const AgregarPregunta =  () => {
                     }
                 });
             }else{
-                console.log("No se han agregado las opciones de respuesta")
+                snackbar("No se han agregado las opciones de respuesta");
                 return;
             }
 
             if(isVacio){
                 //Snackbar
-                console.log("rellena todas las opciones");
+                snackbar("rellena todas las opciones");
                 return;
             }
             
         }
         pregunta.respuestas = obtenerValores();
-        console.log(pregunta)
         let response = await net.post('/admin/preguntas',pregunta);
         console.log(response)
-        resetPregunta();  
-        console.log(pregunta);
-
+        if(response.response === "OK"){
+            resetPregunta();  
+            console.log(pregunta);  
+        }else{
+            snackbar(response.data.data.exception.message);
+        }
     }
 
     return (
@@ -229,7 +231,7 @@ const AgregarPregunta =  () => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Sección: </label>
                 <div className="col-sm-9" >
-                    <select className="form-select" name="tipo" id="selectSecciones" value={pregunta.tipo} onChange={handleChange}>
+                    <select className="form-select" name="tipo" id="selectSecciones" value={pregunta.tipo === "" ? "" : indice} onChange={handleChange}>
                         <option value="" disabled selected>Selecciona una opción:</option>
                         {data !== null &&
                             data.map((item, i) => {

@@ -21,7 +21,7 @@ export default function AdminPage() {
   const moduleRender = (number) =>{
     switch(number){
       case 1:
-        return <Preguntas/>
+        return <Preguntas snackbar={open}/>
       case 2:
         return <span></span>
       case 3:

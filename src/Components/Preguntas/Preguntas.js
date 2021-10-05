@@ -3,12 +3,12 @@ import AgregarPregunta from "./components/AgregarPregunta";
 import ReactDOM from "react-dom";
 import ModificarPregunta from "./components/ModificarPregunta";
 
-const Preguntas = () => {
+const Preguntas = ({snackbar}) => {
     const [ pantalla , setPantalla ] = useState();
     const handleClick = (e) => {
         switch(e.target.value){
             case 'add':
-                setPantalla(<AgregarPregunta />)
+                setPantalla(<AgregarPregunta  snackbar={snackbar}/>)
             break;
             case 'modificar':
                 setPantalla(<ModificarPregunta /> )
