@@ -1,6 +1,7 @@
 import "../css/HomePage.css";
 import "animate.css";
 
+
 export default function HomePage() {
   return (
     <div className="col pt-4">
