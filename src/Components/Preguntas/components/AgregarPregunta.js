@@ -182,6 +182,7 @@ const AgregarPregunta =  ({snackbar}) => {
     }
     //Enviara la pregunta
     const handleState = async () => {
+        let opciones = obtenerValores();
         if(pregunta.texto.trim().length === 0 || pregunta.tipo.length === 0 || pregunta.modulo.length === 0 || pregunta.categoria.length === 0){
             //Snackbar
             snackbar("rellena todas los campos");
@@ -189,7 +190,6 @@ const AgregarPregunta =  ({snackbar}) => {
         }
 
         if(pregunta.modulo === "multiple" || pregunta.modulo === "rango"){
-            let opciones = obtenerValores();
             let isVacio = false;
             if(opciones.length !== 0){
                 opciones.map((item,i) => {
@@ -209,7 +209,7 @@ const AgregarPregunta =  ({snackbar}) => {
             }
             
         }
-        pregunta.respuestas = obtenerValores();
+        pregunta.respuestas = opciones;
         let response = await net.post('/admin/preguntas',pregunta);
         console.log(response)
         if(response.response === "OK"){

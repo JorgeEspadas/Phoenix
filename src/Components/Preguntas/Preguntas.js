@@ -11,7 +11,7 @@ const Preguntas = ({snackbar}) => {
                 setPantalla(<AgregarPregunta  snackbar={snackbar}/>)
             break;
             case 'modificar':
-                setPantalla(<ModificarPregunta /> )
+                setPantalla(<ModificarPregunta snackbar={snackbar}/> )
             break;
             default:
                 setPantalla(<span></span>)
