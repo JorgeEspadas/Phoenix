@@ -5,6 +5,7 @@ const ModificarPregunta = ({snackbar}) => {
     const [ data , setData ] = useState([]);
     const [ search, setSearch ] = useState('');
     const [ dataFound , setDataFound ] = useState([]);
+    const [ numQuestion , setNumQuestion ] = useState(0);
     const [ isModify, setModify ] = useState(false);
     const [ question , setQuestion ] = useState({
         texto: "",
@@ -24,6 +25,7 @@ const ModificarPregunta = ({snackbar}) => {
     const [ res, setRes ] = useState([]);
     const [ indiceCategoria , setIndiceCategoria ] = useState(0);
     const [ isAbierta , setIsAbierta ] = useState([]);
+    const [ id , setId ] = useState("");
 
     const modulos = [
         {
@@ -167,13 +169,17 @@ const ModificarPregunta = ({snackbar}) => {
         let response = await net.get('/admin/categorias'); 
         console.log(response)
         if(response.response === "OK"){
-            setQuestion(dataFound[parseInt(e.target.value,10)]);
-            respuesta_abierta(dataFound[parseInt(e.target.value,10)].respuestas);
-            imprimeRespuestas(dataFound[parseInt(e.target.value,10)].respuestas);
+            setNumQuestion(parseInt(e.target.value,10));
+            let pregunta = dataFound[parseInt(e.target.value,10)];
+            setQuestion(pregunta);
+            setId(pregunta.id_pregunta);
+            console.log(pregunta.id_pregunta)
+            respuesta_abierta(pregunta.respuestas);
+            imprimeRespuestas(pregunta.respuestas);
             setCategorias(response.data);
             setModify(true);   
         }else{
-            snackbar(response.data.data.exception.message);
+            snackbar(response.data.exception);
         }
         document.getElementById("texto-pregunta").focus();
     }
@@ -251,7 +257,7 @@ const ModificarPregunta = ({snackbar}) => {
         setModificar(true);
     }
 
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         let opciones = obtenerValores();
         if(question.texto.trim().length === 0 || question.tipo.length === 0 || question.modulo.length === 0 || question.categoria.length === 0){
              snackbar("Rellena todas los campos");
@@ -278,7 +284,28 @@ const ModificarPregunta = ({snackbar}) => {
             
         }
         question.respuestas = opciones;
-        console.log(question);
+        let payload = {
+            texto: question.texto,
+            tipo: question.tipo,
+            modulo:question.modulo,
+            categoria:question.categoria,
+            multiples:question.multiples,
+            respuestas: question.respuestas
+        }
+        let response = await net.put('/admin/preguntas/'+id,payload);
+        console.log(response)
+        if(response.response === "OK"){
+            snackbar(response.data.message);
+            for(let i in data){
+                if(data[i].id_pregunta === id){
+                    data[i] = question;
+                    dataFound[numQuestion] = question;
+                    return
+                }
+            }
+        }else{
+            snackbar(response.data.exception);
+        }
     }
 
     const handleSalir = e =>{
