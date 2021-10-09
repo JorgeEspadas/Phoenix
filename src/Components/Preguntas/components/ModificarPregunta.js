@@ -175,6 +175,7 @@ const ModificarPregunta = ({snackbar}) => {
         }else{
             snackbar(response.data.data.exception.message);
         }
+        document.getElementById("texto-pregunta").focus();
     }
     
     const respuesta_abierta = (respuestas) => {
@@ -286,9 +287,9 @@ const ModificarPregunta = ({snackbar}) => {
     }
     return (
         <div className="my-3 row">
-            <div className="my-3 row" name="buscar">
+            <div className="my-3 row" id="buscar">
                 <div className="col-sm-10">
-                    <select className="form-select " name="selectModulos" onChange={handleSearchbar}>
+                    <select className="form-select " name="selectModulos" onChange={handleSearchbar} id="select-buscar">
                         <option value={modulos[0].label} selected>slecciona una opción:</option>
                         {
                             modulos.map((item) => {
@@ -298,7 +299,7 @@ const ModificarPregunta = ({snackbar}) => {
                     </select>
                 </div>
                 <div className="col-sm-2">
-                    <button className="btn btn-primary" onClick={handleClick}>Buscar</button>
+                    <button className="btn btn-primary" onClick={handleClick} id="btn-buscar">Buscar</button>
                 </div>
             </div>
             {!isModify ?
@@ -308,7 +309,7 @@ const ModificarPregunta = ({snackbar}) => {
                             <div className="mb-2 row">
                                 <label className="col-sm-9 col-form-label">Pregunta {i+1}:</label>
                                 <div className="col-sm-3">
-                                    <button className ="btn btn-success" onClick={handleModificar} value={i} >Modificar</button>
+                                    <button className ="btn btn-success" onClick={handleModificar} value={i}>Modificar</button>
                                 </div>
                                 <div className="col-sm-12 mt-2">
                                     <label className="col-form-label" type="text" name="texto" value={item.texto}>{item.texto}</label>
@@ -331,7 +332,7 @@ const ModificarPregunta = ({snackbar}) => {
                     <div className="mb-3 row">
                         <label className="col-sm-3 col-form-label">Pregunta: </label>
                         <div className="col-sm-9">
-                            <input className="form-control" type="text" name="texto" value={question.texto} onChange ={handleChangeQuestion}/>
+                            <input className="form-control" id="texto-pregunta" type="text" name="texto" value={question.texto} onChange ={handleChangeQuestion}/>
                         </div>
                     </div>
                     <div className="mb-3 row">

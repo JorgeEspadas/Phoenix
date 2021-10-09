@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import NetworkManager from '../../../Backend/util/http';
+
 const AgregarPregunta =  ({snackbar}) => {
     var net = new NetworkManager();
     const [ pregunta, registrar ] = useState({
