@@ -217,7 +217,7 @@ const AgregarPregunta =  ({snackbar}) => {
             resetPregunta();  
             console.log(pregunta);  
         }else{
-            snackbar(response.data.data.exception.message);
+            snackbar(response.data.exception);
         }
     }
 
