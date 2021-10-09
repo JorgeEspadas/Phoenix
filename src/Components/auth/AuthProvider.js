@@ -30,6 +30,13 @@ const AuthProvider = ({ children }) => {
     isLogged() {
       return !!user;
     },
+    getRol() {
+      if(!!user){
+        return user.rol;
+      }else{
+        return 0;
+      }
+    }
   };
 
   return (

@@ -10,6 +10,7 @@ import useAuth from "../auth/useAuth";
 
 const Sidebar = () => {
   const auth = useAuth();
+  console.log(auth.getRol());
 
   //======= Validaciones del Modal de Login======
   const [show, setShow] = useState(false); //Estado Incial
@@ -69,7 +70,8 @@ const Sidebar = () => {
                     <span className="ms-1 d-none d-sm-inline">Encuestas</span>
                   </a>
                 </li>
-                <li className="nav-item">
+                {(auth.getRol() == 3) && 
+                  <li className="nav-item">
                   <a href="/Administrador" className="nav-link px-sm-0 px-2">
                     <i className="fa fa-cog"></i>
                     <span className="ms-1 d-none d-sm-inline">
@@ -77,6 +79,7 @@ const Sidebar = () => {
                     </span>
                   </a>
                 </li>
+                }
               </>
             )}
           </>

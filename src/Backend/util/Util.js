@@ -1,12 +1,13 @@
 import md5 from 'md5';
 
+
 export default class Util {
     static Config = {
         baseURL: 'http://localhost/',
         headers: {
             'Content-Type' : 'application/json',
             'Accept' : 'application/json',
-            'auth-token' : localStorage.getItem("user") == null ? 'notoken' : ((JSON.parse(localStorage.getItem("user")).token == undefined) ? 'notoken' : JSON.parse(localStorage.getItem("user")).token)
+            'auth-token' : (localStorage.getItem("user") == "null") ? 'notoken' : ((JSON.parse(localStorage.getItem("user")).token == undefined) ? 'notoken' : JSON.parse(localStorage.getItem("user")).token)
         }
     }
     

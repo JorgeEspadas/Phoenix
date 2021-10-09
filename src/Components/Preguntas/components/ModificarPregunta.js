@@ -104,7 +104,7 @@ const ModificarPregunta = ({snackbar}) => {
         if(response.response === "OK"){
             setData(response.data);
         }else{
-            snackbar(response.data.data.exception.message);
+            snackbar(response.data.exception);
         }
         
     }
