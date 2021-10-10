@@ -85,7 +85,7 @@ const AgregarPregunta =  ({snackbar}) => {
             var rawData = response.data;
             setData(rawData);
         }else{
-            snackbar(response.data.exception)
+            snackbar(response.data.exception.message)
         }
     }
 
@@ -217,7 +217,7 @@ const AgregarPregunta =  ({snackbar}) => {
             resetPregunta();  
             console.log(pregunta);  
         }else{
-            snackbar(response.data.exception);
+            snackbar(response.data.exception.message);
         }
     }
 

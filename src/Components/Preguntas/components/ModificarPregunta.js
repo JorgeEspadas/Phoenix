@@ -106,7 +106,7 @@ const ModificarPregunta = ({snackbar}) => {
         if(response.response === "OK"){
             setData(response.data);
         }else{
-            snackbar(response.data.exception);
+            snackbar(response.data.exception.message);
         }
         
     }
@@ -179,7 +179,7 @@ const ModificarPregunta = ({snackbar}) => {
             setCategorias(response.data);
             setModify(true);   
         }else{
-            snackbar(response.data.exception);
+            snackbar(response.data.exception.message);
         }
         document.getElementById("texto-pregunta").focus();
     }
