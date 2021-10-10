@@ -36,6 +36,9 @@ const AuthProvider = ({ children }) => {
       }else{
         return 0;
       }
+    },
+    getToken() {
+      return (!!user ? user.token : 'notoken')
     }
   };
 
