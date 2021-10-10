@@ -1,12 +1,13 @@
 import React from "react";
 import { SidebarData } from "./SidebarData";
 import Login from "../../Pages/Login";
-import { Dropdown, Modal} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LogoNombre from "../../Images/LogoNombre.svg";
 import LogoIcono from "../../Images/LogoIcono.svg";
 import useAuth from "../auth/useAuth";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const auth = useAuth();
@@ -14,9 +15,8 @@ const Sidebar = () => {
 
   //======= Validaciones del Modal de Login======
   const [show, setShow] = useState(false); //Estado Incial
-  //Cambios de Estado.
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (value) => setShow(value);
+
   return (
     <div className="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-color d-flex sticky-top">
       <div className="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-1 pb-1">
@@ -94,22 +94,11 @@ const Sidebar = () => {
                 <AccountCircleIcon
                   className="InicioSesionIcono px-sm-0 px-1"
                   fontSize="large"
-                  onClick={handleShow}
+                  onClick={()=>{
+                    handleShow(true);
+                  }}
                 />
-                <Modal
-                  show={show}
-                  onHide={handleClose}
-                  size="md"
-                  aria-labelledby="contained-modal-title-vcenter"
-                  centered
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title id="modalTittle">Inicio de Sesion</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Login></Login>
-                  </Modal.Body>
-                </Modal>
+                {show && <Login handleClose={handleShow}></Login>}
               </>
             )}
             {/* ========= Con la sesion Iniciada ========= */}

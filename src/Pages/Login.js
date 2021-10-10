@@ -1,6 +1,7 @@
 import { useHistory, useLocation, NavLink } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import {useSnackbar} from 'react-simple-snackbar';
+import { Modal } from "react-bootstrap";
 /*Styles*/
 import LogoIcono from "../Images/LogoIcono.svg";
 import "../css/LoginPage.css";
@@ -9,7 +10,7 @@ import NetworkManager from "../Backend/util/http";
 import { AuthContext } from "../Components/auth/AuthProvider";
 import Util from "../Backend/util/Util";
 
-export default function Login(){
+export default function Login({handleClose}){
   const auth = useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
@@ -18,6 +19,8 @@ export default function Login(){
       email:'',
       password:''
   });
+  const [show, setClose] = useState(true);
+  const handleShow = (value) => setClose(value);
 
   const handleChange = e => {
     saveUser({
@@ -46,6 +49,7 @@ export default function Login(){
         'token' : token,
         'rol' : decoded.rol
       };
+      handleShow(false);
       auth.Login(userData);
       history.push(location.state?.from || "/");
     }else{
@@ -54,6 +58,21 @@ export default function Login(){
   };
 
   return (
+    <div>
+    <Modal
+      show={show}
+      onHide={()=>{
+        handleShow(false);
+        !(handleClose == undefined) ? handleClose(false) : console.log('jejex')
+      }}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+    <Modal.Header closeButton>
+      <Modal.Title id="modalTittle">Inicio de Sesion</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
       <div className="contenedorLoginPage">
         <div className="contLogin container">
           <div className=" rowLogin row g-0 ">
@@ -111,5 +130,7 @@ export default function Login(){
           </div>
         </div>
       </div>
-  );
-}
+    </Modal.Body>
+  </Modal>
+  </div>
+  );}

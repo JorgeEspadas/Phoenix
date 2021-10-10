@@ -10,7 +10,7 @@ export default function PrivateRoute({ component: Component, ...rest }) {
       {auth.user ? (
         <Component />
       ) : (
-        <Redirect to={{ pathname: "/", state: { from: location } }} /> // TODO: para redirigir a donde sea alaverga, y con retorno ahuevo.
+        <Redirect to={{ pathname: "/login", state: { from: location } }} /> // TODO: para redirigir a donde sea alaverga, y con retorno ahuevo.
       )}
     </Route>
   );

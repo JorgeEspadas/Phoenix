@@ -1,5 +1,5 @@
 import md5 from 'md5';
-
+import { Redirect } from 'react-router';
 
 export default class Util {
     static Config = {
@@ -15,10 +15,6 @@ export default class Util {
         return md5(string);
     }
     
-    static nukeAndRedirect =()=>{
-
-    }
-
     static delay = ms => new Promise(res => setTimeout(res, ms));
     static decode = jwt => JSON.parse(jwt.split('.').map((part) => Buffer.from(part.replace(/-/g, '+').replace(/_/g, '/'),'base64').toString())[1]);
 

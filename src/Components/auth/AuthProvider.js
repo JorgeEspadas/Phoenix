@@ -39,6 +39,15 @@ const AuthProvider = ({ children }) => {
     },
     getToken() {
       return (!!user ? user.token : 'notoken')
+    },
+    userActions(value){
+      switch(value){
+        case 'login':
+          this.Logout();
+          break;
+        default:
+          break;
+      }
     }
   };
 
