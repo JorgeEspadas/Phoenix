@@ -24,14 +24,12 @@ export default class Util {
 
     static Error = (message) => {
         let errorResponse = {
-            data: {
                 response: "BAD",
                 data: {
                     exception: {
                         message: 'Error de Servicio'
                     }
                 }
-            }
         }
         return errorResponse;
     }
