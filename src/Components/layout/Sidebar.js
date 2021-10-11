@@ -10,6 +10,7 @@ import useAuth from "../auth/useAuth";
 
 const Sidebar = () => {
   const auth = useAuth();
+  console.log(auth.getRol());
 
   //======= Validaciones del Modal de Login======
   const [show, setShow] = useState(false); //Estado Incial

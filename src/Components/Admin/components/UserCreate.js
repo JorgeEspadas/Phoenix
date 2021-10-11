@@ -81,7 +81,7 @@ function CreateUser({ snackbar }) {
       setLoading(false);
       if (
         state.password.length < 6 &&
-        state.password !== state.passwordConfirmation
+        state.password != state.passwordConfirmation
       ) {
         snackbar(
           "Las contrasenas debe tener 6 o mas caracteres y deben coincidir!"

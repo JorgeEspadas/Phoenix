@@ -23,10 +23,29 @@ import Login from "../Pages/Login.js";
 export default function AppRouter() {
   return (
     <Router>
-      <div className="container-fluid overflow-hidden">
-        <div className="row vh-100 overflow-auto">
+      <div class="container-fluid overflow-hidden">
+        <div class="row vh-100 overflow-auto">
           <Sidebar />
-          <div className="col d-flex flex-column h-sm-100">
+          <div class="col d-flex flex-column h-sm-100">
+            <div
+              className="row"
+              style={{
+                backgroundColor: "var(--main-bg-color)",
+                color: "var(--main-bs-color)",
+                padding: "0.5rem",
+                fontSize: "2rem",
+                textAlign: "right",
+              }}
+            >
+              <div className="">
+                <a>
+                  <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                </a>
+                <a style={{ marginLeft: "1rem" }}>
+                  <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
             <main className="row overflow-auto">
               <Switch>
                 <Route exact path="/" component={HomePage} />
@@ -48,8 +67,8 @@ export default function AppRouter() {
                 <Route exact path="*" component={NotFoundPage} />
               </Switch>
             </main>
-            <footer className=" footer row py-4 mt-auto">
-              <div className="col"> JAM | 2021 </div>
+            <footer class=" footer row py-4 mt-auto">
+              <div class="col"> JAM | 2021 </div>
             </footer>
           </div>
         </div>
