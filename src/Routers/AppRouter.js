@@ -20,7 +20,6 @@ import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 import Login from "../Pages/Login.js";
 
-
 export default function AppRouter() {
   return (
     <Router>
@@ -32,10 +31,9 @@ export default function AppRouter() {
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/Estadisticas" component={AnaliticsPage} />
-                <Route exact path="/Info" component={Login} />
+                <Route exact path="/Info" component={InfoPage} />
                 <Route exact path="/Contactanos" component={ContactPage} />
-                <Route exact path="/Login" component={Login}/>
-
+                <Route exact path="/Login" component={Login} />
                 <PublicRoute exact path="/Singin">
                   <Redirect to="/" />
                 </PublicRoute>
