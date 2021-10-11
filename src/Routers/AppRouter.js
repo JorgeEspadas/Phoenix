@@ -20,7 +20,6 @@ import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
 import Login from "../Pages/Login.js";
 
-
 export default function AppRouter() {
   return (
     <Router>
@@ -28,14 +27,32 @@ export default function AppRouter() {
         <div class="row vh-100 overflow-auto">
           <Sidebar />
           <div class="col d-flex flex-column h-sm-100">
+            <div
+              className="row"
+              style={{
+                backgroundColor: "var(--main-bg-color)",
+                color: "var(--main-bs-color)",
+                padding: "0.5rem",
+                fontSize: "2rem",
+                textAlign: "right",
+              }}
+            >
+              <div className="">
+                <a>
+                  <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                </a>
+                <a style={{ marginLeft: "1rem" }}>
+                  <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
             <main className="row overflow-auto">
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/Estadisticas" component={AnaliticsPage} />
-                <Route exact path="/Info" component={Login} />
+                <Route exact path="/Info" component={InfoPage} />
                 <Route exact path="/Contactanos" component={ContactPage} />
-                <Route exact path="/Login" component={Login}/>
-
+                <Route exact path="/Login" component={Login} />
                 <PublicRoute exact path="/Singin">
                   <Redirect to="/" />
                 </PublicRoute>

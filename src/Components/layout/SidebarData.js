@@ -12,12 +12,6 @@ export const SidebarData = [
     Activo: true,
   },
   {
-    Modulo: "Info",
-    Icono: "fa fa-info-circle",
-    Link: "/Info",
-    Activo: true,
-  },
-  {
     Modulo: "Contactanos",
     Icono: "fa fa-envelope",
     Link: "/Contactanos",

@@ -1,0 +1,28 @@
+#MenuUsuario {
+  border-bottom: 0px;
+}
+#MenuUsuario button {
+  width: 150px;
+  text-align: left;
+  color: var(--main-bg-primary-color);
+  text-align: left;
+}
+/* UserCreate.js*/
+#AreaUserCreate,
+#AreaModifyUser {
+  padding: 1rem;
+  color: var(--main-bg-primary-color);
+  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+}
+#AreaUserCreate h2,
+#AreaModifyUser h2 {
+  padding-bottom: 1rem;
+}
+#AreaUserCreate .form-group,
+#AreaModifyUser .form-group {
+  padding-bottom: 1rem;
+}
+#btnUserModify button {
+  margin: 0.2rem;
+  width: 90px;
+}
