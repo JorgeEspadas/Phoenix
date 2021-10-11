@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
     Logout() {
       // Se haria la peticion y si resulta exitosa
       setUser(null);
+      localStorage.removeItem("user");
     },
     isLogged() {
       return !!user;
@@ -39,6 +40,9 @@ const AuthProvider = ({ children }) => {
     },
     getToken() {
       return (!!user ? user.token : 'notoken')
+    },
+    printUser(){
+      console.log(user);
     },
     userActions(value){
       switch(value){
