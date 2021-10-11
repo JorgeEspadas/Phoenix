@@ -39,7 +39,7 @@ const AgregarPregunta =  ({snackbar}) => {
     }
     const Opciones = (props) => {
         let valor = props.value;
-        return(<Fragment key={valor.toString()}>   
+        return(<Fragment>   
             <div className="mb-3 row">
                 <div className="row">
                     <label className="col-sm-3 col-form-label">Opción:</label>
@@ -48,7 +48,7 @@ const AgregarPregunta =  ({snackbar}) => {
                     </div>
                 </div>         
                 <div className="mb-2 row">
-                    <label className="col-sm-6 col-form-label" for="abierta">Abierta
+                    <label className="col-sm-6 col-form-label">Abierta
                         <input type="checkbox" id={"abierta_"+valor} className="mx-2" name={"abierta_"+valor} onClick={handleChecked}/>
                     </label>
                     <div className="col-sm-6">
@@ -167,7 +167,7 @@ const AgregarPregunta =  ({snackbar}) => {
         return opciones;
     }
     const handleClick = e => {
-        res.push(<Opciones value = {indiceRes} />);
+        res.push(<Opciones value = {indiceRes} key = {"opcion_"+indiceRes}/>);
         setIndiceRes(indiceRes+1);
         setModificar(true);
     }
@@ -232,7 +232,7 @@ const AgregarPregunta =  ({snackbar}) => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Sección: </label>
                 <div className="col-sm-9" >
-                    <select className="form-select" name="tipo" id="selectSecciones" value={pregunta.tipo === "" ? "" : indice} onChange={handleChange}>
+                    <select className="form-select" name="tipo" id="selectSecciones" defaultValue={pregunta.tipo === "" ? "" : indice} onChange={handleChange}>
                         <option value="" disabled selected>Selecciona una opción:</option>
                         {data !== null &&
                             data.map((item, i) => {

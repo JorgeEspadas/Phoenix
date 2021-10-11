@@ -3,6 +3,8 @@ import NetworkManager from "../../../Backend/util/http";
 const ModificarPregunta = ({snackbar}) => {
     var net = new NetworkManager();
     const [ data , setData ] = useState([]);
+    const [ empresa , setEmpresa ] = useState([]);
+    const [ ies , setIes ] = useState([]);
     const [ search, setSearch ] = useState('');
     const [ dataFound , setDataFound ] = useState([]);
     const [ numQuestion , setNumQuestion ] = useState(0);
@@ -26,6 +28,17 @@ const ModificarPregunta = ({snackbar}) => {
     const [ indiceCategoria , setIndiceCategoria ] = useState(0);
     const [ isAbierta , setIsAbierta ] = useState([]);
     const [ id , setId ] = useState("");
+
+    const tipo = [
+        {
+            label: "IES",
+            value: 0
+        },
+        {
+            label: "Empresa",
+            value: 1
+        }
+    ];
 
     const modulos = [
         {
@@ -69,7 +82,7 @@ const ModificarPregunta = ({snackbar}) => {
                     </div>
                 </div>         
                 <div className="mb-2 row">
-                    <label className="col-sm-6 col-form-label" for="abierta">Abierta
+                    <label className="col-sm-6 col-form-label">Abierta
                         <input type="checkbox" id={"abierta_"+valor}  className="mx-2" name={valor} onClick={handleChecked} 
                         defaultChecked={isAbierta[valor]}/>
                     </label>
@@ -105,10 +118,35 @@ const ModificarPregunta = ({snackbar}) => {
         console.log(response);
         if(response.response === "OK"){
             setData(response.data);
+            setEmpresa(response.data.empresa);
+            setIes(response.data.ies);
+            obtenerCategorias(response.data.empresa.concat(response.data.ies));
         }else{
             snackbar(response.data.exception.message);
         }
         
+    }
+
+    const obtenerCategorias = (preguntas) => {
+        console.log(preguntas)
+        let empresas = [];
+        let ies = [];
+        let categorias = [];
+        preguntas.map((item) => {
+            item.preguntas.map( (pregunta) =>{
+                if(pregunta.tipo === "IES"){
+                    ies.push(pregunta.categoria)
+                }else{
+                    empresas.push(pregunta.categoria)
+                }
+            })
+        })
+        ies = new Set(ies);
+        empresas = new Set(empresas);
+        categorias.push([...ies]);
+        categorias.push([...empresas]);
+        console.log(categorias)
+        setCategorias(categorias);
     }
 
     useEffect (() => {
@@ -117,14 +155,14 @@ const ModificarPregunta = ({snackbar}) => {
 
     const secciones = () => {
         let secciones = []
-        categorias.map( (item) => {
-            secciones.push(item.id_categoria);
+        tipo.map( (item) => {
+            secciones.push(item.label);
         })
         return secciones;
     }
 
     const handleSearchbar = (e) =>{
-        setSearch(e.target.value);
+        setSearch(parseInt(e.target.value),10);
     }
 
     const obtenerValores = () => {
@@ -165,37 +203,29 @@ const ModificarPregunta = ({snackbar}) => {
         return opciones;
     }
 
-    const handleModificar = async (e) => { 
-        let response = await net.get('/admin/categorias'); 
-        console.log(response)
-        if(response.response === "OK"){
-            setNumQuestion(parseInt(e.target.value,10));
-            let pregunta = dataFound[parseInt(e.target.value,10)];
-            setQuestion(pregunta);
-            setId(pregunta.id_pregunta);
-            console.log(pregunta.id_pregunta)
-            respuesta_abierta(pregunta.respuestas);
-            imprimeRespuestas(pregunta.respuestas);
-            setCategorias(response.data);
-            setModify(true);   
-        }else{
-            snackbar(response.data.exception.message);
-        }
-        document.getElementById("texto-pregunta").focus();
+    const handleModificar = (e) => {
+        setNumQuestion(parseInt(e.target.value,10));
+        let pregunta = dataFound[parseInt(e.target.value,10)];
+        setQuestion(pregunta);
+        setId(pregunta.id_pregunta);
+        respuesta_abierta(pregunta);
+        imprimeRespuestas(pregunta);
+        setIndiceCategoria(search);
+        setModify(true);
     }
     
-    const respuesta_abierta = (respuestas) => {
-        if(search === "multiple"){
-            respuestas.map( (item) => {
+    const respuesta_abierta = (pregunta) => {
+        if(pregunta.modulo==="multiple"){
+            pregunta.respuestas.map( (item) => {
                 isAbierta.push(item.abierta);
             })
         }
     }
 
-    const imprimeRespuestas = (respuestas) => {
-        if(search === "multiple"){
+    const imprimeRespuestas = (pregunta) => {
+        if(pregunta.modulo === "multiple"){
             let cont = 0;
-            respuestas.map( (item,i) => {
+            pregunta.respuestas.map( (item,i) => {
                 res.push(<Opciones indice={i} value={item.texto}  key={i.toString()}/>);
                 cont+=1;
             })
@@ -207,11 +237,19 @@ const ModificarPregunta = ({snackbar}) => {
         setModify(false);
         vaciarRes();
         let busqueda = []
-        data.map( (item) => {
-            if(item.modulo === search){
-                busqueda.push(item);
-            }
-        })
+        if(search===0){
+            ies.map((item) => {
+                item.preguntas.map( (pregunta) =>{
+                    busqueda.push(pregunta);
+                })
+            })
+        }else if(search===1){
+            empresa.map((item) => {
+                item.preguntas.map( (pregunta) =>{
+                    busqueda.push(pregunta);
+                })
+            })
+        }
         setDataFound(busqueda);
     }
 
@@ -231,7 +269,7 @@ const ModificarPregunta = ({snackbar}) => {
             valor = false;
         }else if(e.target.name === "tipo"){
             valor = categorias[parseInt(e.target.value,10)].id_categoria;
-            setIndiceCategoria(parseInt(e.target.value));
+            setIndiceCategoria(parseInt(e.target.value),10);
             question.categoria = "";
         }else if(e.target.name === "modulo"){
             question.respuestas = [];
@@ -292,22 +330,41 @@ const ModificarPregunta = ({snackbar}) => {
             multiples:question.multiples,
             respuestas: question.respuestas
         }
+        console.log(payload);
         let response = await net.put('/admin/preguntas/'+id,payload);
         console.log(response)
         if(response.response === "OK"){
-            snackbar(response.data.message);
-            for(let i in data){
-                if(data[i].id_pregunta === id){
-                    data[i] = question;
-                    dataFound[numQuestion] = question;
-                    return
-                }
+            if(question.tipo === "IES"){
+               let datos = modificacion(question, question.id_pregunta, ies);
+               ies[datos.numCategoria].preguntas[datos.numPregunta] = question;
+               console.log(datos)
+            }else{
+                let datos = modificacion(question, question.id_pregunta, empresa);
+                empresa[datos.numCategoria].preguntas[datos.numPregunta] = question;
+                console.log(datos)
             }
+            snackbar(response.data.message);
         }else{
             snackbar(response.data.exception);
         }
     }
 
+    const modificacion = (question, id, tipo) => {
+        let datos = {
+            numCategoria:0,
+            numPregunta:0
+        }
+        tipo.map((item,i) => {
+            item.preguntas.map( (pregunta,j) =>{
+                if(pregunta.id_pregunta === id){
+                    console.log("cambiado")
+                    datos.numCategoria = i;
+                    datos.numPregunta = j;
+                }
+            })
+        })
+        return datos;
+    }
     const handleSalir = e =>{
         resetPregunta();
         setModify(false);
@@ -316,11 +373,11 @@ const ModificarPregunta = ({snackbar}) => {
         <div className="my-3 row">
             <div className="my-3 row" id="buscar">
                 <div className="col-sm-10">
-                    <select className="form-select " name="selectModulos" onChange={handleSearchbar} id="select-buscar">
-                        <option value={modulos[0].label} selected>slecciona una opción:</option>
+                    <select className="form-select " name="selectTipo" onChange={handleSearchbar} id="select-buscar" defaultValue={""}>
+                        <option value={""} disabled selected>slecciona una opción:</option>
                         {
-                            modulos.map((item) => {
-                                return <option value={item.label}>{item.label}</option>
+                            tipo.map((item) => {
+                                return <option value={item.value} key={item.label}>{item.label}</option>
                             })
                         }
                     </select>
@@ -365,11 +422,11 @@ const ModificarPregunta = ({snackbar}) => {
                     <div className="mb-3 row">
                         <label className="col-sm-3 col-form-label">Sección: </label>
                         <div className="col-sm-9" >
-                            <select className="form-select" name="tipo" id="selectSecciones" value={indiceCategoria} onChange ={handleChangeQuestion}>
+                            <select className="form-select" name="tipo" id="selectSecciones" defaultValue={indiceCategoria} onChange ={handleChangeQuestion}>
                                 <option value="" disabled selected>Selecciona una opción:</option>
                                 {
                                     secciones().map( (item,i) => {
-                                        return <option value={i}>{item}</option>
+                                        return <option value={i} key={item}>{item}</option>
                                     })
                                 }
                             </select>
@@ -381,8 +438,8 @@ const ModificarPregunta = ({snackbar}) => {
                             <select className="form-select" name="categoria" id="selectCategories" value={question.categoria} onChange ={handleChangeQuestion}>
                                 <option value="" disabled selected>Selecciona una opción:</option>
                                 {
-                                    categorias[indiceCategoria].categorias.map( (item,i) =>{
-                                        return <option value={item.titulo} >{item.titulo}</option>
+                                    categorias[indiceCategoria].map( (item) =>{
+                                        return <option value={item} key={item}>{item}</option>
                                     })
                                 }
                             </select>
@@ -395,7 +452,7 @@ const ModificarPregunta = ({snackbar}) => {
                                 <option value="" disabled selected>Selecciona una opción:</option>
                                 {
                                     modulos.map((item) => {
-                                        return <option value={item.label}>{item.label}</option>
+                                        return <option value={item.label} key={item.label}>{item.label}</option>
                                     })
                                 }
                             </select>
@@ -419,7 +476,7 @@ const ModificarPregunta = ({snackbar}) => {
                        <div className="form-group" id="opciones">
                        {isModificar &&
                        setModificar(false),
-                           res.map( (item,i) => {
+                           res.map( (item) => {
                                return item;
                            })
                        }
