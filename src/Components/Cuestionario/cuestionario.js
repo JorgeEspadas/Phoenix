@@ -9,9 +9,10 @@ function Cuestionario({snackbar}) {
         let response = await net.get('/usuario/cuestionario');
         console.log(response); // por si acaso.
         if(response.response === "OK" && !response.data.answered){
-            setFormData(response.data.categorias);
+            setFormData(response.data);
             setVisible(true);
         }else{
+            snackbar(response.data.exception.message);
             setVisible(false);
         }
     }

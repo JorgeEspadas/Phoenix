@@ -8,7 +8,7 @@ class NetworkManager {
 
     post = async (endpoint, payload) =>{
         return await this.__axios.post(endpoint, payload).then((response) =>{
-            if(response.status != 200){
+            if(response.status !== 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
                 return response.data;
@@ -22,7 +22,7 @@ class NetworkManager {
 
     put = async (endpoint, payload) => {
         return await this.__axios.put(endpoint, payload).then((response) =>{
-            if(response.status != 200){
+            if(response.status !== 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
                 return response.data;
@@ -37,7 +37,7 @@ class NetworkManager {
     //cambiar a get
     get = async (endpoint) => {
         return await this.__axios.get(endpoint).then((response) => {
-            if(response.status != 200){
+            if(response.status !== 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
                 return response.data;

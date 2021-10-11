@@ -52,7 +52,7 @@ function ModifyUser({ snackbar }) {
       if (result.response === "OK") {
         snackbar("Informacion obtenida");
         setLoading(false);
-        setEdit(result.data.email == local.email);
+        setEdit(result.data.email === local.email);
         setData(result.data);
       } else {
         snackbar(result.data.exception.message);
@@ -183,7 +183,7 @@ function ModifyUser({ snackbar }) {
                 <option
                   key={rol.value}
                   value={rol.value}
-                  selected={recoveredData.rol == rol.value}
+                  selected={recoveredData.rol === rol.value}
                 >
                   {rol.label}
                 </option>

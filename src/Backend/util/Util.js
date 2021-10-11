@@ -1,5 +1,4 @@
 import md5 from 'md5';
-import { Redirect } from 'react-router';
 
 export default class Util {
     static Config = {
@@ -7,7 +6,7 @@ export default class Util {
         headers: {
             'Content-Type' : 'application/json',
             'Accept' : 'application/json',
-            'auth-token' : (localStorage.getItem("user") == null || localStorage.getItem("user") == "null" || localStorage.getItem("user") == undefined) ? 'notoken' : JSON.parse(localStorage.getItem("user")).token
+            'auth-token' : (localStorage.getItem("user") === null || localStorage.getItem("user") === "null" || localStorage.getItem("user") === undefined) ? 'notoken' : JSON.parse(localStorage.getItem("user")).token
         }
     }
     

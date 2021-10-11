@@ -23,10 +23,10 @@ import Login from "../Pages/Login.js";
 export default function AppRouter() {
   return (
     <Router>
-      <div class="container-fluid overflow-hidden">
-        <div class="row vh-100 overflow-auto">
+      <div className="container-fluid overflow-hidden">
+        <div className="row vh-100 overflow-auto">
           <Sidebar />
-          <div class="col d-flex flex-column h-sm-100">
+          <div className="col d-flex flex-column h-sm-100">
             <main className="row overflow-auto">
               <Switch>
                 <Route exact path="/" component={HomePage} />
@@ -48,8 +48,8 @@ export default function AppRouter() {
                 <Route exact path="*" component={NotFoundPage} />
               </Switch>
             </main>
-            <footer class=" footer row py-4 mt-auto">
-              <div class="col"> JAM | 2021 </div>
+            <footer className=" footer row py-4 mt-auto">
+              <div className="col"> JAM | 2021 </div>
             </footer>
           </div>
         </div>
