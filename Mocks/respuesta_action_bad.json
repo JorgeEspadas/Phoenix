@@ -1,9 +1,0 @@
-{
-    "response" : "BAD",
-    "data" : {
-        "exception" : {
-            "action" : "login",
-            "message" : "Token invalido, reloguea porfavor."
-        }
-    }
-}
