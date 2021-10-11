@@ -27,6 +27,25 @@ export default function AppRouter() {
         <div class="row vh-100 overflow-auto">
           <Sidebar />
           <div class="col d-flex flex-column h-sm-100">
+            <div
+              className="row"
+              style={{
+                backgroundColor: "var(--main-bg-color)",
+                color: "var(--main-bs-color)",
+                padding: "0.5rem",
+                fontSize: "2rem",
+                textAlign: "right",
+              }}
+            >
+              <div className="">
+                <a>
+                  <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                </a>
+                <a style={{ marginLeft: "1rem" }}>
+                  <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
             <main className="row overflow-auto">
               <Switch>
                 <Route exact path="/" component={HomePage} />
