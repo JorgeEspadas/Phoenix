@@ -7,7 +7,6 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LogoNombre from "../../Images/LogoNombre.svg";
 import LogoIcono from "../../Images/LogoIcono.svg";
 import useAuth from "../auth/useAuth";
-import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const auth = useAuth();
@@ -22,7 +21,7 @@ const Sidebar = () => {
       <div className="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-1 pb-1">
         <br />
         {/* ========= Primera Parte: Imagen de la Pagina ========= */}
-        <div class=" align-items-center flex-shrink-1" align="center">
+        <div className=" align-items-center flex-shrink-1" align="center">
           <a className="logoPrincipal" href="/" align="center">
             <img
               src={LogoIcono}
@@ -47,9 +46,8 @@ const Sidebar = () => {
           <>
             {SidebarData.map((val, key) => {
               return (
-                <li className="nav-item flex-column">
+                <li className="nav-item flex-column" key={key}>
                   <a
-                    key={key}
                     href={val.Link}
                     className="nav-link  px-sm-0 px-2"
                   >

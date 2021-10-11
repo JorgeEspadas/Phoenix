@@ -7,7 +7,7 @@ export default function HomePage() {
     <div className="col pt-4">
       <div></div>
       <h1>Aqui va cosa Perrona</h1>
-      <p class="lead">
+      <p className="lead">
         An example multi-level sidebar with collasible menu items. The menu
         functions like an "accordion" where only a single menu is be open at a
         time.
