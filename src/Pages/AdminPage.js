@@ -9,7 +9,7 @@ export default function AdminPage() {
   const [pantallaActual, setPantalla] = useState(0);
   
   const handleClick = (e) => {
-    if(e.target.value === "agregar_pregunta"){  
+    if(e.target.value === "preguntas"){  
       setPantalla(1);
     }else if(e.target.value=== "config"){
       setPantalla(2);
@@ -48,7 +48,7 @@ export default function AdminPage() {
           </button>
         </li>
         <li className="nav-item">
-          <button exact to="/agregar-pregunta" className="nav-link " href="#" value="agregar_pregunta"
+          <button className="nav-link " href="#" value="preguntas"
           onClick={handleClick}>
             Modificación
           </button>

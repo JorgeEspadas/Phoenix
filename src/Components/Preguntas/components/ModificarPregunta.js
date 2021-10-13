@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import NetworkManager from "../../../Backend/util/http";
 import Opciones from "./Opciones";
-import Rangos from "./Rangos";
 const ModificarPregunta = ({snackbar}) => {
     var net = new NetworkManager();
     const [ empresa , setEmpresa ] = useState([]);
@@ -29,10 +28,9 @@ const ModificarPregunta = ({snackbar}) => {
     const [ isAbierta , setIsAbierta ] = useState([]);
     const [ id , setId ] = useState("");
     const tipo = [ { label: "IES", value: 0 } , { label: "Empresa", value: 1 } ];
-    const modulos = [ { label: "abierta", value: 0 } , { label: "multiple",  value: 1 } , { label: "rango",  value: 2 } ];
+    const modulos = [ { label: "abierta", value: 0 } , { label: "multiple",  value: 1 } ];
     const multiples = [ { label: "Unica Respuesta" , value: false } , { label: "Multiples Respuestas" , value: true } ]
     const [ resetQuestion , setResetQuestion ] = useState(question);
-    const [ num, setNum ] = useState("");
    
     const resetPregunta = () =>{
         setQuestion(resetQuestion);
@@ -47,8 +45,6 @@ const ModificarPregunta = ({snackbar}) => {
         }else{
             isAbierta[parseInt(name,10)] = true;
         }
-        console.log(num)
-        setNum(parseInt(name,10))
         setModificar(true);
     }
 
@@ -123,15 +119,6 @@ const ModificarPregunta = ({snackbar}) => {
                     cont++;
                 }
             })
-        }else if(question.modulo === "rango"){
-            let rangos = document.getElementById("opcionesRango").querySelectorAll("input");
-            rangos.forEach( (item) => {
-                respuesta.id_respuesta = cont+"";
-                respuesta.texto = item.value;
-                opciones.push(respuesta);
-                respuesta = {};
-                cont++;
-            })
         }else if(question.modulo === "abierta"){
             respuesta.id_respuesta = cont+"";
             respuesta.abierta = true;
@@ -158,12 +145,10 @@ const ModificarPregunta = ({snackbar}) => {
 
     const imprimeRespuestas = (pregunta) => {
         if(pregunta.modulo === "multiple"){
-            let cont = 0;
             pregunta.respuestas.map( (item,i) => {
                 res.push(<Opciones indice={i} value={item.texto} handleChecked = {handleChecked} handleEliminar = {handleEliminar} isAbierta ={isAbierta[i]} key={i.toString()}/>);
-                cont+=1;
             })
-            setIndiceRes(cont);
+            setIndiceRes(pregunta.respuestas.length);
         }
     }
 
@@ -217,7 +202,7 @@ const ModificarPregunta = ({snackbar}) => {
 
     const handleAddRes = e => {
         isAbierta.push(false);
-        res.push(<Opciones indice = {indiceRes} value={""}  key={indiceRes.toString() } handleChecked = {handleChecked} handleEliminar = {handleEliminar} isAbierta ={ isAbierta[indiceRes]}/>);
+        res.push(<Opciones indice = {indiceRes} value={""}  key={indiceRes.toString()} handleChecked = {handleChecked} handleEliminar = {handleEliminar} isAbierta ={ isAbierta[indiceRes]}/>);
         setRes(res);
         setIsAbierta(isAbierta);
         setIndiceRes(indiceRes+1);
@@ -231,10 +216,11 @@ const ModificarPregunta = ({snackbar}) => {
             return;
         }
 
-        if(question.modulo === "multiple" || question.modulo === "rango"){
+        if(question.modulo === "multiple"){
             let isVacio = false;
+            console.log(opciones)
             if(opciones.length !== 0){
-                opciones.map((item,i) => {
+                opciones.map((item) => {
                     if(item.texto.trim().length === 0){
                         isVacio = true;
                     }
@@ -243,13 +229,13 @@ const ModificarPregunta = ({snackbar}) => {
                 snackbar("No se han agregado las opciones de respuesta");
                 return;
             }
-
             if(isVacio){
                 snackbar("Rellena todas las opciones");
                 return;
             }
             
         }
+
         question.respuestas = opciones;
         let payload = {
             texto: question.texto,
@@ -324,7 +310,7 @@ const ModificarPregunta = ({snackbar}) => {
             <div className="my-3 row" id="buscar">
                 <div className="col-sm-10">
                     <select className="form-select " name="selectTipo" onChange={handleSearchbar} id="select-buscar" defaultValue={""}>
-                        <option value={""} disabled selected>slecciona una opción:</option>
+                        <option value={""} disabled selected>Selecciona una opción:</option>
                         {
                             tipo.map((item) => {
                                 return <option value={item.value} key={item.label}>{item.label}</option>
@@ -388,8 +374,8 @@ const ModificarPregunta = ({snackbar}) => {
                             <select className="form-select" name="categoria" id="selectCategories" value={question.categoria} onChange ={handleChangeQuestion}>
                                 <option value="" disabled selected>Selecciona una opción:</option>
                                 {
-                                    categorias[indiceCategoria].map( (item) =>{
-                                        return <option value={item} key={item}>{item}</option>
+                                    categorias[indiceCategoria].map( (item,i) =>{
+                                        return <option value={item} key={i.toString()}>{item}</option>
                                     })
                                 }
                             </select>
@@ -413,7 +399,7 @@ const ModificarPregunta = ({snackbar}) => {
                             <label className="col-sm-3 col-form-label">Opciones de respuestas: </label>
                                 <div className="col-sm-9 mb-3">
                                     <select className="form-select " name="multiples" defaultValue={question.multiples} onChange ={handleChangeQuestion}>
-                                        {multiples.map( (item) => { return <option value={item.value}>{item.label}</option> } )}
+                                        {multiples.map( (item) => { return <option value={item.value} key={item.label}>{item.label}</option> } )}
                                     </select>
                                 </div>
                             <div className="col-sm-12">
@@ -430,9 +416,6 @@ const ModificarPregunta = ({snackbar}) => {
                            })
                        }
                        </div>
-                    } 
-                    {question.modulo === "rango" &&
-                        <Rangos question={question}/>
                     }
                     <div className="mb-3 row">
                         <div className="col-sm-6">
