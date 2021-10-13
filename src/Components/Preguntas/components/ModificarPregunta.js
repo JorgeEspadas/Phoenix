@@ -1,13 +1,13 @@
 import React, { useEffect, useState, Fragment } from "react";
 import NetworkManager from "../../../Backend/util/http";
+import Opciones from "./Opciones";
+import Rangos from "./Rangos";
 const ModificarPregunta = ({snackbar}) => {
     var net = new NetworkManager();
-    const [ data , setData ] = useState([]);
     const [ empresa , setEmpresa ] = useState([]);
     const [ ies , setIes ] = useState([]);
     const [ search, setSearch ] = useState('');
     const [ dataFound , setDataFound ] = useState([]);
-    const [ numQuestion , setNumQuestion ] = useState(0);
     const [ isModify, setModify ] = useState(false);
     const [ question , setQuestion ] = useState({
         texto: "",
@@ -28,71 +28,16 @@ const ModificarPregunta = ({snackbar}) => {
     const [ indiceCategoria , setIndiceCategoria ] = useState(0);
     const [ isAbierta , setIsAbierta ] = useState([]);
     const [ id , setId ] = useState("");
-
-    const tipo = [
-        {
-            label: "IES",
-            value: 0
-        },
-        {
-            label: "Empresa",
-            value: 1
-        }
-    ];
-
-    const modulos = [
-        {
-            label: "abierta",
-            value: 0
-        },
-        {
-            label: "multiple",
-            value: 1
-        },
-        {
-            label: "rango",
-            value: 2
-        }
-    ];
-
+    const tipo = [ { label: "IES", value: 0 } , { label: "Empresa", value: 1 } ];
+    const modulos = [ { label: "abierta", value: 0 } , { label: "multiple",  value: 1 } , { label: "rango",  value: 2 } ];
+    const multiples = [ { label: "Unica Respuesta" , value: false } , { label: "Multiples Respuestas" , value: true } ]
+    const [ resetQuestion , setResetQuestion ] = useState(question);
+    const [ num, setNum ] = useState("");
+   
     const resetPregunta = () =>{
-        setQuestion({
-            texto: "",
-            tipo:"",
-            modulo:"",
-            categoria:"",
-            multiples:false,
-            respuestas:[{
-                id_respuesta:"",
-                texto:"",
-                abierta: false
-            }]
-        });
+        setQuestion(resetQuestion);
         vaciarRes();
     }
-
-    const Opciones = (props) => {
-        let valor = props.indice;
-        return(<Fragment>   
-            <div className="mb-3 row">
-                <div className="row">
-                    <label className="col-sm-3 col-form-label">Opción:</label>
-                    <div className="col-sm-9 mb-3">
-                        <input  className="form-control" type="text" name={"respuesta_"+valor} id={"opcion"+valor} defaultValue={props.value}/>
-                    </div>
-                </div>         
-                <div className="mb-2 row">
-                    <label className="col-sm-6 col-form-label">Abierta
-                        <input type="checkbox" id={"abierta_"+valor}  className="mx-2" name={valor} onClick={handleChecked} 
-                        defaultChecked={isAbierta[valor]}/>
-                    </label>
-                    <div className="col-sm-6">
-                        <button type='button' onClick={handleEliminar} name={valor} className="btn btn-danger">Eliminar</button> 
-                    </div>
-                </div>
-            </div>
-        </Fragment>)
-    } 
 
     const handleChecked = e => {
         const target = e.target;
@@ -102,6 +47,8 @@ const ModificarPregunta = ({snackbar}) => {
         }else{
             isAbierta[parseInt(name,10)] = true;
         }
+        console.log(num)
+        setNum(parseInt(name,10))
         setModificar(true);
     }
 
@@ -117,7 +64,6 @@ const ModificarPregunta = ({snackbar}) => {
         let response = await net.get('/admin/preguntas'); 
         console.log(response);
         if(response.response === "OK"){
-            setData(response.data);
             setEmpresa(response.data.empresa);
             setIes(response.data.ies);
             obtenerCategorias(response.data.empresa.concat(response.data.ies));
@@ -128,7 +74,6 @@ const ModificarPregunta = ({snackbar}) => {
     }
 
     const obtenerCategorias = (preguntas) => {
-        console.log(preguntas)
         let empresas = [];
         let ies = [];
         let categorias = [];
@@ -145,7 +90,6 @@ const ModificarPregunta = ({snackbar}) => {
         empresas = new Set(empresas);
         categorias.push([...ies]);
         categorias.push([...empresas]);
-        console.log(categorias)
         setCategorias(categorias);
     }
 
@@ -155,9 +99,7 @@ const ModificarPregunta = ({snackbar}) => {
 
     const secciones = () => {
         let secciones = []
-        tipo.map( (item) => {
-            secciones.push(item.label);
-        })
+        tipo.map( (item) => { secciones.push(item.label) });
         return secciones;
     }
 
@@ -168,11 +110,8 @@ const ModificarPregunta = ({snackbar}) => {
     const obtenerValores = () => {
         let opciones = [];
         let cont = 0;
-        let respuesta = {
-            id_respuesta:"",
-            texto:"",
-            abierta: false
-        }
+        let respuesta = { id_respuesta:"", texto:"", abierta: false }
+
         if(question.modulo === "multiple"){
             res.map( (item, i) => {
                 if(item !== null){
@@ -204,7 +143,6 @@ const ModificarPregunta = ({snackbar}) => {
     }
 
     const handleModificar = (e) => {
-        setNumQuestion(parseInt(e.target.value,10));
         let pregunta = dataFound[parseInt(e.target.value,10)];
         setQuestion(pregunta);
         setId(pregunta.id_pregunta);
@@ -215,18 +153,14 @@ const ModificarPregunta = ({snackbar}) => {
     }
     
     const respuesta_abierta = (pregunta) => {
-        if(pregunta.modulo==="multiple"){
-            pregunta.respuestas.map( (item) => {
-                isAbierta.push(item.abierta);
-            })
-        }
+        if(pregunta.modulo==="multiple") pregunta.respuestas.map( (item) => { isAbierta.push(item.abierta) });
     }
 
     const imprimeRespuestas = (pregunta) => {
         if(pregunta.modulo === "multiple"){
             let cont = 0;
             pregunta.respuestas.map( (item,i) => {
-                res.push(<Opciones indice={i} value={item.texto}  key={i.toString()}/>);
+                res.push(<Opciones indice={i} value={item.texto} handleChecked = {handleChecked} handleEliminar = {handleEliminar} isAbierta ={isAbierta[i]} key={i.toString()}/>);
                 cont+=1;
             })
             setIndiceRes(cont);
@@ -238,22 +172,13 @@ const ModificarPregunta = ({snackbar}) => {
         vaciarRes();
         let busqueda = []
         if(search===0){
-            ies.map((item) => {
-                item.preguntas.map( (pregunta) =>{
-                    busqueda.push(pregunta);
-                })
-            })
+            ies.map((item) => { item.preguntas.map((pregunta) => { busqueda.push(pregunta) }) })
         }else if(search===1){
-            empresa.map((item) => {
-                item.preguntas.map( (pregunta) =>{
-                    busqueda.push(pregunta);
-                })
-            })
+            empresa.map((item) => { item.preguntas.map( (pregunta) => { busqueda.push(pregunta) }) })
         }
         setDataFound(busqueda);
     }
 
-  
     const handleEliminar = e => {
         let deleteIndice = parseInt(e.target.name,10);
         delete  res[deleteIndice];
@@ -268,7 +193,11 @@ const ModificarPregunta = ({snackbar}) => {
         }else if(e.target.value === "false"){
             valor = false;
         }else if(e.target.name === "tipo"){
-            valor = categorias[parseInt(e.target.value,10)].id_categoria;
+            tipo.map((item) => {
+                if(parseInt(e.target.value,10) === item.value){
+                    valor = item.label;
+                }
+            })
             setIndiceCategoria(parseInt(e.target.value),10);
             question.categoria = "";
         }else if(e.target.name === "modulo"){
@@ -288,7 +217,7 @@ const ModificarPregunta = ({snackbar}) => {
 
     const handleAddRes = e => {
         isAbierta.push(false);
-        res.push(<Opciones indice = {indiceRes} value={""}  key={indiceRes.toString()}/>);
+        res.push(<Opciones indice = {indiceRes} value={""}  key={indiceRes.toString() } handleChecked = {handleChecked} handleEliminar = {handleEliminar} isAbierta ={ isAbierta[indiceRes]}/>);
         setRes(res);
         setIsAbierta(isAbierta);
         setIndiceRes(indiceRes+1);
@@ -330,29 +259,48 @@ const ModificarPregunta = ({snackbar}) => {
             multiples:question.multiples,
             respuestas: question.respuestas
         }
-        console.log(payload);
         let response = await net.put('/admin/preguntas/'+id,payload);
         console.log(response)
         if(response.response === "OK"){
             if(question.tipo === "IES"){
-               let datos = modificacion(question, question.id_pregunta, ies);
-               ies[datos.numCategoria].preguntas[datos.numPregunta] = question;
-               console.log(datos)
+               let datos = modificacion(question.id_pregunta, ies);
+                if(datos.numCategoria === -1){
+                    let datos = modificacion(question.id_pregunta, empresa);
+                    empresa[datos.numCategoria].preguntas.splice(datos.numPregunta,1);
+                    ies.map((categoria) =>{
+                        if(categoria._id === question.categoria){
+                           categoria.preguntas.push(question);
+                        }
+                    })
+                }else{
+                    ies[datos.numCategoria].preguntas[datos.numPregunta] = question;
+                }
+               setIes(ies);
             }else{
-                let datos = modificacion(question, question.id_pregunta, empresa);
-                empresa[datos.numCategoria].preguntas[datos.numPregunta] = question;
-                console.log(datos)
+                let datos = modificacion(question.id_pregunta, empresa);
+                if(datos.numCategoria === -1){
+                    let datos = modificacion(question.id_pregunta, ies);
+                    ies[datos.numCategoria].preguntas.splice(datos.numPregunta,1);
+                    empresa.map((categoria) =>{
+                        if(categoria._id === question.categoria){
+                           categoria.preguntas.push(question);
+                        }
+                    })
+                }else{
+                    empresa[datos.numCategoria].preguntas[datos.numPregunta] = question;
+                }
             }
+            setEmpresa(empresa);
             snackbar(response.data.message);
         }else{
             snackbar(response.data.exception);
         }
     }
 
-    const modificacion = (question, id, tipo) => {
+    const modificacion = (id, tipo) => {
         let datos = {
-            numCategoria:0,
-            numPregunta:0
+            numCategoria:-1,
+            numPregunta:-1
         }
         tipo.map((item,i) => {
             item.preguntas.map( (pregunta,j) =>{
@@ -365,10 +313,12 @@ const ModificarPregunta = ({snackbar}) => {
         })
         return datos;
     }
+
     const handleSalir = e =>{
         resetPregunta();
         setModify(false);
     }
+
     return (
         <div className="my-3 row">
             <div className="my-3 row" id="buscar">
@@ -462,9 +412,8 @@ const ModificarPregunta = ({snackbar}) => {
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label">Opciones de respuestas: </label>
                                 <div className="col-sm-9 mb-3">
-                                    <select className="form-select " name="multiples" value={question.multiples} onChange ={handleChangeQuestion}>
-                                        <option value={false}>Unica Respuesta</option>
-                                        <option value={true}>Multiples Respuestas</option>
+                                    <select className="form-select " name="multiples" defaultValue={question.multiples} onChange ={handleChangeQuestion}>
+                                        {multiples.map( (item) => { return <option value={item.value}>{item.label}</option> } )}
                                     </select>
                                 </div>
                             <div className="col-sm-12">
@@ -483,16 +432,7 @@ const ModificarPregunta = ({snackbar}) => {
                        </div>
                     } 
                     {question.modulo === "rango" &&
-                        <div className="mb-3 row" id="opcionesRango">
-                            <label className="col-sm-2 col-form-label">Inicio:</label>
-                            <div className="col-sm-4">
-                                <input  className="form-control" type="text" name="inicio" id="inicio" value={(question.modulo === "rango" && question.respuestas.length > 0 )? question.respuestas[0].texto : ""}/>
-                            </div>
-                            <label className="col-sm-2 col-form-label">Fin:</label>
-                            <div className="col-sm-4">
-                                <input className="form-control" type="text" name="fin" id="fin" value={(question.modulo === "rango" && question.respuestas.length > 0 )? question.respuestas[1].texto : ""}/>                            
-                            </div>
-                        </div>
+                        <Rangos question={question}/>
                     }
                     <div className="mb-3 row">
                         <div className="col-sm-6">

@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import NetworkManager from '../../../Backend/util/http';
+import Rangos from './Rangos';
 
 const AgregarPregunta =  ({snackbar}) => {
     var net = new NetworkManager();
@@ -291,16 +292,7 @@ const AgregarPregunta =  ({snackbar}) => {
             </div>
         }
         {pregunta.modulo === "rango" &&
-            <div className="mb-3 row" id="opcionesRango">
-                <label className="col-sm-2 col-form-label">Inicio:</label>
-                <div className="col-sm-4">
-                    <input  className="form-control" type="text" name="inicio" id="inicio"/>
-                </div>
-                <label className="col-sm-2 col-form-label">Fin:</label>
-                <div className="col-sm-4">
-                    <input className="form-control" type="text" name="fin" id="fin"/>                            
-                </div>
-            </div>
+           <Rangos question ={pregunta} />
         }
             <center className ="">
                 <button className="btn btn-primary" name="btn" onClick={handleState} href="#">Agregar Pregunta</button>
