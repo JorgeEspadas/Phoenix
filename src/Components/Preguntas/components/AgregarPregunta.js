@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import NetworkManager from '../../../Backend/util/http';
+import Opciones from './Opciones';
 
 const AgregarPregunta =  ({snackbar}) => {
     var net = new NetworkManager();
@@ -21,62 +22,24 @@ const AgregarPregunta =  ({snackbar}) => {
     const [ res, setRes ] = useState([]);
     const [ isModificar, setModificar ] = useState(false);
     const [ check, setCheck ] = useState([])
-
+    const [ isAbierta , setIsAbierta ] = useState([]);
+    const [ resetQuestion , setResetQuestion ] = useState(pregunta);
     const resetPregunta = () =>{
-        registrar({
-            texto: "",
-            tipo:"",
-            modulo:"",
-            categoria:"",
-            multiples:false,
-            respuestas:[{
-                id_respuesta:"",
-                texto:"",
-                abierta: false
-            }]
-        });
+        registrar(resetQuestion);
         vaciarRes();
     }
-    const Opciones = (props) => {
-        let valor = props.value;
-        return(<Fragment key={valor.toString()}>   
-            <div className="mb-3 row">
-                <div className="row">
-                    <label className="col-sm-3 col-form-label">Opción:</label>
-                    <div className="col-sm-9 mb-3">
-                        <input  className="form-control" type="text" name={"respuesta_"+valor} id={"opcion"+valor}/>
-                    </div>
-                </div>         
-                <div className="mb-2 row">
-                    <label className="col-sm-6 col-form-label" for="abierta">Abierta
-                        <input type="checkbox" id={"abierta_"+valor} className="mx-2" name={"abierta_"+valor} onClick={handleChecked}/>
-                    </label>
-                    <div className="col-sm-6">
-                        <button type='button' onClick={handleEliminar} name={valor} className="btn btn-danger">Eliminar</button> 
-                    </div>
-                </div>
-            </div>
-        </Fragment>)
-    } 
+
     const handleChecked = e => {
         const target = e.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name
-        let abierto = check;
-        if(value){
-            if(check.length === 0){
-                abierto.push(name);
-            }else{
-                if(!abierto.includes(name)){
-                    abierto.push(name);
-                }
-            }
+        const name = target.name;
+        if(isAbierta[parseInt(name,10)]){
+            isAbierta[parseInt(name,10)] = false;
         }else{
-            abierto.splice(abierto.indexOf(name),1)
+            isAbierta[parseInt(name,10)] = true;
         }
-        setCheck(abierto);
-        console.log(check)
+        setModificar(true);
     }
+
     //recibe las categorias de la base de datos para pintarlas en los selects
     const recibirCategorias = async () => {
         var response = await net.get('/admin/categorias'); 
@@ -128,34 +91,17 @@ const AgregarPregunta =  ({snackbar}) => {
     const obtenerValores = () => {
         let opciones = [];
         let cont = 0;
-        let respuesta = {
-            id_respuesta:"",
-            texto:"",
-            abierta: false
-        }
+        let respuesta = { id_respuesta:"", texto:"", abierta: false }
         if(pregunta.modulo === "multiple"){
             res.map( (item, i) => {
                 if(item !== null){
                     respuesta.id_respuesta = cont+"";
                     respuesta.texto = document.getElementById("opcion"+i).value;
-                    if(check.includes("abierta_"+i)){
-                        respuesta.abierta = true;
-                    }else{
-                        respuesta.abierta = false;
-                    }
+                    respuesta.abierta = isAbierta[i];
                     opciones.push(respuesta);
                     respuesta = {};
                     cont++;
                 }
-            })
-        }else if(pregunta.modulo === "rango"){
-            let rangos = document.getElementById("opcionesRango").querySelectorAll("input");
-            rangos.forEach( (item) => {
-                respuesta.id_respuesta = cont+"";
-                respuesta.texto = item.value;
-                opciones.push(respuesta);
-                respuesta = {};
-                cont++;
             })
         }else if(pregunta.modulo === "abierta"){
             respuesta.id_respuesta = cont+"";
@@ -167,30 +113,27 @@ const AgregarPregunta =  ({snackbar}) => {
         return opciones;
     }
     const handleClick = e => {
-        res.push(<Opciones value = {indiceRes} />);
+        isAbierta.push(false);
+        res.push(<Opciones indice = {indiceRes} value={""}  key={ indiceRes.toString() } handleChecked = {handleChecked} handleEliminar = {handleEliminar} isAbierta ={ isAbierta[indiceRes] } />)
         setIndiceRes(indiceRes+1);
         setModificar(true);
     }
 
     const handleEliminar = e => {
         let deleteIndice = parseInt(e.target.name,10);
-        let abierto = "abierta_"+deleteIndice;
         delete  res[deleteIndice];
-        if(check.includes(abierto)){
-            check.splice(check.indexOf(abierto),1)
-        }
+        delete isAbierta[deleteIndice];
         setModificar(true);
     }
     //Enviara la pregunta
     const handleState = async () => {
         let opciones = obtenerValores();
         if(pregunta.texto.trim().length === 0 || pregunta.tipo.length === 0 || pregunta.modulo.length === 0 || pregunta.categoria.length === 0){
-            //Snackbar
             snackbar("rellena todas los campos");
             return;
         }
 
-        if(pregunta.modulo === "multiple" || pregunta.modulo === "rango"){
+        if(pregunta.modulo === "multiple"){
             let isVacio = false;
             if(opciones.length !== 0){
                 opciones.map((item,i) => {
@@ -204,7 +147,6 @@ const AgregarPregunta =  ({snackbar}) => {
             }
 
             if(isVacio){
-                //Snackbar
                 snackbar("rellena todas las opciones");
                 return;
             }
@@ -214,10 +156,12 @@ const AgregarPregunta =  ({snackbar}) => {
         let response = await net.post('/admin/preguntas',pregunta);
         console.log(response)
         if(response.response === "OK"){
-            resetPregunta();  
-            console.log(pregunta);  
+            console.log(pregunta);
+            resetPregunta();
+            snackbar("Pregunta agregada exitosamente")
         }else{
-            snackbar(response.data.exception.message);
+            console.log(response.data.exception.message)
+            //snackbar(response.data.exception.message);
         }
     }
 
@@ -232,12 +176,10 @@ const AgregarPregunta =  ({snackbar}) => {
             <div className="mb-3 row">
                 <label className="col-sm-3 col-form-label">Sección: </label>
                 <div className="col-sm-9" >
-                    <select className="form-select" name="tipo" id="selectSecciones" value={pregunta.tipo === "" ? "" : indice} onChange={handleChange}>
-                        <option value="" disabled selected>Selecciona una opción:</option>
+                    <select className="form-select" name="tipo" id="selectSecciones" value={pregunta.tipo === "" ? "-1":indice} onChange={handleChange}>
+                        <option value="-1" disabled selected>Selecciona una opción:</option>
                         {data !== null &&
-                            data.map((item, i) => {
-                                return <option key={i} value ={i}>{item.id_categoria}</option>
-                            })
+                            data.map((item, i) => { return <option key={i} value ={i}>{item.id_categoria}</option> })
                         }
                     </select>
                 </div>
@@ -248,9 +190,7 @@ const AgregarPregunta =  ({snackbar}) => {
                     <select className="form-select" name="categoria" id="selectCategories" value = {pregunta.categoria} onChange={handleChange} >
                         <option value="" disabled selected>Selecciona una opción</option>
                         {data !== null &&
-                            data[indice].categorias.map((item, i) => {
-                                return <option key={item.titulo} value = {item.titulo}>{item.titulo}</option>
-                            })
+                            data[indice].categorias.map((item, i) => { return <option key={item.titulo} value = {item.titulo}>{item.titulo}</option> })
                         }
                     </select>
                 </div>
@@ -262,7 +202,6 @@ const AgregarPregunta =  ({snackbar}) => {
                         <option value="" disabled selected>Selecciona una opción:</option>
                         <option value="abierta">Abierta</option>
                         <option value="multiple">Opción multiple</option>
-                        <option value="rango">Rango</option>
                     </select>
                 </div>
             </div>           
@@ -284,22 +223,8 @@ const AgregarPregunta =  ({snackbar}) => {
             <div className="form-group" id="opciones">
             {isModificar &&
             setModificar(false),
-                res.map( (item,i) => {
-                    return item;
-                })
+                res.map( (item,i) => { return item; })
             }
-            </div>
-        }
-        {pregunta.modulo === "rango" &&
-            <div className="mb-3 row" id="opcionesRango">
-                <label className="col-sm-2 col-form-label">Inicio:</label>
-                <div className="col-sm-4">
-                    <input  className="form-control" type="text" name="inicio" id="inicio"/>
-                </div>
-                <label className="col-sm-2 col-form-label">Fin:</label>
-                <div className="col-sm-4">
-                    <input className="form-control" type="text" name="fin" id="fin"/>                            
-                </div>
             </div>
         }
             <center className ="">

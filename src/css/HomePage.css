@@ -1,0 +1,6 @@
+@media (max-width: 576px) {
+  #HomePage .px-5 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

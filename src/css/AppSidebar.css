@@ -30,7 +30,7 @@
 /*Boton de Usuario de la Barra Lateral*/
 .InicioSesionIcono:hover,
 .InicioSesionIcono:focus {
-  color: var(--main-bg-contrast-color) !important;
+  color: var(--main-bg-secundary-color) !important;
 }
 .dropdown .btn-primary {
   border-radius: 30px;
@@ -91,6 +91,15 @@
     color: var(--main-bg-contrast-color) !important;
     background-color: var(--main-bs-color) !important;
     border-color: var(--main-bs-color) !important;
+  }
+  #AppRouter {
+    display: inherit;
+  }
+  #RedesSociales {
+    display: none;
+  }
+  .footer {
+    display: none;
   }
 }
 

@@ -1,10 +1,9 @@
 import "../css/HomePage.css";
 import "animate.css";
 
-
 export default function HomePage() {
   return (
-    <div className="col pt-4">
+    <div id="HomePage" className="col pt-4 px-5">
       <div></div>
       <h1>Aqui va cosa Perrona</h1>
       <p className="lead">
