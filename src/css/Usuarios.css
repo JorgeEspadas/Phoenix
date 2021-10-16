@@ -6,13 +6,14 @@
   text-align: left;
   color: var(--main-bg-primary-color);
   text-align: left;
+  font-weight: bold;
 }
 /* UserCreate.js*/
 #AreaUserCreate,
 #AreaModifyUser {
   padding: 1rem;
   color: var(--main-bg-primary-color);
-  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+  /*box-shadow: 2px 2px 5px rgb(186, 184, 189);*/
 }
 #AreaUserCreate h2,
 #AreaModifyUser h2 {
@@ -25,4 +26,26 @@
 #btnUserModify button {
   margin: 0.2rem;
   width: 90px;
+}
+
+@media (max-width: 992px) {
+  #MenuUsuario .nav-link {
+    display: inline-flex !important;
+  }
+}
+@media (max-width: 768px) {
+  #MenuUsuario .nav-link {
+    display: inline-flex !important;
+  }
+}
+@media (max-width: 576px) {
+  #MenuUsuario .nav-link {
+    display: inline-flex !important;
+  }
+  #MenuUsuario .nav-link i {
+    margin-top: 0.25rem;
+  }
+  #AreaUserCreate {
+    margin-top: 1rem;
+  }
 }

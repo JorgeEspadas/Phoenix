@@ -24,16 +24,17 @@ export default function AppRouter() {
   return (
     <Router>
       <div className="container-fluid overflow-hidden">
-        <div className="row vh-100 overflow-auto">
+        <div className="row vh-100 overflow-auto" id="AppRouter">
           <Sidebar />
           <div className="col d-flex flex-column h-sm-100">
             <div
               className="row"
+              id="RedesSociales"
               style={{
                 backgroundColor: "var(--main-bg-color)",
                 color: "var(--main-bs-color)",
                 padding: "0.5rem",
-                fontSize: "2rem",
+                fontSize: "1.5rem",
                 textAlign: "right",
               }}
             >
@@ -46,7 +47,7 @@ export default function AppRouter() {
                 </a>
               </div>
             </div>
-            <main className="row overflow-auto">
+            <main className="row overflow-auto" id="contentido">
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/Estadisticas" component={AnaliticsPage} />
