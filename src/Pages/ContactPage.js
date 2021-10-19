@@ -2,8 +2,8 @@ import imagen from "../Images/backgroud-acuarela.svg";
 
 export default function ContactPage() {
   return (
-    <div className="col pt-4">
-      <h1>Contactanos</h1>
+    <div className="col pt-4 px-5">
+      <h1>&nbsp;&nbsp; Contactanos</h1>
       <br />
       <div className="card mb-3" style={{ maxWidth: "540px" }}>
         <div className="row g-0">

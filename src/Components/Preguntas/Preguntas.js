@@ -23,7 +23,7 @@ const Preguntas = ({snackbar}) => {
             <div className="row">
                 <div className='col-2'>
                 <center>
-                    <ul className="nav nav-tabs flex-column" style={{'border-bottom' : '0px'}}>
+                    <ul className="nav nav-tabs flex-column" >
                         <li className="nav-item">
                             <button className="nav-link" href="#" onClick={handleClick} value="add">
                                 Agregar

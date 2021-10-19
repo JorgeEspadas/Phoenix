@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ModifyUser from "./components/ModifyUser";
 import CreateUser from "./components/UserCreate";
 import "../../css/Usuarios.css";
+import image from "../../Images/Admin-Usuario.jpg";
 
 function UserEditor({ snackbar }) {
   const [currentModule, setModule] = useState(0);
@@ -25,7 +26,7 @@ function UserEditor({ snackbar }) {
   const moduleRender = (number) => {
     switch (number) {
       case 0:
-        return <span></span>;
+        return <span>Aqui quiero una Imagen :v</span>;
       case 1:
         return <CreateUser snackbar={snackbar} />;
       case 2:
@@ -66,7 +67,7 @@ function UserEditor({ snackbar }) {
             </ul>
           </center>
         </div>
-        <div className="col-sm-12 col-xl-6 ">
+        <div className="col-sm-12 col-xl-7">
           <div className="container">
             <>{moduleRender(currentModule)}</>
           </div>
