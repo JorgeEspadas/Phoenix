@@ -1,5 +1,6 @@
 import React from "react";
 import { Accordion } from 'react-bootstrap';
+import PreguntaMultiple from "./Modulos/multiple";
 
 function CategoryForm({titulo, preguntas, setRespuesta}){
     return (
@@ -14,7 +15,13 @@ function CategoryForm({titulo, preguntas, setRespuesta}){
                             // a ese modulo especifico de cada pregunta se le debe pasar el setRespuesta para que pueda enviar la respuestas
                             // hasta el santisimo padre masterForm.
 
-                            return <p>Pregunta: {pregunta.texto}, Tipo: {pregunta.modulo}</p>
+                            
+                            if(pregunta.modulo === "multiple"){
+                               return <PreguntaMultiple data={pregunta} />
+                              
+                            }else{
+                                return <p>Pregunta: {pregunta.texto}, Tipo: {pregunta.modulo} </p>
+                            }
                         })
                     }
                 </Accordion.Body>
