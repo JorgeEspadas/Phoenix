@@ -26,7 +26,11 @@ function UserEditor({ snackbar }) {
   const moduleRender = (number) => {
     switch (number) {
       case 0:
-        return <span>Aqui quiero una Imagen :v</span>;
+        return (
+          <div>
+            <img src={image} style={{ width: "20rem" }}></img>
+          </div>
+        );
       case 1:
         return <CreateUser snackbar={snackbar} />;
       case 2:

@@ -5,7 +5,10 @@ export default function HomePage() {
   return (
     <div id="HomePage" className="col pt-4 px-5">
       <div></div>
-      <h1>Aqui va cosa Perrona</h1>
+      <h1>
+        Diagnóstico de la Situación actual de la Industria de Software en la
+        Ciudad de San Francisco de Campeche
+      </h1>
       <p className="lead">
         An example multi-level sidebar with collasible menu items. The menu
         functions like an "accordion" where only a single menu is be open at a
