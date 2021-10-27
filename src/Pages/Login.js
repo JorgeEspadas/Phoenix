@@ -35,7 +35,6 @@ export default function Login({handleClose}){
       return;
     }
     user.password = Util.Hash(user.password);
-    console.log(user.password);
     var net = new NetworkManager();
     var response = await net.post('auth/login',user);
     if(response.response === "OK"){

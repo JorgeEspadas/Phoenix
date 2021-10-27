@@ -17,7 +17,7 @@ function CategoryForm({titulo, preguntas, setRespuesta}){
 
                             
                             if(pregunta.modulo === "multiple"){
-                               return <PreguntaMultiple data={pregunta} />
+                               return <PreguntaMultiple data={pregunta} save={setRespuesta} />
                               
                             }else{
                                 return <p>Pregunta: {pregunta.texto}, Tipo: {pregunta.modulo} </p>

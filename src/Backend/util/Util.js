@@ -5,6 +5,7 @@ export default class Util {
 
     static context;
 
+    // esto es ilegal.
     static setContext = (value) => {
         this.context = value;
     }
@@ -30,7 +31,7 @@ export default class Util {
                 response: "BAD",
                 data: {
                     exception: {
-                        message: 'Error de Servicio'
+                        message: message
                     }
                 }
         }

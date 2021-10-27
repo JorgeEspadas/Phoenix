@@ -8,56 +8,73 @@ class NetworkManager {
     }
 
     validate = (response) => {
-        if(response.data.data.exception.action != undefined){
-            Util.context.Logout();
-        }else{
-            console.log(response);
+        /**
+         * El manejo de undefined solo puede bajar hasta cierto punto
+         * response.data.data.exception se puede evaluar, por que la llave puede o no estar incluida.
+         * Sin embargo, evaluar response.data.data.exception.ACTION dara un Unhandled Rejection
+         * .l.
+         * 
+         */
+
+        console.log(response.data.data);
+        var pincheUnhandled = response.data.data.exception;
+
+        if(pincheUnhandled === undefined){
             return response.data;
+        }else{
+            if(pincheUnhandled.action !== undefined){
+                Util.context.Logout();
+                return Util.Error('Sesion Expirada');
+            }
         }
     }
 
     post = async (endpoint, payload) =>{
-        return await this.__axios.post(endpoint, payload).then((response) =>{
+        var response = await this.__axios.post(endpoint, payload).then((response) =>{
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
-                console.log(response.data.data.exception.action === undefined);
-                
+                return response;
             }
         }, (error) =>{
             return Util.Error('Error de Red');
         }).catch(function(error){
             return Util.Error('Error de Red');
         });
+
+        return this.validate(response);
     }
 
     put = async (endpoint, payload) => {
-        return await this.__axios.put(endpoint, payload).then((response) =>{
+        var response = await this.__axios.put(endpoint, payload).then((response) =>{
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
-                return this.validate(response);
+                return response;
             }
         }, (error) =>{
             return Util.Error('Error de Red');
         }).catch(function(error){
             return Util.Error('Error de Red');
         });
+
+        return this.validate(response);
     }
 
     //cambiar a get
     get = async (endpoint) => {
-        return await this.__axios.get(endpoint).then((response) => {
+        var response = await this.__axios.get(endpoint).then((response) => {
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
-                return this.validate(response);
+                return response;
             }
         }, (error) => {
             return Util.Error('Error de Red');
         }).catch(function(error){
             return Util.Error('Error de Red');
         });
+        return this.validate(response);
     }
 }
 

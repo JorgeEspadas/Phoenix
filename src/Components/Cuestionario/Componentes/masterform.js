@@ -15,11 +15,15 @@ function MasterForm({snackbar, formData}){
         }
     }
 
+    const handleRespuesta = (value) => {
+        console.log(value);
+    }
+
     //map :v
     return (
         <div>
                {formData.categorias.map((categoria, i) => {
-                   return <CategoryForm key={"llave_"+i} preguntas={categoria.preguntas} titulo={categoria._id} setRespuesta={setRespuesta}></CategoryForm>
+                   return <CategoryForm key={"llave_"+i} preguntas={categoria.preguntas} titulo={categoria._id} setRespuesta={handleRespuesta}></CategoryForm>
                })}
                <button onClick={sendCuestionario}>Enviar formulario</button>
         </div>
