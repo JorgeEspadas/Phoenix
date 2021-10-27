@@ -2,6 +2,13 @@ import md5 from 'md5';
 import { Redirect } from 'react-router';
 
 export default class Util {
+
+    static context;
+
+    static setContext = (value) => {
+        this.context = value;
+    }
+
     static Config = {
         baseURL: 'http://localhost/',
         headers: {

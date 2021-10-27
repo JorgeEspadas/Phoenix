@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Next } from 'react-bootstrap/esm/PageItem';
 import Util from './Util';
 
 class NetworkManager {
@@ -6,12 +7,22 @@ class NetworkManager {
         this.__axios = axios.create(Util.Config);
     }
 
+    validate = (response) => {
+        if(response.data.data.exception.action != undefined){
+            Util.context.Logout();
+        }else{
+            console.log(response);
+            return response.data;
+        }
+    }
+
     post = async (endpoint, payload) =>{
         return await this.__axios.post(endpoint, payload).then((response) =>{
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
-                return response.data;
+                console.log(response.data.data.exception.action === undefined);
+                
             }
         }, (error) =>{
             return Util.Error('Error de Red');
@@ -25,7 +36,7 @@ class NetworkManager {
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
-                return response.data;
+                return this.validate(response);
             }
         }, (error) =>{
             return Util.Error('Error de Red');
@@ -40,7 +51,7 @@ class NetworkManager {
             if(response.status != 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
-                return response.data;
+                return this.validate(response);
             }
         }, (error) => {
             return Util.Error('Error de Red');
