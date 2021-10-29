@@ -16,7 +16,7 @@ class NetworkManager {
          * 
          */
 
-        console.log(response.data.data);
+        //console.log(response.data.data);
         var pincheUnhandled = response.data.data.exception;
 
         if(pincheUnhandled === undefined){
@@ -25,6 +25,8 @@ class NetworkManager {
             if(pincheUnhandled.action !== undefined){
                 Util.context.Logout();
                 return Util.Error('Sesion Expirada');
+            }else{
+                return response.data;
             }
         }
     }
