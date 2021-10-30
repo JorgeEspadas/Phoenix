@@ -1,0 +1,1 @@
+// Modelo JS Placeholder para las Preguntas de empresas

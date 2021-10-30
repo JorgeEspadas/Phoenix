@@ -16,7 +16,7 @@ class NetworkManager {
          * 
          */
 
-        //console.log(response.data.data);
+        //console.log(response.dapta.data);
         var pincheUnhandled = response.data.data.exception;
 
         if(pincheUnhandled === undefined){
