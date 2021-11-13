@@ -18,7 +18,7 @@ function Cuestionario({snackbar}) {
     }
 
     useEffect(() => {
-        getCuestionario();
+        //getCuestionario();
     },[]);
 
     // Obtener todas las preguntas, el token se encarga de todo.
@@ -26,6 +26,7 @@ function Cuestionario({snackbar}) {
     const [visible, setVisible] = useState(false);
 
     // en el true, va el componente que pintara cada modulo?
+    // CAMBIA AQUI PARA MOSTRAR TU CUESTIONARIO
     return (
         <div>
             {
