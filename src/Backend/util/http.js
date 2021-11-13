@@ -17,12 +17,12 @@ class NetworkManager {
          */
 
         //console.log(response.dapta.data);
-        var pincheUnhandled = response.data.data.exception;
+        var data = response.data.data.exception;
 
-        if(pincheUnhandled === undefined){
+        if(data === undefined){
             return response.data;
         }else{
-            if(pincheUnhandled.action !== undefined){
+            if(data.action !== undefined){
                 Util.context.Logout();
                 return Util.Error('Sesion Expirada');
             }else{
