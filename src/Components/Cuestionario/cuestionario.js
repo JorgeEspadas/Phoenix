@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import NetworkManager from '../../Backend/util/http';
-import MasterForm from './Componentes/masterform';
 
 function Cuestionario({snackbar}) {
     var net = new NetworkManager();
@@ -29,9 +28,6 @@ function Cuestionario({snackbar}) {
     // CAMBIA AQUI PARA MOSTRAR TU CUESTIONARIO
     return (
         <div>
-            {
-                visible ? <div><MasterForm snackbar={snackbar} formData={formData}></MasterForm></div> : <div>Ya has respondido este cuestionario.</div>
-            }
         </div>
     );
 }
