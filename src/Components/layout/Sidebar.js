@@ -38,6 +38,7 @@ const Sidebar = () => {
           </a>
         </div>
         <br />
+        <br />
         {/* ========= Segunda Parte: Modulos del Sidebar ========= */}
         <ul
           className="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
@@ -47,10 +48,7 @@ const Sidebar = () => {
             {SidebarData.map((val, key) => {
               return (
                 <li className="nav-item flex-column" key={key}>
-                  <a
-                    href={val.Link}
-                    className="nav-link  px-sm-0 px-2"
-                  >
+                  <a href={val.Link} className="nav-link  px-sm-0 px-2">
                     <i className={val.Icono}></i>
                     <span className="ms-1 d-none d-sm-inline">
                       {val.Modulo}
@@ -68,16 +66,16 @@ const Sidebar = () => {
                     <span className="ms-1 d-none d-sm-inline">Encuestas</span>
                   </a>
                 </li>
-                {(auth.getRol() == 3) && 
+                {auth.getRol() == 3 && (
                   <li className="nav-item">
-                  <a href="/Administrador" className="nav-link px-sm-0 px-2">
-                    <i className="fa fa-cog"></i>
-                    <span className="ms-1 d-none d-sm-inline">
-                      Administrador
-                    </span>
-                  </a>
-                </li>
-                }
+                    <a href="/Administrador" className="nav-link px-sm-0 px-2">
+                      <i className="fa fa-cog"></i>
+                      <span className="ms-1 d-none d-sm-inline">
+                        Administrador
+                      </span>
+                    </a>
+                  </li>
+                )}
               </>
             )}
           </>
@@ -92,7 +90,7 @@ const Sidebar = () => {
                 <AccountCircleIcon
                   className="InicioSesionIcono px-sm-0 px-1"
                   fontSize="large"
-                  onClick={()=>{
+                  onClick={() => {
                     handleShow(true);
                   }}
                 />
@@ -104,7 +102,7 @@ const Sidebar = () => {
               <Dropdown>
                 <Dropdown.Toggle id="">
                   <a>
-                  <i className="fa fa-user"></i>
+                    <i className="fa fa-user"></i>
                     <span className="username ms-1 d-none d-sm-inline">
                       Mi Perfil
                     </span>

@@ -1,3 +1,18 @@
+#Objetivo {
+  background-color: var(--main-bs-secundary-color);
+  padding: 3rem;
+  border-radius: 5px;
+}
+#btnVerMas {
+  background-color: var(--main-bg-primary-color) !important;
+  color: var(--main-bs-color);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+#btnVerMas:hover {
+  background-color: var(--main-bg-base-color) !important;
+}
+
 @media (max-width: 576px) {
   #HomePage .px-5 {
     padding-left: 1rem;
