@@ -3,7 +3,7 @@
   /*Color y Sombra de la Barra Lateral*/
   background-color: var(--main-bs-color) !important;
   background: var(--main-bs-color) !important;
-  box-shadow: 2px 2px 5px rgb(186, 184, 189);
+  box-shadow: 2px 0px 0px rgb(186, 184, 189);
 }
 .logoPrincipal {
   align-content: center;
@@ -16,15 +16,15 @@
   padding-bottom: 0.5rem !important;
 }
 .nav-item a:hover ::before {
-  color: var(--main-bg-contrast-color) !important;
+  color: var(--main-bg-primary-color) !important;
 }
 .nav-link i, /*Iconos de la Barra Lateral*/
 .InicioSesionIcono {
-  color: var(--main-bg-primary-color);
+  color: var(--main-bg-color);
 }
 .nav-link span {
   /*Texto de la Barra Lateral*/
-  color: var(--main-bg-secundary-color);
+  color: var(--main-bg-color);
   padding-left: 0.5rem;
 }
 /*Boton de Usuario de la Barra Lateral*/
@@ -33,16 +33,15 @@
   color: var(--main-bg-secundary-color) !important;
 }
 .dropdown .btn-primary {
-  border-radius: 30px;
-  box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3);
   background-color: var(--main-bg-primary-color) !important;
   border-color: var(--main-bg-primary-color) !important;
 }
 .dropdown .btn-primary:hover,
 .dropdown .show .btn-primary:focus {
-  color: var(--main-bg-primary-color) !important;
-  background-color: var(--main-bg-contrast-color) !important;
-  border-color: var(--main-bg-contrast-color) !important;
+  background-color: var(--main-bg-base-color) !important;
+  border-color: var(--main-bg-base-color) !important;
 }
 /* END Boton de Usuario de la Barra Lateral*/
 .footer {

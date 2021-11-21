@@ -1,14 +1,15 @@
 :root {
   /*Colores de Principales*/
-  --main-bg-color: #1a1e31;
-  --main-bg-primary-color: #3b4859;
-  --main-bg-secundary-color: #858793;
-  --main-bg-contrast-color: #d7bc31;
+  --main-bg-color: #0a0161; /*#1a1e31;*/
+  --main-bg-primary-color: #4749ef; /*#3b4859;*/
+  --main-bg-secundary-color: #91b3fa;
+  --main-bg-base-color: #6f8fb8;
+  --main-bg-contrast-color: #fe7062;
 
   /*Colores de Secundarios*/
   --main-bs-color: #ffffff;
-  --main-bs-primary-color: #dadadb;
-  --main-bs-secundary-color: #ececec;
+  --main-bs-primary-color: #4f51f5;
+  --main-bs-secundary-color: #e8effd;
   /*Colores de Basicos*/
   --primary-color: #4e73df;
   --secondary-color: #858796;
