@@ -31,15 +31,15 @@ const preguntas = [
                         id: "ies_5",
                         respuestas: [
                             {
-                                nombre: "publica",
+                                valor: 1,
                                 texto: "Subsistema de universidades publicas"
                             },
                             {
-                                nombre: "tecnologica",
+                                valor: 2,
                                 texto: "Subsistema de educacion tecnologica"
                             },
                             {
-                                nombre: "particular",
+                                valor: 3,
                                 texto: "Subsistema de instituciones particulares"
                             }
                         ]

@@ -1,10 +1,10 @@
 import React from "react";
 
-const handleChange = e => {
-    // filter response, and send it back to the source through the callback
-}
+function PreguntaAbierta({ modulo, callback }) {
+    const handleChange = e => {
+        callback(e.target.name, e.target.value);
+    }
 
-function PreguntaAbierta({modulo, callback}){
     return (
         <div className="container border-bottom px-1 p-2">
             <div className="row p-1">
@@ -12,7 +12,7 @@ function PreguntaAbierta({modulo, callback}){
                     {modulo.texto}
                 </div>
                 <div className="col-sm-5 px-1">
-                    <input type="text" id={modulo.id} name={modulo.id}/>
+                    <input type="text" className="form-control" id={modulo.id} name={modulo.id} onChange={handleChange}/>
                 </div>
             </div>
         </div>

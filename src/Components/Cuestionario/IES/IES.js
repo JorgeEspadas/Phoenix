@@ -9,10 +9,13 @@ import PreguntaMultiple from "./Modulos/Pregunta_Multiple";
 
 function CuestionarioIES({ snackbar }) {
 
-    const [respuestas, setRespuesta] = useState({});
+    const [respuestas, setRespuesta] = useState([]);
 
-    const handleChange = (event) => {
-        console.log(event.target.value);
+    const setProperty = (name, value, extradata) => {
+        var xtradata = (extradata === undefined) ? '' : extradata;
+
+        setRespuesta({...respuestas, [name]: {valor: value, extra: xtradata}})
+        console.log(respuestas);
     }
 
     const handleSubmit = (event) => {
@@ -24,36 +27,36 @@ function CuestionarioIES({ snackbar }) {
             {
                 preguntas.map((seccion, i) => {
                     return (
-                    <div>
-                       <h1> {seccion.header} </h1>
-                       <div>
-                           {
-                               seccion.indicadores.map((dimension, i) => {
-                                   return (
-                                       <div>
-                                           <Accordion>
-                                               <Accordion.Item eventKey={i}>
-                                                   <Accordion.Header>{dimension.titulo}</Accordion.Header>
-                                                   <Accordion.Body>
-                                                       {
-                                                           dimension.preguntas.map((pregunta, i) => {
-                                                               switch(pregunta.modulo){
-                                                                   case "multiple":
-                                                                       return <PreguntaMultiple id={pregunta.id} texto={pregunta.texto} respuestas={pregunta.respuestas}/>;
-                                                                   case "abierta":
-                                                                       return <PreguntaAbierta modulo={pregunta}/>;
-                                                               }
-                                                           })
-                                                       }
-                                                   </Accordion.Body>
-                                               </Accordion.Item>
-                                           </Accordion>
-                                       </div>
-                                   );
-                               })
-                           }
-                       </div>
-                    </div>
+                        <div>
+                            <h1> {seccion.header} </h1>
+                            <div>
+                                {
+                                    seccion.indicadores.map((dimension, i) => {
+                                        return (
+                                            <div>
+                                                <Accordion>
+                                                    <Accordion.Item eventKey={i}>
+                                                        <Accordion.Header>{dimension.titulo}</Accordion.Header>
+                                                        <Accordion.Body>
+                                                            {
+                                                                dimension.preguntas.map((pregunta, i) => {
+                                                                    switch (pregunta.modulo) {
+                                                                        case "multiple":
+                                                                            return <PreguntaMultiple id={pregunta.id} texto={pregunta.texto} respuestas={pregunta.respuestas} callback={setProperty} />;
+                                                                        case "abierta":
+                                                                            return <PreguntaAbierta modulo={pregunta} callback={setProperty} />;
+                                                                    }
+                                                                })
+                                                            }
+                                                        </Accordion.Body>
+                                                    </Accordion.Item>
+                                                </Accordion>
+                                            </div>
+                                        );
+                                    })
+                                }
+                            </div>
+                        </div>
                     );
                 })
             }
