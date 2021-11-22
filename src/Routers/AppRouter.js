@@ -54,11 +54,11 @@ export default function AppRouter() {
                 <Route exact path="/Info" component={InfoPage} />
                 <Route exact path="/Contactanos" component={ContactPage} />
                 <Route exact path="/Login" component={Login} />
+                <Route exact path="/Encuestas" component={FormPage} />
                 <PublicRoute exact path="/Singin">
                   <Redirect to="/" />
                 </PublicRoute>
 
-                <PrivateRoute exact path="/Encuestas" component={FormPage} />
                 <PrivateRoute
                   exact
                   path="/Administrador"

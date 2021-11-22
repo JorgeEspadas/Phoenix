@@ -12,6 +12,12 @@ export const SidebarData = [
     Activo: true,
   },
   {
+    Modulo: "Encuestas",
+    Icono: "fa fa-file-text",
+    Link: "/Encuestas",
+    Activo: true,
+  },
+  {
     Modulo: "Informacion",
     Icono: "fa fa-info-circle",
     Link: "/Contactanos",

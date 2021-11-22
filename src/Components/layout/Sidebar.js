@@ -10,7 +10,6 @@ import useAuth from "../auth/useAuth";
 
 const Sidebar = () => {
   const auth = useAuth();
-  console.log(auth.getRol());
 
   //======= Validaciones del Modal de Login======
   const [show, setShow] = useState(false); //Estado Incial
@@ -60,12 +59,6 @@ const Sidebar = () => {
             {/* ========= Modulos que se muestran solo cuando estas logeado ========= */}
             {auth.isLogged() && (
               <>
-                <li className="nav-item">
-                  <a href="/Encuestas" className="nav-link px-sm-0 px-2">
-                    <i className="fa fa-file-text"></i>
-                    <span className="ms-1 d-none d-sm-inline">Encuestas</span>
-                  </a>
-                </li>
                 {auth.getRol() == 3 && (
                   <li className="nav-item">
                     <a href="/Administrador" className="nav-link px-sm-0 px-2">
