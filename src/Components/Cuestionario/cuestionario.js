@@ -40,6 +40,7 @@ function Cuestionario({ snackbar }) {
     if (auth.isLogged()) {
         // si estamos logueados pedimos el cuestionario al back.
         //await net.post('');
+        content = <strong>Aun no programado</strong>
     } else {
         // si no, preguntamos el codigo de acceso.
         if(qenabled){
@@ -51,7 +52,7 @@ function Cuestionario({ snackbar }) {
                 <div className="row d-flex justify-content-center">
                     <input type="text" className="form-control col-3" name="accessKey" onChange={handleChange}></input>
                     <div className="p-2"></div>
-                    <button className="btn-success btn-lg d-flex justify-content-center col-8" onClick={handleAuth}>Acceder</button>
+                    <button className="btn btn-success btn-lg d-flex justify-content-center col-8" onClick={handleAuth}>Acceder</button>
                 </div>
             </div>
         </div>

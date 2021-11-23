@@ -3,6 +3,7 @@ import ModifyUser from "./components/ModifyUser";
 import CreateUser from "./components/UserCreate";
 import "../../css/Usuarios.css";
 import image from "../../Images/Admin-Usuario.jpg";
+import KeyGenerator from "./components/TemporalKey";
 
 function UserEditor({ snackbar }) {
   const [currentModule, setModule] = useState(0);
@@ -14,6 +15,9 @@ function UserEditor({ snackbar }) {
         break;
       case "modificar":
         setModule(2);
+        break;
+      case "temporal":
+        setModule(3);
         break;
       default:
         setModule(0);
@@ -36,7 +40,7 @@ function UserEditor({ snackbar }) {
       case 2:
         return <ModifyUser snackbar={snackbar} />;
       case 3:
-        return <span>soon(tm)</span>;
+        return <KeyGenerator snackbar={snackbar}/>;
       default:
         return <span>you should not see this message</span>;
     }
@@ -66,6 +70,15 @@ function UserEditor({ snackbar }) {
                 >
                   <i className="fa fa-pencil-square"></i>
                   &nbsp; Modificar
+                </button>
+                <button
+                  className="nav-link"
+                  href="#"
+                  onClick={handleClick}
+                  value="temporal"
+                >
+                  <i className="fa fa-lock"></i>
+                  &nbsp; Llaves
                 </button>
               </li>
             </ul>

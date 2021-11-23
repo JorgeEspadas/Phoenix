@@ -4,10 +4,11 @@ import UserEditor from "../Components/Admin/Usuarios";
 import { useSnackbar } from "react-simple-snackbar";
 import Util from "../Backend/util/Util";
 import "../css/AdminPage.css";
+import ConfigEditor from "../Components/AdminConfig/Configuracion";
 
 export default function AdminPage() {
   const [open] = useSnackbar(Util.snackbarConfig.options);
-  const [pantallaActual, setPantalla] = useState(0);
+  const [pantallaActual, setPantalla] = useState(2);
 
   const handleClick = (e) => {
     if (e.target.value === "preguntas") {
@@ -24,7 +25,7 @@ export default function AdminPage() {
       case 1:
         return <Preguntas snackbar={open} />;
       case 2:
-        return <span></span>;
+        return <ConfigEditor snackbar={open}/>;
       case 3:
         return <UserEditor snackbar={open} />;
       default:
