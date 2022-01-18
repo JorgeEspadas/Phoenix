@@ -62,7 +62,7 @@ export default function Login({handleClose}){
       show={show}
       onHide={()=>{
         handleShow(false);
-        !(handleClose == undefined) ? handleClose(false) : console.log('jejex')
+        !(handleClose === undefined) ? handleClose(false) : console.log('jejex')
       }}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
@@ -122,7 +122,7 @@ export default function Login({handleClose}){
               <div className="contactLogin text-center">
                 <span>¿No tienes Cuenta? </span>
                 <NavLink exact to="/Contactanos">
-                  <a id="linkContactanos">Contactanos</a>
+                  <a id="linkContactanos" href="/#">Contactanos</a>
                 </NavLink>
               </div>
             </div>

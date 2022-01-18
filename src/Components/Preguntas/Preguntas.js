@@ -25,10 +25,10 @@ const Preguntas = ({snackbar}) => {
                 <center>
                     <ul className="nav nav-tabs flex-column" >
                         <li className="nav-item">
-                            <button className="nav-link" href="#" onClick={handleClick} value="add">
+                            <button className="nav-link" href="/#" onClick={handleClick} value="add">
                                 Agregar
                             </button>
-                            <button className="nav-link" href="#" onClick={handleClick} value="modificar">
+                            <button className="nav-link" href="/#" onClick={handleClick} value="modificar">
                                 Modificar
                             </button>
                         </li>

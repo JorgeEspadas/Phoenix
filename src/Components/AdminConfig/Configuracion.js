@@ -40,7 +40,7 @@ function ConfigEditor({ snackbar }) {
                             <li className="nav-item">
                                 <button
                                     className="nav-link"
-                                    href="#"
+                                    href="/#"
                                     onClick={handleClick}
                                     value="status"
                                 >

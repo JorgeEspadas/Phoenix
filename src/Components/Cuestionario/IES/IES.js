@@ -4,14 +4,14 @@
 import React, { useState } from "react";
 import { Accordion, Alert } from "react-bootstrap";
 import PreguntaAbierta from "./Modulos/Pregunta_Abierta";
-import { preguntas } from './Data/DataIES';
 import PreguntaMultiple from "./Modulos/Pregunta_Multiple";
 
-function CuestionarioIES({ snackbar }) {
+function CuestionarioIES({ snackbar, data }) {
 
     const [respuestas, setRespuesta] = useState([]);
     const [buttonDisabled, setButton] = useState(false);
     var total = 0;
+    var preguntas = data;
 
     const setProperty = (name, value, texto, extradata) => {
         var xtradata = (extradata === undefined) ? '' : extradata;
@@ -20,7 +20,36 @@ function CuestionarioIES({ snackbar }) {
     }
     const handleSubmit = (event) => {
         // codigo para enviar el formulario
-        //console.log(JSON.stringify({respuestas:[respuestas]}));
+        //if(Object.values(respuestas).length < total) snackbar('Porfavor llena todas las respuestas');
+        console.log(JSON.stringify({ respuestas: [respuestas] }));
+        validateCuestionario();
+    }
+
+    const validateCuestionario = () => {
+        // if respuestas['ies_6'] === 1 (respuesta es 0, por tanto necesitamos)
+        // que se haya llenado ies_7 y 8.
+        // Este es un ejemplo de la primera validacion, en caso de que respuestas ies_6 sea diferente de 1, borramos el nodo 7 y 8.
+        if(respuestas['ies_6'] === 1 && (respuestas['ies_7'] === undefined || respuestas['ies_8'] === undefined)){
+            snackbar('Contesta la Seccion 1, preguntas 7 y 8.');
+            return false;
+        }else if(respuestas['ies_6'] !== 1){
+            if(respuestas['ies_7'] !== undefined){
+                delete respuestas['ies_7'];
+            }
+            if(respuestas['ies_8']!== undefined){
+                delete respuestas['ies_8'];
+            }
+        }
+
+        // IES 20/21 RESP 1
+        if(respuestas['ies_20'] === 1 && respuestas['ies_21'] === undefined){
+            snackbar('Porfavor contesta la pregunta 2, Seccion 3');
+            if(respuestas['ies_20'] !== 1 && respuestas['ies_21'] !== undefined){
+                delete respuestas['ies_21'];
+            }
+        }
+        
+        // IES 23/24 RESP 1
     }
 
     return (
@@ -40,7 +69,6 @@ function CuestionarioIES({ snackbar }) {
                                                     <Accordion.Item eventKey={i}>
                                                         <Accordion.Header>{dimension.titulo}</Accordion.Header>
                                                         <Accordion.Body>
-
                                                             {
                                                                 dimension.preguntas.map((pregunta, i) => {
                                                                     switch (pregunta.modulo) {

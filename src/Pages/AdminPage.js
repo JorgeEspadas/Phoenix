@@ -41,7 +41,7 @@ export default function AdminPage() {
           <button
             className="nav-link "
             aria-current="page"
-            href="#"
+            href="/#"
             onClick={handleClick}
             value="config"
           >
@@ -51,7 +51,7 @@ export default function AdminPage() {
         <li className="nav-item">
           <button
             className="nav-link "
-            href="#"
+            href="/#"
             onClick={handleClick}
             value="usuario"
           >
@@ -61,7 +61,7 @@ export default function AdminPage() {
         <li className="nav-item">
           <button
             className="nav-link "
-            href="#"
+            href="/#"
             value="preguntas"
             onClick={handleClick}
           >

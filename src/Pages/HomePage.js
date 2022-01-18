@@ -17,7 +17,7 @@ export default function HomePage() {
               El mejor lugar para Actualizarte con estadisticas reales de
               Empresas e Instituciones en materia de Desarrollo de Software.
             </p>
-            <button className="btn btn-default" href="#" id="btnVerMas">
+            <button className="btn btn-default" href="/#" id="btnVerMas">
               Ver mas...
             </button>
           </div>

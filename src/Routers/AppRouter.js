@@ -39,10 +39,10 @@ export default function AppRouter() {
               }}
             >
               <div className="">
-                <a>
+                <a href="/#">
                   <i className="fa fa-twitter-square" aria-hidden="true"></i>
                 </a>
-                <a style={{ marginLeft: "1rem" }}>
+                <a style={{ marginLeft: "1rem" }} href="/#">
                   <i className="fa fa-facebook-square" aria-hidden="true"></i>
                 </a>
               </div>

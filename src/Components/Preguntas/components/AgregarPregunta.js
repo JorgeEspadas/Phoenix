@@ -228,7 +228,7 @@ const AgregarPregunta =  ({snackbar}) => {
             </div>
         }
             <center className ="">
-                <button className="btn btn-primary" name="btn" onClick={handleState} href="#">Agregar Pregunta</button>
+                <button className="btn btn-primary" name="btn" onClick={handleState} href="/#">Agregar Pregunta</button>
             </center>
         </div>    
     );   

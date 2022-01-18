@@ -55,7 +55,7 @@ function UserEditor({ snackbar }) {
               <li className="nav-item">
                 <button
                   className="nav-link"
-                  href="#"
+                  href="/#"
                   onClick={handleClick}
                   value="create"
                 >
@@ -64,7 +64,7 @@ function UserEditor({ snackbar }) {
                 </button>
                 <button
                   className="nav-link"
-                  href="#"
+                  href="/#"
                   onClick={handleClick}
                   value="modificar"
                 >
@@ -73,7 +73,7 @@ function UserEditor({ snackbar }) {
                 </button>
                 <button
                   className="nav-link"
-                  href="#"
+                  href="/#"
                   onClick={handleClick}
                   value="temporal"
                 >
