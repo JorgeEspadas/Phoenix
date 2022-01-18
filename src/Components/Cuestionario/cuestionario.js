@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import NetworkManager from '../../Backend/util/http';
 import CuestionarioIES from './IES/IES';
+import EmpresasForm from './Empresa/Empresas';
 
 function Cuestionario({snackbar}) {
     var net = new NetworkManager();
@@ -29,7 +30,7 @@ function Cuestionario({snackbar}) {
     // CAMBIA AQUI PARA MOSTRAR TU CUESTIONARIO
     return (
         <div>
-            <CuestionarioIES snackbar={snackbar}/>
+            <EmpresasForm snackbar={snackbar}/>
         </div>
     );
 }
