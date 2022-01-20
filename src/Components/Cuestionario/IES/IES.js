@@ -1,5 +1,5 @@
 // Modelo JS para placeholder de IES.
-// Escala likert es 1 (horrible) - 5 (chingon :v)
+// Escala likert es 1 al 5.
 
 import React, { useState } from "react";
 import { Accordion, Alert } from "react-bootstrap";
@@ -48,8 +48,14 @@ function CuestionarioIES({ snackbar, data }) {
                 delete respuestas['ies_21'];
             }
         }
-        
+
         // IES 23/24 RESP 1
+        if(respuestas['ies_23'] === 1 && respuestas['ies_24'] === undefined){
+            snackbar('Porfavor contesta la pregunta 3, Seccion 3');
+            if(respuestas['ies_23'] !== 1 && respuestas['ies_24'] !== undefined){
+                delete respuestas['ies_24'];
+            }
+        }
     }
 
     return (
