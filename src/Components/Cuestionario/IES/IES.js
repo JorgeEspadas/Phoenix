@@ -6,7 +6,7 @@ import { Accordion, Alert } from "react-bootstrap";
 import PreguntaAbierta from "./Modulos/Pregunta_Abierta";
 import PreguntaMultiple from "./Modulos/Pregunta_Multiple";
 
-function CuestionarioIES({ snackbar, data }) {
+function CuestionarioIES({ snackbar, data, key }) {
 
     const [respuestas, setRespuesta] = useState([]);
     const [buttonDisabled, setButton] = useState(false);

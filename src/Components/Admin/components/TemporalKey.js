@@ -46,6 +46,7 @@ function KeyGenerator({ snackbar }) {
         var result = await nm.post('admin/temporal/delete', {hash: hash});
         if(result.response === "OK"){
             receiveList();
+            snackbar('Llave borrada con exito');
         }
     }
 
@@ -147,7 +148,7 @@ function KeyGenerator({ snackbar }) {
                                     <th scope="col">#</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Usos</th>
-                                    <th scope="col">Borrar</th>
+                                    <th scope="col" colSpan={2}><center>Acciones</center></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -157,7 +158,11 @@ function KeyGenerator({ snackbar }) {
                                             <th scope="row">{index+1}</th>
                                             <td>{llave.nombre}</td>
                                             <td>{llave.usos}</td>
-                                            <td><button type="button" class="btn btn-danger" onClick={() => handleDelete(llave.hash)}>Borrar</button></td>
+                                            <td><center><button type="button" class="btn btn-primary" onClick={() => {
+                                                navigator.clipboard.writeText(llave.hash);
+                                                snackbar('Llave copiada al portapapeles');
+                                            }}>Copiar Llave</button></center></td>
+                                            <td><center><button type="button" className="btn btn-danger" onClick={() => handleDelete(llave.hash)}>Borrar</button></center></td>
                                         </tr>
                                     ))
                                 }
