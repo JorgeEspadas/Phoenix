@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import NetworkManager from '../../Backend/util/http';
 import CuestionarioIES from './IES/IES';
+import EmpresasForm from './Empresa/Empresas';
 import useAuth from '../auth/useAuth';
 
 function Cuestionario({ snackbar }) {
+    var net = new NetworkManager();
     const auth = useAuth();
     const [key, setKey] = useState('');
     const [qloading, setLoading] = useState(false);
-    const [qenabled, enableCuestionario] = useState(false)
+    const [qenabled, enableCuestionario] = useState(true)
     const [qdata, setQData] = useState([]);
     let content;
     let tk;
@@ -15,9 +17,8 @@ function Cuestionario({ snackbar }) {
 
     // useEffect para ejecutar solo una vez.
     const getCuestionario = async () => {
-        let nm = new NetworkManager();
         if (auth.isLogged()) {
-            let response = await nm.post('usuario/preguntas');
+            let response = await net.post('usuario/preguntas');
             console.log(response); // por si acaso, todo:  && !response.data.answered
             if (response.response === "OK") {
                 setQData(response.data.preguntas);

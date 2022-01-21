@@ -5,7 +5,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"Año de constitución de la empresa:",
-                _id:"1",
+                _id:"empresas_1",
                 tipo:"rango",
                 multiples:false,
                 opciones:[
@@ -24,7 +24,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"Departamentos con los que cuenta su empresa",
-                _id:"2",
+                _id:"empresas_2",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -72,7 +72,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"Cada cuanto tiempo realiza encuestas sobre el clima laboral",
-                _id:"3",
+                _id:"empresas_3",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -106,7 +106,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿Cuáles son los cuatro criterios de contratación de personal más importantes para su empresa?",
-                _id:"4",
+                _id:"empresas_4",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -159,7 +159,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"Número TOTAL de empleados por tipo de contrato:",
-                _id:"5",
+                _id:"empresas_5",
                 tipo:"tabla",
                 multiples:true,
                 opciones:[
@@ -187,7 +187,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"Número TOTAL de trabajadores según nivel de estudios.",
-                _id:"6",
+                _id:"empresas_6",
                 tipo:"tabla",
                 multiples:true,
                 opciones:[
@@ -215,7 +215,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"Número de programadores por nivel de estudio.",
-                _id:"7",
+                _id:"empresas_7",
                 tipo:"tabla",
                 multiples:true,
                 opciones:[
@@ -238,7 +238,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuál es el porcentaje de rotación de empleados?",
-                _id:"8",
+                _id:"empresas_8",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -277,7 +277,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿Cómo está constituida la empresa?",
-                _id:"9",
+                _id:"empresas_9",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -320,7 +320,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Utiliza indicadores financieros en los procesos que involucran tomas de decisiones en la empresa?",
-                _id:"10",
+                _id:"empresas_10",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -348,7 +348,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cómo es la liquidez de su negocio? (cantidad de efectivo y los activos, que se puedan convertir en efectivo, para satisfacer las obligaciones de deuda a corto plazo)",
-                _id:"11",
+                _id:"empresas_11",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -376,7 +376,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cómo es la solvencia de su negocio? (capacidad de una empresa para cumplir con sus obligaciones de deuda en cualquier momento)",
-                _id:"12",
+                _id:"empresas_12",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -404,7 +404,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cómo es la rentabilidad de su negocio? (margen neto, que se corresponde con la relación entre las ganancias y los ingresos totales: es decir, el beneficio neto dividido por la cifra de negocios)",
-                _id:"13",
+                _id:"empresas_13",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -432,7 +432,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles de estos indicadores financieros de liquidez utiliza la empresa?",
-                _id:"14",
+                _id:"empresas_14",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -485,7 +485,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles de estos indicadores financieros de rentabilidad utiliza la empresa?",
-                _id:"15",
+                _id:"empresas_15",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -518,7 +518,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles de estos indicadores financieros de actividad utiliza la empresa?",
-                _id:"16",
+                _id:"empresas_16",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -566,7 +566,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles de estos indicadores de endeudamiento utiliza la empresa?",
-                _id:"17",
+                _id:"empresas_17",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -604,7 +604,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Adicional a los reportes básicos de contabilidad (balance general, estado de resultados), qué reportes a nivel contable y financiero generan?",
-                _id:"18",
+                _id:"empresas_18",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -637,7 +637,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Qué problemas identifica en sus procesos de toma de decisión en el campo financiero?",
-                _id:"19",
+                _id:"empresas_19",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -670,7 +670,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Con base en qué información toma la decisión de invertir?",
-                _id:"20",
+                _id:"empresas_20",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -703,7 +703,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cómo realiza la proyección financiera de la empresa?",
-                _id:"21",
+                _id:"empreas_21",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -726,7 +726,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Qué entidades toma como referencia para posicionar su empresa en el sector empresarial?",
-                _id:"22",
+                _id:"empresas_22",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -754,7 +754,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Qué índices emplea para posicionar su empresa en relación al sector empresarial?",
-                _id:"23",
+                _id:"empresas_23",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -842,7 +842,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿La empresa establece metas financieras?",
-                _id:"24",
+                _id:"empresas_24",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -860,7 +860,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuenta la empresa con la posibilidad de acceso a crédito bancario?",
-                _id:"25",
+                _id:"empresas_25",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -878,7 +878,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuenta la entidad con acceso a recursos del capital?",
-                _id:"26",
+                _id:"empresas_26",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -896,7 +896,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Existe participación de capital extranjero en el capital social?",
-                _id:"27",
+                _id:"empresas_27",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -914,7 +914,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuenta la empresa con financiación de fomento gubernamental?",
-                _id:"28",
+                _id:"empresas_28",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -938,7 +938,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿Qué software usan para manejar la información contable y financiera?",
-                _id:"29",
+                _id:"empresas_29",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -971,7 +971,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el número de equipos de cómputo con los que cuenta su empresa, de acuerdo a su objetivo de uso?",
-                _id:"30",
+                _id:"empresas_30",
                 tipo:"tabla",
                 multiples:true,
                 opciones:[
@@ -989,7 +989,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Qué medios de almacenamiento para los Backups hace uso su empresa?",
-                _id:"31",
+                _id:"empresas_31",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1017,7 +1017,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el tipo de Red con el cuenta su empresa?",
-                _id:"32",
+                _id:"empresas_32",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1055,7 +1055,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el ancho de banda de conexión a internet con el que cuenta su empresa?",
-                _id:"33",
+                _id:"empresas_33",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1084,7 +1084,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿Ha desarrollado proyectos en investigación y desarrollo (I&D) en los últimos 3 años?",
-                _id:"34",
+                _id:"empresas_34",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1102,7 +1102,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Qué departamentos para los proyectos de investigación y desarrollo posee su empresa? (puede seleccionar más de uno)",
-                _id:"35",
+                _id:"empresas_35",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1135,7 +1135,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuáles de las siguientes actividades de innovación realiza la empresa?",
-                _id:"36",
+                _id:"empresas_36",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1163,7 +1163,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Tiene la empresa productos certificados? En caso de respuesta afirmativa, determine el país de la cual obtuvo la certificación y año de obtención.",
-                _id:"37",
+                _id:"empresas_37",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1181,7 +1181,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuántos de sus productos han sido certificados en total?",
-                _id:"37.1",
+                _id:"empresas_37_1",
                 tipo:"abierta",
                 multiples:false,
                 opciones:[
@@ -1194,7 +1194,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Ha solicitado la empresa patentes en el país y en el exterior en los últimos 3 años? (en caso de respuesta positiva determinar cuántas y en qué países).",
-                _id:"38",
+                _id:"empresas_38",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1212,7 +1212,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuántas patentes ha solicitado en total?",
-                _id:"38.1",
+                _id:"empresas_38_1",
                 tipo:"abierta",
                 multiples:false,
                 opciones:[
@@ -1225,7 +1225,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿La empresa ha obtenido  patentes en el país y en el exterior en los últimos 3 años? (en caso de respuesta positiva determinar cuántas y en qué países).",
-                _id:"39",
+                _id:"empresas_39",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1243,7 +1243,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuántas patentes ha obtenido en total?",
-                _id:"39.1",
+                _id:"empresas_39_1",
                 tipo:"abierta",
                 multiples:false,
                 opciones:[
@@ -1256,7 +1256,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿La empresa ha obtenido la concesión de licencia de producto o de tecnología en los últimos 3 años?",
-                _id:"40",
+                _id:"empresas_40",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1274,7 +1274,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuántos productos o tecnologías han obtenido la concesión de licencia en total?",
-                _id:"40.1",
+                _id:"empresas_40_1",
                 tipo:"abierta",
                 multiples:false,
                 opciones:[
@@ -1287,7 +1287,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Tiene la empresa procesos certificados? En caso de respuesta afirmativa, determine el país de la cual obtuvo la certificación y año de obtención.",
-                _id:"41",
+                _id:"empresas_41",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1305,7 +1305,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuántos procesos certificados ha obtenido?:",
-                _id:"41.1",
+                _id:"empresas_41_1",
                 tipo:"abierta",
                 multiples:false,
                 opciones:[
@@ -1318,7 +1318,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Su empresa está registrada en el Registro Nacional de Instituciones y Empresas Científicas y Tecnológicas (RENIECYT)?",
-                _id:"42",
+                _id:"empresas_42",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1336,7 +1336,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuáles son los principales lenguajes de programación utilizados por la empresa?",
-                _id:"43",
+                _id:"empresas_43",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1439,7 +1439,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Cuáles son los principales administradores de base de datos utilizados por la empresa?",
-                _id:"44",
+                _id:"empresas_44",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1512,7 +1512,7 @@ const preguntas_empresas = [
             },
             {
                 texto:"¿Tecnología para desarrollo  en la nube utilizados por la empresa?",
-                _id:"45",
+                _id:"empresas_45",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1601,7 +1601,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿Qué tipo de productos de software ofrece su empresa?",
-                _id:"46",
+                _id:"empresas_46",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1634,7 +1634,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles son las métricas actuales que utiliza la empresa para medir el costo de un producto de software?",
-                _id:"47",
+                _id:"empresas_47",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1672,7 +1672,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el grado de efectividad de las pruebas de funcionamiento?",
-                _id:"48",
+                _id:"empresas_48",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1700,7 +1700,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el grado de efectividad de las pruebas de usabilidad?",
-                _id:"49",
+                _id:"empresas_49",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1728,7 +1728,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el grado de efectividad de las pruebas de fiabilidad?",
-                _id:"50",
+                _id:"empresas_50",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1756,7 +1756,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el grado de efectividad de las pruebas de rendimiento?",
-                _id:"51",
+                _id:"empresas_51",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1784,7 +1784,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el grado de efectividad de las pruebas para la capacidad de soporte?",
-                _id:"52",
+                _id:"empresas_52",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1812,7 +1812,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"Porcentaje de participación en la ventas de nuevos productos introducidos en los últimos tres años:",
-                _id:"53",
+                _id:"empresas_53",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1851,7 +1851,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿Cuáles son las áreas de mercado que han sido atendidas por los softwares desarrollados por la empresa?",
-                _id:"54",
+                _id:"empresas_54",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1894,7 +1894,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles son los sectores económicos que han sido atendidas por los softwares desarrollados por la empresa?",
-                _id:"55",
+                _id:"empresas_55",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1927,7 +1927,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles son los canales de distribución que utiliza su empresa?",
-                _id:"56",
+                _id:"empresas_56",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -1960,7 +1960,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el porcentaje de exportaciones realizadas por la empresa?",
-                _id:"57",
+                _id:"empresas_57",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -1992,7 +1992,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Con qué rapidez lanza al mercado nuevos productos para satisfacer las necesidades del mercado?",
-                _id:"58",
+                _id:"empresas_58",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2020,7 +2020,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuál es el porcentaje del personal total que corresponde a mercadeo y comercialización?",
-                _id:"59",
+                _id:"empresas_59",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2059,7 +2059,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿ Qué conocimientos cuenta la empresa sobre MoProsoft?",
-                _id:"60",
+                _id:"empresas_60",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2082,7 +2082,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿En qué nivel se encuentra certificado su empresa?",
-                _id:"61",
+                _id:"empresas_61",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2120,7 +2120,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿ Qué conocimientos cuenta la empresa sobre CMMI?",
-                _id:"62",
+                _id:"empresas_62",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2143,7 +2143,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿En qué nivel se encuentra certificado su empresa?",
-                _id:"63",
+                _id:"empresas_63",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2171,12 +2171,17 @@ const preguntas_empresas = [
                         opcion_id:5,
                         abierta:false,
                         texto:"nivel 1. Inicial"
+                    },
+                    {
+                        opcion_id:6,
+                        abierta:false,
+                        texto:"Ninguno"
                     }
                 ]
             }, 
             {
                 texto:"¿La empresa hace uso de los siguientes aspectos de optimización para la mejora continua de sus procesos?",
-                _id:"64",
+                _id:"empresas_64",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2199,7 +2204,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿La empresa hace uso de los siguientes aspectos de medición y control  para la Gestión cuantitativa de los procesos?",
-                _id:"65",
+                _id:"empresas_65",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2222,7 +2227,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"-¿La empresa hace uso de los siguientes aspectos para la estandarización de sus procesos?",
-                _id:"66",
+                _id:"empresas_66",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2305,7 +2310,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿La empresa hace uso de los siguientes aspectos básicos para la Gestión de proyectos?",
-                _id:"67",
+                _id:"empresas_67",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2353,7 +2358,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿El personal está certificado en PSP?",
-                _id:"68",
+                _id:"empresas_68",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2371,7 +2376,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿En qué niveles se encuentra certificado su personal?",
-                _id:"69",
+                _id:"empresas_69",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2409,12 +2414,17 @@ const preguntas_empresas = [
                         opcion_id:7,
                         abierta:false,
                         texto:"TSP"
+                    },
+                    {
+                        opcion_id:8,
+                        abierta:false,
+                        texto:"Ninguno"
                     }
                 ]
             }, 
             {
                 texto:"¿El personal está certificado en Scrum?",
-                _id:"70",
+                _id:"empresas_70",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2432,7 +2442,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles son los tipos de roles con los que se encuentra certificado su personal?",
-                _id:"71",
+                _id:"empresas_71",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2460,12 +2470,17 @@ const preguntas_empresas = [
                         opcion_id:5,
                         abierta:true,
                         texto:"Otro, especifique:"
+                    },
+                    {
+                        opcion_id:6,
+                        abierta:true,
+                        texto:"Ninguno"
                     }
                 ]
             }, 
             {
                 texto:"¿El personal está certificado en Kanban ?",
-                _id:"72",
+                _id:"empresas_72",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2483,7 +2498,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles son los tipos de roles con los que se encuentra certificado su personal?",
-                _id:"73",
+                _id:"empresas_73",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2506,6 +2521,11 @@ const preguntas_empresas = [
                         opcion_id:4,
                         abierta:false,
                         texto:"Otro, especifique:"
+                    },
+                    {
+                        opcion_id:5,
+                        abierta:false,
+                        texto:"Ninguno"
                     }
                 ]
             }
@@ -2517,7 +2537,7 @@ const preguntas_empresas = [
         preguntas:[
             {
                 texto:"¿Cuáles son las estrategias de marketing que utiliza la empresa?",
-                _id:"74",
+                _id:"empresas_74",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2625,7 +2645,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles son las estrategias que emplea la empresa para conocer las tendencias y necesidades del mercado?",
-                _id:"75",
+                _id:"empresas_75",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
@@ -2658,7 +2678,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Realiza Benchmarking con los productos de la competencia?",
-                _id:"76",
+                _id:"empresas_76",
                 tipo:"multiple",
                 multiples:false,
                 opciones:[
@@ -2681,7 +2701,7 @@ const preguntas_empresas = [
             }, 
             {
                 texto:"¿Cuáles son las métricas de marketing y ventas que se utilizan en su empresas?",
-                _id:"77",
+                _id:"empresas_77",
                 tipo:"multiple",
                 multiples:true,
                 opciones:[
