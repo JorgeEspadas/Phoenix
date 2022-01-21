@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NetworkManager from '../../Backend/util/http';
 import CuestionarioIES from './IES/IES';
+import EmpresasForm from './Empresa/Empresas';
 import useAuth from '../auth/useAuth';
 
 function Cuestionario({ snackbar }) {
@@ -8,7 +9,7 @@ function Cuestionario({ snackbar }) {
     const auth = useAuth();
     const [key, setKey] = useState('');
     const [qloading, setLoading] = useState(false);
-    const [qenabled, enableCuestionario] = useState(false)
+    const [qenabled, enableCuestionario] = useState(true)
     const [qdata, setQData] = useState([]);
     let content;
     var preguntas = "";
@@ -52,7 +53,7 @@ function Cuestionario({ snackbar }) {
 
     // Si no esta activado el cuestionario, preguntamos por codigo de acceso.
     if (qenabled) {
-        content = <div><CuestionarioIES data={qdata} snackbar={snackbar} /></div>
+        content = <div><EmpresasForm snackbar={snackbar} /></div>
     } else {
         content = <div className="container">
             <div className="d-flex justify-content-center"><h1>Acceso a la Encuesta</h1></div>
