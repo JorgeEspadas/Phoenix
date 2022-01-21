@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Spinner, InputGroup, FormControl, Form } from "react-bootstrap";
 import NetworkManager from "../../../Backend/util/http";
 import Util from "../../../Backend/util/Util";
-import {} from "react-bootstrap";
+import { } from "react-bootstrap";
 
 function CreateUser({ snackbar }) {
   const roles = [
@@ -44,7 +44,6 @@ function CreateUser({ snackbar }) {
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
-    console.log(state);
   };
 
   const handleSubmit = async () => {
@@ -186,7 +185,7 @@ function CreateUser({ snackbar }) {
       </div>
       <div className="form-group">
         <label for="rol">Asignar Rol </label>
-        <Form.Select>
+        <Form.Select onChange={handleChange} id="rol" name="rol" value={state.rol}>
           {roles.map((rol) => (
             <option
               key={rol.value}
