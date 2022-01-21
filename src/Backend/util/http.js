@@ -12,17 +12,19 @@ class NetworkManager {
          * El manejo de undefined solo puede bajar hasta cierto punto
          * response.data.data.exception se puede evaluar, por que la llave puede o no estar incluida.
          * Sin embargo, evaluar response.data.data.exception.ACTION dara un Unhandled Rejection
-         * .l.
+         * 
+         * 
+         * Si sale un error  originado aqui, antes de moverle checa que el response en Hydra este siguiendo
+         * el protocolo dictado por el responseHandler, enviar algo libre sin el responseHandler hara que esto no retorne.
          * 
          */
 
-        //console.log(response.dapta.data);
-        var data = response.data.data.exception;
+        if(response.data.response === undefined) return Util.Error('Error en Backend');
 
-        if(data === undefined){
+        if(response.data.data.exception === undefined){
             return response.data;
         }else{
-            if(data.action !== undefined){
+            if(response.data.data.exception.action !== undefined){
                 Util.context.Logout();
                 return Util.Error('Sesion Expirada');
             }else{

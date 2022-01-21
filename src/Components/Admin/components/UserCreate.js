@@ -7,6 +7,10 @@ import { } from "react-bootstrap";
 function CreateUser({ snackbar }) {
   const roles = [
     {
+      label: "Estudiante",
+      value: 0
+    },
+    {
       label: "IES",
       value: 1,
     },

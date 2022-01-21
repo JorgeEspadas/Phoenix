@@ -10,6 +10,7 @@ function Cuestionario({ snackbar }) {
     const [qenabled, enableCuestionario] = useState(false)
     const [qdata, setQData] = useState([]);
     let content;
+    let tk;
     var preguntas = "";
 
     // useEffect para ejecutar solo una vez.
@@ -36,26 +37,25 @@ function Cuestionario({ snackbar }) {
     const handleKeyAuth = async () => {
         let nm = new NetworkManager();
         var response = await nm.post('api/validate', { key: key });
+        tk = key;
         console.log(response);
         if (response.response === "OK") {
             // La respuesta del codigo temporal es valida, asi que activaremos el cuestionario con la data que nos llego.
             // response.data.preguntas
             setQData(response.data.preguntas);
             enableCuestionario(true);
-
         }else{
             snackbar(response.data.exception.message);
         }
     }
 
     const handleChange = e => {
-        setKey(e.target.value);
-        console.log(key);
+        setKey((e.target.value).toString());
     }
 
     // Si no esta activado el cuestionario, preguntamos por codigo de acceso.
     if (qenabled) {
-        content = <div><CuestionarioIES data={qdata} snackbar={snackbar} key={key} /></div>
+        content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} /></div>
     } else {
         content = <div className="container">
             <div className="d-flex justify-content-center"><h1>Acceso a la Encuesta</h1></div>
