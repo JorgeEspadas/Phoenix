@@ -32,6 +32,10 @@ function CuestionarioIES({ snackbar, data, qkey }) {
                 console.log('Event Registered without Key, Sending...');
                 let network = new NetworkManager();
                 // ENVIAR CUESTIONARIO AL ENDPOINT DE USUARIO REGISTRADO.
+                var response = await network.post('usuario/preguntas/guardar',{"respuestas": respuestas});
+                if(response['response'] === "OK"){
+                    // quitamos el cuestionario, y/o redirijimos a home
+                }
             }else{
                 handleTemporalFormSubmit();
             }
@@ -43,6 +47,9 @@ function CuestionarioIES({ snackbar, data, qkey }) {
         let network = new NetworkManager();
         // ENVIAR CUESTIONARIO AL ENDPOINT PUBLICO
         var response = await network.post('api/preguntas', {'hash': qkey, respuestas: respuestas});
+        if(response['response'] === "OK"){
+            // quitamos el cuestionario, y/o redirijimos a home
+        }
     }
 
     const validateCuestionario = () => {
