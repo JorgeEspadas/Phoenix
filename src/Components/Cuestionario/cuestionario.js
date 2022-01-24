@@ -9,7 +9,8 @@ function Cuestionario({ snackbar }) {
     const auth = useAuth();
     const [key, setKey] = useState('');
     const [qloading, setLoading] = useState(false);
-    const [qenabled, enableCuestionario] = useState(true)
+    const [qrol, setQRol] = useState();
+    const [qenabled, enableCuestionario] = useState(false)
     const [qdata, setQData] = useState([]);
     let content;
     let tk;
@@ -38,14 +39,14 @@ function Cuestionario({ snackbar }) {
     const handleKeyAuth = async () => {
         let nm = new NetworkManager();
         var response = await nm.post('api/validate', { key: key });
-        tk = key;
         console.log(response);
         if (response.response === "OK") {
             // La respuesta del codigo temporal es valida, asi que activaremos el cuestionario con la data que nos llego.
             // response.data.preguntas
             setQData(response.data.preguntas);
+            setQRol(response.data.rol);
             enableCuestionario(true);
-        }else{
+        } else {
             snackbar(response.data.exception.message);
         }
     }
@@ -56,7 +57,17 @@ function Cuestionario({ snackbar }) {
 
     // Si no esta activado el cuestionario, preguntamos por codigo de acceso.
     if (qenabled) {
-        content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} /></div>
+        switch (qrol) {
+            case 0:
+            case 1:
+                content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} /></div>
+                break;
+            case 2:
+                content = <div><EmpresasForm data={qdata} snackbar={snackbar} qkey={key}/></div>
+                break;
+            default:
+                break;
+        }
     } else {
         content = <div className="container">
             <div className="d-flex justify-content-center"><h1>Acceso a la Encuesta</h1></div>
