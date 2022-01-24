@@ -5,14 +5,15 @@ import Multiple from "./tipos/Multiple";
 import Rango from "./tipos/Rango";
 import Abierta from "./tipos/Abierta";
 import Tabla from "./tipos/Tabla";
+import NetworkManager from '../../../Backend/util/http';
 
-const EmpresasForm = ({ snackbar }) => {
+const EmpresasForm = ({ snackbar, data, qkey }) => {
 
     const [respuestas, setRespuesta] = useState([]);
     var numeroDePreguntas = 0;
 
     const setProperty = (name, value) => {
-        setRespuesta({...respuestas, [name]: {valor:value}});
+        setRespuesta(prevState=>[...prevState, {id:name,valor:value}]);//Jorge siempre se rifa
     }
 
    const enviarRespuestas = () => {
@@ -54,11 +55,17 @@ const EmpresasForm = ({ snackbar }) => {
        }
    }
 
+    const handleSubmit = async () => {
+        console.log("Enviado");
+        let network = new NetworkManager();
+        // ENVIAR CUESTIONARIO AL ENDPOINT PUBLICO
+        var response = await network.post('api/preguntas', {'hash': qkey, respuestas: respuestas});
+    }
+
     return (
         <div>
             <Accordion defaultActiveKey="0">
-                {
-                     preguntas_empresas.map((categoria,i) => {
+                {data.map((categoria,i) => {
                         return <Accordion.Item eventKey={i} name={i} key={categoria.categoria}>
                             <Accordion.Header>{categoria.categoria}</Accordion.Header>
                             <Accordion.Body>
@@ -89,7 +96,7 @@ const EmpresasForm = ({ snackbar }) => {
             </Accordion>
             <div className="container d-flex justify-content-center p-5">
                 <div className="d-grid gap-2 col-4 mx-auto">
-                    <button className="btn btn-success btn-lg" onClick={enviarRespuestas}>Enviar</button>
+                    <button className="btn btn-success btn-lg" onClick={handleSubmit}>Enviar</button>
                 </div>
             </div>
         </div>
