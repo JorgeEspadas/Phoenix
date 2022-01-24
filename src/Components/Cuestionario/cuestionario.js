@@ -13,12 +13,11 @@ function Cuestionario({ snackbar }) {
     const [qenabled, enableCuestionario] = useState(false)
     const [qdata, setQData] = useState([]);
     let content;
-    let tk;
-    var preguntas = "";
 
     // useEffect para ejecutar solo una vez.
     const getCuestionario = async () => {
         if (auth.isLogged()) {
+            setQRol(auth.getRol());
             let response = await net.post('usuario/preguntas');
             console.log(response); // por si acaso, todo:  && !response.data.answered
             if (response.response === "OK") {
