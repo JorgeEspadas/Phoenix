@@ -23,9 +23,9 @@ export default function AdminPage() {
   const moduleRender = (number) => {
     switch (number) {
       case 1:
-        return <Preguntas snackbar={open} />;
+        return <div></div>;
       case 2:
-        return <ConfigEditor snackbar={open}/>;
+        return <ConfigEditor snackbar={open} />;
       case 3:
         return <UserEditor snackbar={open} />;
       default:
@@ -55,17 +55,7 @@ export default function AdminPage() {
             onClick={handleClick}
             value="usuario"
           >
-            Usuarios
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link "
-            href="/#"
-            value="preguntas"
-            onClick={handleClick}
-          >
-            Modificación
+            Encuestas
           </button>
         </li>
       </ul>

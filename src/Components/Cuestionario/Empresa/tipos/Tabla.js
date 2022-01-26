@@ -8,9 +8,9 @@ const Tabla = ({pregunta, callback, numero}) => {
         let op = [];
         pregunta.opciones.map( (opcion, i) =>{
             op.push({
-                _id: opcion.opcion_id,
+                _id: opcion.opcion_id.toString(),
                 texto:opcion.texto,
-                valor:"0"
+                valor:""
             });  
         });
         setOpciones(op);
@@ -26,7 +26,7 @@ const Tabla = ({pregunta, callback, numero}) => {
             op[indice].valor = e.target.value;
         }
         setOpciones(op);
-        callback(e.target.name,op);
+        callback(e.target.name,op,"tabla");
     } 
     return (
 
@@ -34,7 +34,7 @@ const Tabla = ({pregunta, callback, numero}) => {
             <div class="py-2">{numero+") "+pregunta.texto}</div>
              {
                 pregunta.opciones.map( (opcion, i) =>{
-                    return <div key={i} class="py-1"><label class="px-sm-3 col-lg-3 col-sm-6 col-12">{opcion.texto}</label> <input class="col-lg-1 col-sm-2 col-6" type="number" id={opcion.opcion_id} name={pregunta._id}  onChange={handleChange} ></input></div>
+                    return <div key={i} class="py-1"><label class="px-sm-3 col-lg-3 col-sm-6 col-12">{opcion.texto}</label> <input class="col-lg-1 col-sm-2 col-6" type="number" id={opcion.opcion_id} name={pregunta._id}  onChange={handleChange}></input></div>
                 })
             }
         </div>

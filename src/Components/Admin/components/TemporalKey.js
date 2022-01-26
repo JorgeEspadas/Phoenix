@@ -52,11 +52,14 @@ function KeyGenerator({ snackbar }) {
 
     const submitData = async () => {
         let nm = new NetworkManager();
+        console.log(data.rol);
         var payload = {
             nombre: data.nombre,
             usos: data.usos,
-            rol: data.rol
+            rol: (data.rol === undefined) ? "1" : data.rol
         };
+
+        console.log(payload);
 
         setLoading(true);
         await Util.delay(1000);

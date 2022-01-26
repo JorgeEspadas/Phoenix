@@ -7,13 +7,20 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LogoNombre from "../../Images/LogoNombre.svg";
 import LogoIcono from "../../Images/LogoIcono.svg";
 import useAuth from "../auth/useAuth";
+import { useHistory } from "react-router-dom";
 
 const Sidebar = () => {
   const auth = useAuth();
+  const history = useHistory();
 
   //======= Validaciones del Modal de Login======
   const [show, setShow] = useState(false); //Estado Incial
   const handleShow = (value) => setShow(value);
+
+  const logout = () =>{
+    auth.Logout();
+    history.push('/');
+  }
 
   return (
     <div className="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-color d-flex sticky-top">
@@ -106,7 +113,7 @@ const Sidebar = () => {
                     Cambiar Contraseña
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={auth.Logout}>
+                  <Dropdown.Item onClick={logout}>
                     Cerrar Sesion
                   </Dropdown.Item>
                 </Dropdown.Menu>

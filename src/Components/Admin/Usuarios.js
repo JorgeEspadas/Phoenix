@@ -60,31 +60,24 @@ function UserEditor({ snackbar }) {
                   value="create"
                 >
                   <i className="fa fa-plus-square"></i>
-                  &nbsp; Crear
+                  &nbsp; Crear Acceso
                 </button>
+              </li>
+              <li className="nav-item">
                 <button
                   className="nav-link"
                   href="/#"
                   onClick={handleClick}
-                  value="modificar"
+                  value="create"
                 >
-                  <i className="fa fa-pencil-square"></i>
-                  &nbsp; Modificar
-                </button>
-                <button
-                  className="nav-link"
-                  href="/#"
-                  onClick={handleClick}
-                  value="temporal"
-                >
-                  <i className="fa fa-lock"></i>
-                  &nbsp; Llaves
+                  <i className="fa fa-plus-square"></i>
+                  &nbsp; Resultados
                 </button>
               </li>
             </ul>
           </center>
         </div>
-        <div className="col-sm-12 col-xl-7">
+        <div className="col-sm-12 col-xl-8">
           <div className="container">
             <>{moduleRender(currentModule)}</>
           </div>

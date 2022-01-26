@@ -52,7 +52,7 @@ export default function Login({handleClose}){
       auth.Login(userData);
       history.push(location.state?.from || "/");
     }else{
-      openSnackbar(response.data.exception.message);
+      console.log(response);
     }
   };
 

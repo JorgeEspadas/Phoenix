@@ -9,43 +9,22 @@ function Cuestionario({ snackbar }) {
     const auth = useAuth();
     const [key, setKey] = useState('');
     const [qloading, setLoading] = useState(false);
-    const [qenabled, enableCuestionario] = useState(true)
+    const [qrol, setQRol] = useState();
+    const [qenabled, enableCuestionario] = useState(false)
     const [qdata, setQData] = useState([]);
     let content;
-    let tk;
-    var preguntas = "";
 
-    // useEffect para ejecutar solo una vez.
-    const getCuestionario = async () => {
-        if (auth.isLogged()) {
-            let response = await net.post('usuario/preguntas');
-            console.log(response); // por si acaso, todo:  && !response.data.answered
-            if (response.response === "OK") {
-                setQData(response.data.preguntas);
-                enableCuestionario(true);
-            } else {
-                snackbar(response.data.exception.message);
-                enableCuestionario(false);
-            }
-        }
-    }
-
-    useEffect(() => {
-        getCuestionario();
-    }, []);
-
-
-    const handleKeyAuth = async () => {
+    const handleAuth = async () => {
         let nm = new NetworkManager();
         var response = await nm.post('api/validate', { key: key });
-        tk = key;
         console.log(response);
         if (response.response === "OK") {
             // La respuesta del codigo temporal es valida, asi que activaremos el cuestionario con la data que nos llego.
             // response.data.preguntas
             setQData(response.data.preguntas);
+            setQRol(response.data.rol);
             enableCuestionario(true);
-        }else{
+        } else {
             snackbar(response.data.exception.message);
         }
     }
@@ -56,7 +35,17 @@ function Cuestionario({ snackbar }) {
 
     // Si no esta activado el cuestionario, preguntamos por codigo de acceso.
     if (qenabled) {
-        content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} /></div>
+        switch (qrol) {
+            case 0:
+            case 1:
+                content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} /></div>
+                break;
+            case 2:
+                content = <div><EmpresasForm data={qdata} snackbar={snackbar} qkey={key}/></div>
+                break;
+            default:
+                break;
+        }
     } else {
         content = <div className="container">
             <div className="d-flex justify-content-center"><h1>Acceso a la Encuesta</h1></div>
@@ -64,7 +53,7 @@ function Cuestionario({ snackbar }) {
                 <div className="row d-flex justify-content-center">
                     <input type="text" className="form-control col-3" name="accessKey" onChange={handleChange}></input>
                     <div className="p-2"></div>
-                    <button className="btn btn-success btn-lg d-flex justify-content-center col-8" onClick={handleKeyAuth}>Acceder</button>
+                    <button className="btn btn-success btn-lg d-flex justify-content-center col-8" onClick={handleAuth}>Acceder</button>
                 </div>
             </div>
         </div>
