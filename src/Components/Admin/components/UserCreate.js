@@ -2,24 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Spinner, InputGroup, FormControl, Form } from "react-bootstrap";
 import NetworkManager from "../../../Backend/util/http";
 import Util from "../../../Backend/util/Util";
-import {} from "react-bootstrap";
+import { } from "react-bootstrap";
 
 function CreateUser({ snackbar }) {
-  /**
-   * TODO:
-   *
-   * Una entidad y un alumno son la misma cosa, solo son filtrados diferente.
-   * Una entidad tiene un uso de 0, no es requerido mandar el campo, la validación se hace en hydra.
-   * Un alumno debe tener numero de usos para su cuestionario, de no especificarse el default es 10.
-   *
-   * - Crear Entidades - ONGOING. ADMIN/ENTIDAD POST
-   * - Listar Entidades - ADMIN/ENTIDAD GET
-   * - Borrar Entidades - ADMIN/ENTIDAD/BORRAR
-   * - Listar Alumnos - ADMIN/ENTIDAD GET
-   * - Borrar Alumnos - ADMIN/ENTIDAD DELETE
-   *
-   */
-
   const roles = [
     {
       label: "Estudiante",
@@ -66,12 +51,10 @@ function CreateUser({ snackbar }) {
   const handleSubmit = async () => {
     var network = new NetworkManager();
 
-    // validation
     if (state.email === "" || state.nombre === "" || state.telefono === "") {
       snackbar("Porfavor llena todos los campos");
       return;
     }
-
     setLoading(true);
 
     var payload = {
@@ -237,8 +220,12 @@ function CreateUser({ snackbar }) {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col"><center>Entidad</center></th>
-                  <th scope="col"><center>Activo</center></th>
+                  <th scope="col">
+                    <center>Entidad</center>
+                  </th>
+                  <th scope="col">
+                    <center>Activo</center>
+                  </th>
                   <th scope="col" colSpan={2}>
                     <center>Acciones</center>
                   </th>
@@ -313,8 +300,12 @@ function CreateUser({ snackbar }) {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col"><center>Entidad</center></th>
-                  <th scope="col"><center>Usos Restantes</center></th>
+                  <th scope="col">
+                    <center>Entidad</center>
+                  </th>
+                  <th scope="col">
+                    <center>Usos Restantes</center>
+                  </th>
                   <th scope="col" colSpan={2}>
                     <center>Acciones</center>
                   </th>

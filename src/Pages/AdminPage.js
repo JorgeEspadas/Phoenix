@@ -25,7 +25,7 @@ export default function AdminPage() {
       case 1:
         return <div></div>;
       case 2:
-        return <ConfigEditor snackbar={open}/>;
+        return <ConfigEditor snackbar={open} />;
       case 3:
         return <UserEditor snackbar={open} />;
       default:
