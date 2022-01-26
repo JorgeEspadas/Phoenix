@@ -55,17 +55,7 @@ export default function AdminPage() {
             onClick={handleClick}
             value="usuario"
           >
-            Usuarios
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link "
-            href="/#"
-            value="preguntas"
-            onClick={handleClick}
-          >
-            Modificación
+            Encuestas
           </button>
         </li>
       </ul>

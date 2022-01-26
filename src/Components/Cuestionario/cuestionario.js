@@ -14,28 +14,7 @@ function Cuestionario({ snackbar }) {
     const [qdata, setQData] = useState([]);
     let content;
 
-    // useEffect para ejecutar solo una vez.
-    const getCuestionario = async () => {
-        if (auth.isLogged()) {
-            setQRol(auth.getRol());
-            let response = await net.post('usuario/preguntas');
-            console.log(response); // por si acaso, todo:  && !response.data.answered
-            if (response.response === "OK") {
-                setQData(response.data.preguntas);
-                enableCuestionario(true);
-            } else {
-                snackbar(response.data.exception.message);
-                enableCuestionario(false);
-            }
-        }
-    }
-
-    useEffect(() => {
-        getCuestionario();
-    }, []);
-
-
-    const handleKeyAuth = async () => {
+    const handleAuth = async () => {
         let nm = new NetworkManager();
         var response = await nm.post('api/validate', { key: key });
         console.log(response);
@@ -74,7 +53,7 @@ function Cuestionario({ snackbar }) {
                 <div className="row d-flex justify-content-center">
                     <input type="text" className="form-control col-3" name="accessKey" onChange={handleChange}></input>
                     <div className="p-2"></div>
-                    <button className="btn btn-success btn-lg d-flex justify-content-center col-8" onClick={handleKeyAuth}>Acceder</button>
+                    <button className="btn btn-success btn-lg d-flex justify-content-center col-8" onClick={handleAuth}>Acceder</button>
                 </div>
             </div>
         </div>
