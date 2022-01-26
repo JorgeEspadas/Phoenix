@@ -44,8 +44,13 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
                 setRespuesta(prevState=>[...prevState, {id:name,valor:value,modulo:tipo}]);//Jorge siempre se rifa
             }
         }
-        
-        if ((Object.values(respuestas).length) === numeroDePreguntas) setButton(false);
+        if (respuestas.length === numeroDePreguntas-1){
+           // console.log(buttonDisabled);
+            setButton(false);
+        } else{
+           // console.log(buttonDisabled);
+            setButton(true);
+        }
     }
 
     const handleSubmit = async () => {
@@ -59,13 +64,15 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
                 }
             }
             if(respuestas[i].id==="empresas_60" || respuestas[i].id==="empresas_62"){
-                if(respuestas[i].valor[0]._id === "3"){
+                if(respuestas[i].valor[0]._id === "3"|| respuestas[i].valor[0]._id === "1"){
                     respuestas[i+1].valor[0].texto = "Ninguno";
+                    respuestas[i+1].valor[0]._id = "0";
                 }
             }
             if(respuestas[i].id==="empresas_68" || respuestas[i].id==="empresas_70" || respuestas[i].id==="empresas_72"){
                 if(respuestas[i].valor[0]._id === "2"){
                     respuestas[i+1].valor[0].texto = "Ninguno";
+                    respuestas[i+1].valor[0]._id = "0";
                 }
             }
         }
@@ -73,7 +80,8 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
 
         let network = new NetworkManager();
         // ENVIAR CUESTIONARIO AL ENDPOINT PUBLICO
-        //var response = await network.post('api/preguntas', {'hash': qkey, respuestas: respuestas});
+        var response = await network.post('api/preguntas', {'hash': qkey, respuestas: respuestas});
+        snackbar("Enviado");
         
     }
 

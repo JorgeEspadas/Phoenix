@@ -18,7 +18,6 @@ const Tabla = ({pregunta, callback, numero}) => {
 
     const handleChange = e => {
         let op = opciones;
-        console.log(op);
         let indice = parseInt(e.target.id,10)-1;
         if(e.target.value.trim  () === ""){
             op[indice].valor = e.target.placeholder;
