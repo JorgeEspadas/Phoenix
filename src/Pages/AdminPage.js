@@ -23,7 +23,7 @@ export default function AdminPage() {
   const moduleRender = (number) => {
     switch (number) {
       case 1:
-        return <Preguntas snackbar={open} />;
+        return <div></div>;
       case 2:
         return <ConfigEditor snackbar={open}/>;
       case 3:
