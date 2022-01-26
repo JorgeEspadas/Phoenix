@@ -57,7 +57,7 @@ const Multiple = ({pregunta, callback,numero}) => {
 
         setId(ids);
         setOpciones(multiple);
-        callback(e.target.name, valor);      
+        callback(e.target.name, valor, "multiple");      
     } 
 
     return(

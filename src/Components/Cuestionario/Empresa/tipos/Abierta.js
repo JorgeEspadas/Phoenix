@@ -3,7 +3,7 @@ import {Accordion} from 'react-bootstrap';
 
 const Abierta = ({pregunta,callback, numero}) =>{
     const handleChange = e => {
-        callback(e.target.name,[{abierta:true, texto: e.target.value}]);
+        callback(e.target.name,[{texto: e.target.value}], "abierta");
     }  
     return (
         <div class="mb-2"> 

@@ -4,7 +4,7 @@ const Rango = ({pregunta, callback,numero}) => {
     const [ rango , setRango ] = useState([]);
     
     const handleChange = e => {
-        callback(e.target.name, [e.target.value]);
+        callback(e.target.name, [e.target.value],"rango");
     }  
 
     useEffect( () =>{
