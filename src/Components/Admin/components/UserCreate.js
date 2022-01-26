@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Spinner, InputGroup, FormControl, Form } from "react-bootstrap";
 import NetworkManager from "../../../Backend/util/http";
 import Util from "../../../Backend/util/Util";
@@ -8,7 +8,7 @@ function CreateUser({ snackbar }) {
   const roles = [
     {
       label: "Estudiante",
-      value: 0
+      value: 0,
     },
     {
       label: "IES",
@@ -18,80 +18,70 @@ function CreateUser({ snackbar }) {
       label: "Empresa",
       value: 2,
     },
-    {
-      label: "Administrador",
-      value: 3,
-    },
   ];
 
   const [state, setState] = useState({
-    email: "",
     nombre: "",
-    rol: roles[0].value,
-    password: "",
-    passwordConfirmation: "",
     telefono: "",
+    email: "",
+    rol: 1,
   });
 
   const [loading, setLoading] = useState(false);
+  const [entidades, setEntidades] = useState([]);
+  const [entidad, setEntidad] = useState([]);
 
-  const resetState = () => {
-    setState({
-      email: "",
-      nombre: "",
-      rol: roles[0].value,
-      password: "",
-      passwordConfirmation: "",
-      telefono: "",
-    });
+  const recibirEntidades = async () => {
+    var network = new NetworkManager();
+    var response = await network.post("admin/entidad/ver");
+
+    if (response.response == "OK") {
+      setEntidades(response.data.llaves);
+    }
   };
+
+  useEffect(() => {
+    recibirEntidades();
+  }, [entidad]);
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
-    let nm = new NetworkManager();
-    setLoading(true);
-    if (
-      state.password === state.passwordConfirmation &&
-      state.password.length >= 6 &&
-      state.passwordConfirmation.length >= 6
-    ) {
-      var payload = {
-        nombre: state.nombre,
-        email: state.email,
-        password: Util.Hash(state.password),
-        rol: state.rol,
-        telefono: state.telefono,
-      };
+    var network = new NetworkManager();
 
-      await Util.delay(1000);
-      var result = await nm.post("admin/cuentas", payload);
-      if (result.response === "OK") {
-        //limpiamos el estado
-        resetState();
-        //mostramos snackbar
-        setLoading(false);
-        snackbar(result.data.message);
-      } else {
-        //mostramos snackbar igual por que algo fallo alaverga.
-        setLoading(false);
-        snackbar(result.data.exception.message);
-      }
-    } else {
-      // snackbar, las contrasenas no coinciden?
+    if (state.email === "" || state.nombre === "" || state.telefono === "") {
+      snackbar("Porfavor llena todos los campos");
+      return;
+    }
+    setLoading(true);
+
+    var payload = {
+      nombre: state.nombre,
+      email: state.email,
+      telefono: state.telefono,
+      usos: state.usos,
+      rol: state.rol,
+    };
+
+    var response = await network.post("admin/entidad/generar", payload);
+    if (response.response === "OK") {
       setLoading(false);
-      if (
-        state.password.length < 6 &&
-        state.password != state.passwordConfirmation
-      ) {
-        snackbar(
-          "Las contrasenas debe tener 6 o mas caracteres y deben coincidir!"
-        );
-      } else {
-        snackbar("La contrasena debe tener mas de 6 caracteres");
-      }
+      setEntidad(response.data.key);
+      snackbar("Entidad registrada");
+    } else {
+      setLoading(false);
+      snackbar(response.data.exception.message);
+    }
+  };
+
+  const handleDelete = async (key) => {
+    let network = new NetworkManager();
+    var response = await network.post("admin/entidad/borrar", { hash: key });
+    if (response.response === "OK") {
+      recibirEntidades();
+      snackbar("Entidad borrada");
     }
   };
 
@@ -99,10 +89,10 @@ function CreateUser({ snackbar }) {
     <div id="AreaUserCreate">
       <h2>
         <i className="fa fa-user-plus"></i>
-        &nbsp;Crea Usuario
+        &nbsp;Crear Acceso a Encuesta
       </h2>
       <div className="form-group">
-        <label for="nombre">Nombre de la institución</label>
+        <label for="nombre">Nombre de la entidad</label>
         <input
           type="text"
           id="nombre"
@@ -125,7 +115,7 @@ function CreateUser({ snackbar }) {
             ></i>
           </InputGroup.Text>
           <FormControl
-            type="text"
+            type="number"
             id="telefono"
             autoComplete="off"
             name="telefono"
@@ -159,37 +149,13 @@ function CreateUser({ snackbar }) {
         </InputGroup>
       </div>
       <div className="form-group">
-        <label for="password">Contraseña</label>
-        <input
-          type="password"
-          autoComplete="off"
-          id="password"
-          name="password"
-          className="form-control"
+        <label for="rol">Rol de la Entidad</label>
+        <Form.Select
           onChange={handleChange}
-          value={state.password}
-          required
-        />
-        <small id="passwordInfo" class="form-text text-muted">
-          Debe tener al menos 6 caracteres.
-        </small>
-      </div>
-      <div className="form-group">
-        <label for="passwordConfirmation">Confirmar Contraseña</label>
-        <input
-          type="password"
-          autoComplete="off"
-          id="passwordConfirmation"
-          name="passwordConfirmation"
-          className="form-control"
-          onChange={handleChange}
-          value={state.passwordConfirmation}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label for="rol">Asignar Rol </label>
-        <Form.Select onChange={handleChange} id="rol" name="rol" value={state.rol}>
+          id="rol"
+          name="rol"
+          value={state.rol}
+        >
           {roles.map((rol) => (
             <option
               key={rol.value}
@@ -201,6 +167,23 @@ function CreateUser({ snackbar }) {
           ))}
         </Form.Select>
       </div>
+      {state.rol == 0 ? (
+        <div className="form-group">
+          <label for="usos">
+            Número de veces que puede presentar el cuestionario
+          </label>
+          <FormControl
+            type="number"
+            className="form-control"
+            id="usos"
+            name="usos"
+            onChange={handleChange}
+            required
+          />
+        </div>
+      ) : (
+        <div></div>
+      )}
       <div
         id="btnRegistrar"
         className="row"
@@ -228,6 +211,152 @@ function CreateUser({ snackbar }) {
             "Registrar"
           )}
         </button>
+      </div>
+      <div style={{ paddingTop: "20px" }}>
+        <div className="card" id="AreaUserCreate">
+          <h5 className="card-header text-center">Entidades en el sistema</h5>
+          <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">
+                    <center>Entidad</center>
+                  </th>
+                  <th scope="col">
+                    <center>Activo</center>
+                  </th>
+                  <th scope="col" colSpan={2}>
+                    <center>Acciones</center>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {entidades.map((llave, index) =>
+                  llave.rol != 0 ? (
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td>
+                        <center>{llave.nombre}</center>
+                      </td>
+                      <td>
+                        {llave.rol != 0
+                          ? llave.usos > 0
+                            ? "Activo"
+                            : "Inactivo"
+                          : llave.usos}
+                      </td>
+                      <td>
+                        <center>
+                          {llave.rol != 0 ? (
+                            llave.usos > 0 ? (
+                              <button
+                                style={{ width: "120px" }}
+                                type="button"
+                                class="btn btn-primary"
+                                onClick={() => {
+                                  navigator.clipboard.writeText(llave.hash);
+                                  snackbar("Llave copiada al portapapeles");
+                                }}
+                              >
+                                Copiar Llave
+                              </button>
+                            ) : (
+                              <div></div>
+                            )
+                          ) : (
+                            <div></div>
+                          )}
+                        </center>
+                      </td>
+                      <td>
+                        <center>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={() => handleDelete(llave.hash)}
+                          >
+                            Borrar
+                          </button>
+                        </center>
+                      </td>
+                    </tr>
+                  ) : (
+                    <div></div>
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div style={{ paddingTop: "20px" }}>
+        <div className="card" id="AreaUserCreate">
+          <h5 className="card-header text-center">
+            Entidades de Estudiantes en el Sistema
+          </h5>
+          <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">
+                    <center>Entidad</center>
+                  </th>
+                  <th scope="col">
+                    <center>Usos Restantes</center>
+                  </th>
+                  <th scope="col" colSpan={2}>
+                    <center>Acciones</center>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {entidades.map((llave, index) =>
+                  llave.rol == 0 ? (
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td>
+                        <center>{llave.nombre}</center>
+                      </td>
+                      <td>
+                        <center>{llave.usos}</center>
+                      </td>
+                      <td>
+                        <center>
+                          <button
+                            type="button"
+                            style={{ width: "120px" }}
+                            class="btn btn-primary"
+                            onClick={() => {
+                              navigator.clipboard.writeText(llave.hash);
+                              snackbar("Llave copiada al portapapeles");
+                            }}
+                          >
+                            Copiar Llave
+                          </button>
+                        </center>
+                      </td>
+                      <td>
+                        <center>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={() => handleDelete(llave.hash)}
+                          >
+                            Borrar
+                          </button>
+                        </center>
+                      </td>
+                    </tr>
+                  ) : (
+                    <div></div>
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
