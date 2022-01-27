@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Spinner, InputGroup, FormControl, Form } from "react-bootstrap";
 import NetworkManager from "../../../Backend/util/http";
-import Util from "../../../Backend/util/Util";
 import { } from "react-bootstrap";
 
 function CreateUser({ snackbar }) {
@@ -51,9 +50,17 @@ function CreateUser({ snackbar }) {
   const handleSubmit = async () => {
     var network = new NetworkManager();
 
-    if (state.email === "" || state.nombre === "" || state.telefono === "") {
-      snackbar("Porfavor llena todos los campos");
-      return;
+    console.log(state);
+    if(state.rol != 0){
+      if (state.email === "" || state.nombre === "" || state.telefono === "") {
+        snackbar("Porfavor llena todos los campos");
+        return;
+      }
+    }else{
+      if(state.entidad === undefined){
+        snackbar("Porfavor selecciona una entidad para el alumno");
+        return;
+      }
     }
     setLoading(true);
 
@@ -63,6 +70,7 @@ function CreateUser({ snackbar }) {
       telefono: state.telefono,
       usos: state.usos,
       rol: state.rol,
+      entidad: state.entidad
     };
 
     var response = await network.post("admin/entidad/generar", payload);
@@ -104,50 +112,77 @@ function CreateUser({ snackbar }) {
           required
         />
       </div>
-      <div className="form-group">
-        <label for="telefono">Teléfono de Contacto</label>
-        <InputGroup>
-          <InputGroup.Text>
-            <i
-              className="fa fa-phone"
-              aria-hidden="true"
-              style={{ color: "var(--main-bg-primary-color)" }}
-            ></i>
-          </InputGroup.Text>
-          <FormControl
-            type="number"
-            id="telefono"
-            autoComplete="off"
-            name="telefono"
-            className="form-control"
-            onChange={handleChange}
-            value={state.telefono}
-            required
-          />
-        </InputGroup>
-      </div>
-      <div className="form-group">
-        <label for="email">Correo Electrónico</label>
-        <InputGroup>
-          <InputGroup.Text>
-            <i
-              className="fa fa-envelope"
-              aria-hidden="true"
-              style={{ color: "var(--main-bg-primary-color)" }}
-            ></i>
-          </InputGroup.Text>
-          <FormControl
-            type="email"
-            autoComplete="off"
-            id="email"
-            name="email"
-            className="form-control"
-            onChange={handleChange}
-            value={state.email}
-            required
-          />
-        </InputGroup>
-      </div>
+      {(state.rol == 0) ?
+        <div>
+          <div className="form-group">
+            <label for="entidad">A qué IES Pertenece</label>
+            <Form.Select
+              onChange={handleChange}
+              id="entidad"
+              name="entidad"
+              value={state.entidad}
+            >
+              <option key="null" disabled selected>Selecciona una opción</option>
+              {entidades.map((llave, index) => (
+                <>
+                  {llave.rol == 1 ? <option
+                    key={index}
+                    value={llave.nombre}
+                    style={{ color: "var(--main-bg-primary-color)" }}
+                  >
+                    {llave.nombre}
+                  </option> : <></>}
+                </>
+              ))}
+            </Form.Select>
+          </div>
+        </div> :
+        <div>
+          <div className="form-group">
+            <label for="telefono">Teléfono de Contacto</label>
+            <InputGroup>
+              <InputGroup.Text>
+                <i
+                  className="fa fa-phone"
+                  aria-hidden="true"
+                  style={{ color: "var(--main-bg-primary-color)" }}
+                ></i>
+              </InputGroup.Text>
+              <FormControl
+                type="number"
+                id="telefono"
+                autoComplete="off"
+                name="telefono"
+                className="form-control"
+                onChange={handleChange}
+                value={state.telefono}
+                required
+              />
+            </InputGroup>
+          </div>
+          <div className="form-group">
+            <label for="email">Correo Electrónico</label>
+            <InputGroup>
+              <InputGroup.Text>
+                <i
+                  className="fa fa-envelope"
+                  aria-hidden="true"
+                  style={{ color: "var(--main-bg-primary-color)" }}
+                ></i>
+              </InputGroup.Text>
+              <FormControl
+                type="email"
+                autoComplete="off"
+                id="email"
+                name="email"
+                className="form-control"
+                onChange={handleChange}
+                value={state.email}
+                required
+              />
+            </InputGroup>
+          </div>
+        </div>}
       <div className="form-group">
         <label for="rol">Rol de la Entidad</label>
         <Form.Select
@@ -262,10 +297,10 @@ function CreateUser({ snackbar }) {
                                 Copiar Llave
                               </button>
                             ) : (
-                              <div></div>
+                              <></>
                             )
                           ) : (
-                            <div></div>
+                            <></>
                           )}
                         </center>
                       </td>
@@ -350,7 +385,7 @@ function CreateUser({ snackbar }) {
                       </td>
                     </tr>
                   ) : (
-                    <div></div>
+                    <></>
                   )
                 )}
               </tbody>

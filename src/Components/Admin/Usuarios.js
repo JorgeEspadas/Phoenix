@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import ModifyUser from "./components/ModifyUser";
 import CreateUser from "./components/UserCreate";
 import "../../css/Usuarios.css";
 import image from "../../Images/Admin-Usuario.jpg";
-import KeyGenerator from "./components/TemporalKey";
+import ResultViewer from "./components/Resultados";
 
 function UserEditor({ snackbar }) {
   const [currentModule, setModule] = useState(0);
@@ -13,11 +12,8 @@ function UserEditor({ snackbar }) {
       case "create":
         setModule(1);
         break;
-      case "modificar":
+      case "resultados":
         setModule(2);
-        break;
-      case "temporal":
-        setModule(3);
         break;
       default:
         setModule(0);
@@ -38,9 +34,7 @@ function UserEditor({ snackbar }) {
       case 1:
         return <CreateUser snackbar={snackbar} />;
       case 2:
-        return <ModifyUser snackbar={snackbar} />;
-      case 3:
-        return <KeyGenerator snackbar={snackbar}/>;
+        return <ResultViewer snackbar={snackbar} />;
       default:
         return <span>you should not see this message</span>;
     }
@@ -68,7 +62,7 @@ function UserEditor({ snackbar }) {
                   className="nav-link"
                   href="/#"
                   onClick={handleClick}
-                  value="create"
+                  value="resultados"
                 >
                   <i className="fa fa-plus-square"></i>
                   &nbsp; Resultados

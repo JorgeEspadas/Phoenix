@@ -5,13 +5,14 @@ import { useSnackbar } from "react-simple-snackbar";
 import Util from "../Backend/util/Util";
 import "../css/AdminPage.css";
 import ConfigEditor from "../Components/AdminConfig/Configuracion";
+import ResultViewer from "../Components/Admin/components/Resultados";
 
 export default function AdminPage() {
   const [open] = useSnackbar(Util.snackbarConfig.options);
   const [pantallaActual, setPantalla] = useState(2);
 
   const handleClick = (e) => {
-    if (e.target.value === "preguntas") {
+    if (e.target.value === "resultados") {
       setPantalla(1);
     } else if (e.target.value === "config") {
       setPantalla(2);
@@ -23,7 +24,7 @@ export default function AdminPage() {
   const moduleRender = (number) => {
     switch (number) {
       case 1:
-        return <div></div>;
+        return <ResultViewer snackbar={open}/>;
       case 2:
         return <ConfigEditor snackbar={open} />;
       case 3:
@@ -56,6 +57,16 @@ export default function AdminPage() {
             value="usuario"
           >
             Encuestas
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className="nav-link "
+            href="/#"
+            onClick={handleClick}
+            value="resultados"
+          >
+            Resultados
           </button>
         </li>
       </ul>
