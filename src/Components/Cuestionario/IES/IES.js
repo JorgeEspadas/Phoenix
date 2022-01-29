@@ -6,7 +6,7 @@ import PreguntaMultiple from "./Modulos/Pregunta_Multiple";
 
 function CuestionarioIES({ snackbar, data, qkey }) {
     const [respuestas, setRespuesta] = useState([]);
-    const [buttonDisabled, setButton] = useState(true);
+    const [buttonDisabled, setButton] = useState(false);
     const [loading, setLoading] = useState(false);
 
     var total = 0;
@@ -20,6 +20,8 @@ function CuestionarioIES({ snackbar, data, qkey }) {
                 respuestas.splice(i, 1);
             }
         }
+
+        //console.log('name: '+name+', val: '+value+', text: '+texto+' extra: '+extradata);
 
         setRespuesta(prevState => [...prevState, { id: name, valor: value, texto: texto, extra: xtradata }]);
         if ((Object.values(respuestas).length) === total - 1) setButton(false);

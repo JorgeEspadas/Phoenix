@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CreateUser from "./components/UserCreate";
 import "../../css/Usuarios.css";
 import image from "../../Images/Admin-Usuario.jpg";
-import ResultViewer from "./components/Resultados";
 
 function UserEditor({ snackbar }) {
   const [currentModule, setModule] = useState(0);
@@ -12,9 +11,6 @@ function UserEditor({ snackbar }) {
       case "create":
         setModule(1);
         break;
-      case "resultados":
-        setModule(2);
-        break;
       default:
         setModule(0);
         break;
@@ -22,7 +18,6 @@ function UserEditor({ snackbar }) {
   };
 
   // render switchcase
-
   const moduleRender = (number) => {
     switch (number) {
       case 0:
@@ -33,8 +28,6 @@ function UserEditor({ snackbar }) {
         );
       case 1:
         return <CreateUser snackbar={snackbar} />;
-      case 2:
-        return <ResultViewer snackbar={snackbar} />;
       default:
         return <span>you should not see this message</span>;
     }
@@ -55,17 +48,6 @@ function UserEditor({ snackbar }) {
                 >
                   <i className="fa fa-plus-square"></i>
                   &nbsp; Crear Acceso
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className="nav-link"
-                  href="/#"
-                  onClick={handleClick}
-                  value="resultados"
-                >
-                  <i className="fa fa-plus-square"></i>
-                  &nbsp; Resultados
                 </button>
               </li>
             </ul>
