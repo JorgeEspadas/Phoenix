@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import ResultadoEmpresas from "../resultados/ResultdosEmpresas";
 
 function ResultViewer({ snackbar }) {
     const [currentModule, setModule] = useState(0);
@@ -31,7 +32,7 @@ function ResultViewer({ snackbar }) {
             case 2:
                 return <div></div>
             case 3:
-                return <div></div>
+                return <ResultadoEmpresas />
             default:
                 return <span>you should not see this message</span>;
         }
