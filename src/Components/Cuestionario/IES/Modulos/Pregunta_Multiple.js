@@ -5,18 +5,22 @@ function PreguntaMultiple({ id, texto, respuestas, callback }) {
     var hasOpenAnswer = false; // indica si la respuesta es o no abierta.
     var answerTexts = []; // guarda los textos de la respuesta (los labels)
     const [openAnswer, setOpenAnswer] = useState(''); // almacena el valor de la respuesta abierta.
+    const [answerData, setAnswerData] = useState({});
 
     const handleChange = e => {
         // filter response, and send it back to the source through the callback
+        setAnswerData({i: e.target.name, v: e.target.value})
         if(hasOpenAnswer) {
             callback(e.target.name, e.target.value, answerTexts[e.target.value - 1], openAnswer);
         }else{
-            callback(e.target.name, e.target.value, answerTexts[e.target.value - 1]);
+            setOpenAnswer('');
+            callback(e.target.name, e.target.value, answerTexts[e.target.value - 1], '');
         }
     }    
 
     const handleOpenAnswer = e => {
         setOpenAnswer(e.target.value);
+        callback(id, answerData.v, answerTexts[answerData.v - 1], e.target.value);
     }
 
     return (
@@ -31,9 +35,9 @@ function PreguntaMultiple({ id, texto, respuestas, callback }) {
                         if(res.modulo !== undefined) hasOpenAnswer = true;
                         return (
                             <div className="container">
-                                <input type="radio" id={id+res.valor} name={id} value={res.valor} onChange={handleChange}/>
+                                <input type="radio" id={id+res.valor} name={id} value={res.valor} onChange={(handleChange)}/>
                                 <label className="px-2" for={id+res.valor}>{res.texto}</label>
-                                {(res.modulo === undefined) ? <></> : <input type="text" className="col-5" id={id} name={id} onChange={handleOpenAnswer}/>}
+                                {(res.modulo === undefined) ? <></> : <input type="text" className="col-5" id={id} name={id} onChange={(e=>handleOpenAnswer(e))}/>}
                             </div>
                         );
                     })}
