@@ -1,17 +1,8 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
-import IMGHome from "../Images/Estadisticas.jpg";
+import { response } from "../Components/PruebaRespuesta";
+import GraficaPastel from "../Components/GraficaPastel";
+import IMGHome from "../Images/estadisticas.png";
 ChartJS.register(ArcElement, Tooltip, Legend);
-export const data = {
-  labels: ["SI", "Mee", "Talvez", "Nel", "NO"],
-  datasets: [
-    {
-      label: "Pregunta",
-      data: [12, 19, 3, 5, 2],
-      backgroundColor: ["#0a0161", "#4749ef", "#fe7062", "#91b3fa", "#6f8fb8"],
-    },
-  ],
-};
 
 export default function AnaliticsPage() {
   return (
@@ -35,34 +26,18 @@ export default function AnaliticsPage() {
       <br />
       <div className="container">
         <div className="row">
-          <div className="col-sm-12 col-xl-4" style={{ textAlign: "center" }}>
-            <h3>Aqui va la Pregunta 1</h3>
-            <Pie data={data} />
-          </div>
-          <div className="col-sm-12 col-xl-4" style={{ textAlign: "center" }}>
-            <h3>Aqui va la Pregunta 2</h3>
-            <Pie data={data} />
-          </div>
-          <div className="col-sm-12 col-xl-4" style={{ textAlign: "center" }}>
-            <h3>Aqui va la Pregunta 3</h3>
-            <Pie data={data} />
-          </div>
-        </div>
-        <br />
-        <br />
-        <div className="row">
-          <div className="col-sm-12 col-xl-4" style={{ textAlign: "center" }}>
-            <h3>Aqui va la Pregunta 4</h3>
-            <Pie data={data} />
-          </div>
-          <div className="col-sm-12 col-xl-4" style={{ textAlign: "center" }}>
-            <h3>Aqui va la Pregunta 5</h3>
-            <Pie data={data} />
-          </div>
-          <div className="col-sm-12 col-xl-4" style={{ textAlign: "center" }}>
-            <h3>Aqui va la Pregunta 6</h3>
-            <Pie data={data} />
-          </div>
+          {response.map((val, key) => {
+            return (
+              <div
+                className="col-sm-12 col-xl-4 mb-5"
+                style={{ textAlign: "center" }}
+                key={key}
+              >
+                <h5>{val.texto}</h5>
+                <GraficaPastel result={val.resultados}></GraficaPastel>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
