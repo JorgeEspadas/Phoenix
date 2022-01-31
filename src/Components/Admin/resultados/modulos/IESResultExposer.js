@@ -48,7 +48,7 @@ function IESResultExposer({ data, number }) {
                 </Accordion>
             </div>) : (<div></div>)}
         </div>
-    );
+  );
 }
 
 export default IESResultExposer;
