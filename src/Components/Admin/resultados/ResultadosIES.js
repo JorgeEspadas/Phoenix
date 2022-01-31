@@ -3,15 +3,14 @@ import { Accordion } from "react-bootstrap";
 import NetworkManager from "../../../Backend/util/http";
 import IESResultExposer from "./modulos/IESResultExposer";
 
-function ResultadosIES({ snackbar }) {
-
+function ResultadosIES({ snackbar, rol }) {
     const [resultData, setResultData] = useState([]);
     const [isResultFormEnabled, setResultFormEnabled] = useState(false);
 
     const traerResultado = async () => {
+        var rl = rol;
         let network = new NetworkManager();
-        var response = await network.post('admin/resultados', { 'rol': 1 });
-        console.log(response.data);
+        var response = await network.post('admin/resultados', { 'rol': rl });
         if (response.response === 'OK') {
             setResultData(response.data);
             setResultFormEnabled(true);
@@ -23,7 +22,7 @@ function ResultadosIES({ snackbar }) {
 
     useEffect(() => {
         traerResultado();
-    }, []);
+    }, [rol]);
 
 
 

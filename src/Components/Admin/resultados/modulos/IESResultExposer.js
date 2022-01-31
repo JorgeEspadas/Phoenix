@@ -1,5 +1,6 @@
 import React from "react";
 import { Accordion } from "react-bootstrap";
+import GraficaPastel from "../../../GraficaPastel"
 
 function IESResultExposer({ data, number }) {
     var modulo = data.tipo;
@@ -40,15 +41,15 @@ function IESResultExposer({ data, number }) {
                                     </table>
                                 </div>
                             </div>
-                            <div style={{paddingTop:'10px'}}>
-                                Grafica
+                            <div style={{ paddingTop: '10px', height: '512px', width: '512px', margin:'0 auto'}}>
+                                <GraficaPastel result={respuestas} />
                             </div>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
             </div>) : (<div></div>)}
         </div>
-  );
+    );
 }
 
 export default IESResultExposer;

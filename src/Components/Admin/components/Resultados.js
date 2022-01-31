@@ -29,9 +29,9 @@ function ResultViewer({ snackbar }) {
             case 0:
                 return <div></div>
             case 1:
-                return <ResultadosIES snackbar={snackbar}/>
+                return <ResultadosIES snackbar={snackbar} rol={1}/>
             case 2:
-                return <div></div>
+                return <ResultadosIES snackbar={snackbar} rol={0}/>
             case 3:
                 return <ResultadoEmpresas />
             default:
