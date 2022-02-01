@@ -109,10 +109,6 @@ const Sidebar = () => {
                   </a>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
-                    Cambiar Contraseña
-                  </Dropdown.Item>
-                  <Dropdown.Divider />
                   <Dropdown.Item onClick={logout}>
                     Cerrar Sesion
                   </Dropdown.Item>

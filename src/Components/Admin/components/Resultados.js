@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import ResultadoEmpresas from "../resultados/ResultdosEmpresas";
+import ResultadosIES from '../resultados/ResultadosIES';
 
 function ResultViewer({ snackbar }) {
     const [currentModule, setModule] = useState(0);
@@ -28,9 +29,9 @@ function ResultViewer({ snackbar }) {
             case 0:
                 return <div></div>
             case 1:
-                return <div></div>
+                return <ResultadosIES snackbar={snackbar} rol={1}/>
             case 2:
-                return <div></div>
+                return <ResultadosIES snackbar={snackbar} rol={0}/>
             case 3:
                 return <ResultadoEmpresas />
             default:
