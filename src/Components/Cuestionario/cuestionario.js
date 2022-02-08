@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import NetworkManager from '../../Backend/util/http';
 import CuestionarioIES from './IES/IES';
 import EmpresasForm from './Empresa/Empresas';
+import IMGDone from "../../Images/IMG-ENCUESTA-DONE.jpg";
+import { useHistory, useLocation, NavLink } from "react-router-dom";
 
 function Cuestionario({ snackbar }) {
+    const history = useHistory();
+    const location = useLocation();
     const [key, setKey] = useState('');
     const [done, setDone] = useState(false);
     const [qrol, setQRol] = useState();
@@ -28,15 +32,40 @@ function Cuestionario({ snackbar }) {
         setKey((e.target.value).toString());
     }
 
+    const handleRedirect = () => {
+        history.push(location.state?.from || "/");
+    }
+
+    const handleDone = (value) => {
+        setDone(value);
+        console.log(value);
+        if (value) {
+            setQRol(3);
+        }
+    }
+
     // Si no esta activado el cuestionario, preguntamos por codigo de acceso.
     if (qenabled) {
         switch (qrol) {
             case 0:
             case 1:
-                content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} complete={setDone}/></div>
+                content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} complete={handleDone} /></div>
                 break;
             case 2:
-                content = <div><EmpresasForm data={qdata} snackbar={snackbar} qkey={key}/></div>
+                content = <div><EmpresasForm data={qdata} snackbar={snackbar} qkey={key} /></div>
+                break;
+            case 3:
+                content = <div className="container">
+                    <div className="d-flex justify-content-center"><h1>Gracias por contestar la encuesta!</h1></div>
+                    <div className="container d-flex justify-content-center col-3">
+                        <div className="row d-flex justify-content-center">
+                            <div className="p-2">
+                                <center><img src={IMGDone} alt="Imagen de Alerta" style={{ width: "20rem" }}></img></center>
+                            </div>
+                            <button className="btn btn-success btn-lg d-flex justify-content-center col-8" onClick={handleRedirect}>Terminar</button>
+                        </div>
+                    </div>
+                </div>
                 break;
             default:
                 break;

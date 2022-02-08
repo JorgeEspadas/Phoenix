@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Accordion, Alert, Spinner } from "react-bootstrap";
 import NetworkManager from '../../../Backend/util/http';
+import Util from "../../../Backend/util/Util";
 import PreguntaAbierta from "./Modulos/Pregunta_Abierta";
 import PreguntaMultiple from "./Modulos/Pregunta_Multiple";
 
 function CuestionarioIES({ snackbar, data, qkey, complete}) {
     const [respuestas, setRespuesta] = useState([]);
-    const [buttonDisabled, setButton] = useState(false);
+    const [buttonDisabled, setButton] = useState(true);
     const [loading, setLoading] = useState(false);
 
     var total = 0;
@@ -27,7 +28,7 @@ function CuestionarioIES({ snackbar, data, qkey, complete}) {
     }
 
     const handleSubmit = async (event) => {
-        console.log(JSON.stringify({ respuestas: [respuestas] }));
+        //setLoading(true);
         if (qkey === undefined) {
             console.log('Event Registered without Key, Sending...');
             let network = new NetworkManager();
@@ -35,6 +36,7 @@ function CuestionarioIES({ snackbar, data, qkey, complete}) {
             var response = await network.post('usuario/preguntas/guardar', { "respuestas": respuestas });
             if (response['response'] === "OK") {
                 // quitamos el cuestionario, y/o redirijimos a home
+                complete(true);
             }
         } else {
             handleTemporalFormSubmit();
@@ -42,11 +44,16 @@ function CuestionarioIES({ snackbar, data, qkey, complete}) {
     }
 
     const handleTemporalFormSubmit = async () => {
-        console.log('Event Registered WITH Key, Sending...');
+        setLoading(true);
+        await Util.delay(1000);
         let network = new NetworkManager();
         var response = await network.post('api/preguntas', { 'hash': qkey, respuestas: respuestas });
+        setLoading(false);
         if (response['response'] === "OK") {
             // quitamos el cuestionario, y/o redirijimos a home
+            complete(true);
+        }else{
+            snackbar(response.data.exception.message);
         }
     }
 
