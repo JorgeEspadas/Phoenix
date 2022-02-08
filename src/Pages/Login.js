@@ -122,7 +122,7 @@ export default function Login({handleClose}){
               <div className="contactLogin text-center">
                 <span>¿No tienes Cuenta? </span>
                 <NavLink exact to="/Contactanos">
-                  <a id="linkContactanos" href="/#">Contactanos</a>
+                  <a id="linkContactanos" href="/#">Contáctanos</a>
                 </NavLink>
               </div>
             </div>

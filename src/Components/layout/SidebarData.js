@@ -6,7 +6,7 @@ export const SidebarData = [
     Activo: true,
   },
   {
-    Modulo: "Estadisticas",
+    Modulo: "Estadísticas",
     Icono: "fa fa-bar-chart",
     Link: "/Estadisticas",
     Activo: true,
@@ -18,7 +18,7 @@ export const SidebarData = [
     Activo: true,
   },
   {
-    Modulo: "Informacion",
+    Modulo: "Información",
     Icono: "fa fa-info-circle",
     Link: "/Contactanos",
     Activo: true,

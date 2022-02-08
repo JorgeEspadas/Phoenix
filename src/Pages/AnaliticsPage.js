@@ -47,9 +47,9 @@ export default function AnaliticsPage() {
       <div className="container" id="Objetivo">
         <div className="row align-items-center">
           <div className="col-sm-12 col-xl-8">
-            <h1 style={{ color: "var(--main-bg-color)" }}>Estadisticas</h1>
+            <h1 style={{ color: "var(--main-bg-color)" }}>Estadísticas</h1>
             <p className="lead">
-              Estadisticas reales de Empresas e Instituciones en materia de
+              Estadísticas reales de Empresas e Instituciones en materia de
               Desarrollo de Software.
             </p>
           </div>

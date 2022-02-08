@@ -11,11 +11,9 @@ export default function ContactPage() {
               &nbsp;&nbsp; ¿Quienes Somos?
             </h1>
             <p className="lead">
-              Somos un Cuerpo Académico que pone a disposicion del publico en
-              general, informacion de la Situación actual de la Industria de
-              Software en la Ciudad de San Francisco de Campeche, con respecto a
-              Empresas o Instituciones que desempeñen un papel dentro del ambito
-              tecnológico.
+            Somos un Cuerpo Académico que pone a disposición del público en general, información de la Situación actual de la 
+            Industria de Software en la Ciudad de San Francisco de Campeche, con respecto a 
+            Empresas o Instituciones que desempeñen un papel dentro del ámbito tecnológico.
             </p>
           </div>
           <div className="col-sm-12 col-xl-4">
@@ -31,7 +29,7 @@ export default function ContactPage() {
         }}
       >
         <h3>
-          &nbsp;Cuerpo Academico:{" "}
+          &nbsp;Cuerpo Académico:{" "}
           <span className="text-muted">Ciencias de la Computación </span>
         </h3>
         <p>
@@ -44,7 +42,7 @@ export default function ContactPage() {
           Busca la formación de Recursos humanos, desarrollo y aplicación de las
           Ciencias de la Computación en los sectores: primario, industrial, de
           servicios y educativo. Por lo que este Observatorio, es uno de los
-          muchos proyectos en los que es participe este cuerpo ademico, que es
+          muchos proyectos en los que es participe este cuerpo académico, que es
           formado por los docentes:
         </p>
         <CardGroup>
@@ -57,8 +55,8 @@ export default function ContactPage() {
               </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush text-center">
-              <ListGroupItem>Jorge Eduardo Espadas Perez</ListGroupItem>
-              <ListGroupItem>Angel Adiel Moran Tuz</ListGroupItem>
+              <ListGroupItem>Jorge Eduardo Espadas Pérez</ListGroupItem>
+              <ListGroupItem>Ángel Adiel Morán Tuz</ListGroupItem>
               <ListGroupItem>Maria José González Novelo</ListGroupItem>
             </ListGroup>
           </Card>
@@ -67,7 +65,7 @@ export default function ContactPage() {
             <Card.Body className="text-center">
               <Card.Title>Mtra. Diana Concepción Mex Alvarez</Card.Title>
               <Card.Text>
-                Lider del Equipo de Investigación de Empresas de Desarrollo,
+                Líder del Equipo de Investigación de Empresas de Desarrollo,
                 conformado por:
               </Card.Text>
             </Card.Body>
@@ -81,7 +79,7 @@ export default function ContactPage() {
             <Card.Body className="text-center">
               <Card.Title>Mtra. Luz María Hernández Cruz</Card.Title>
               <Card.Text>
-                Lider del Equipo de Investigación de IES, conformado por:
+                Líder del Equipo de Investigación de IES, conformado por:
               </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush text-center">
