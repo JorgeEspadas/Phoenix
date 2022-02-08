@@ -47,7 +47,7 @@ function UserEditor({ snackbar }) {
                   value="create"
                 >
                   <i className="fa fa-plus-square"></i>
-                  &nbsp; Crear Acceso
+                  &nbsp; Accesos
                 </button>
               </li>
             </ul>
