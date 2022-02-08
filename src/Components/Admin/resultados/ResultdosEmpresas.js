@@ -30,46 +30,46 @@ const ResultadoEmpresas = () =>{
     },[]);
 
     return (
-        <div className=''>
-            <table className="table table-striped table-bordered">
-                <thead className = "table-secondary">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Preguntas</th>
-                        <th scope="col">Indicador</th>
-                        <th scope="col">Resultado</th>
-                        <th scope="col">Unidad de medida</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        resultado.map((element) => {
-                            console.log(element.isTabla !== undefined)
-                            return  <tr>
-                                <th scope="row">{element.indicador}</th>
-                                <td>{element.pregunta}</td>
-                                <td>{element.contenido}</td>
-                                {element.isTabla !== undefined ? 
-                                   <div>
-                                       <button className="btn btn-secondary" onClick={() => handleShow(true,element.resultado,element.indicador)}>Resultados</button>
-                                       {show && <DatosTablas handleClose={handleShow} valores = {resultados} is35={is35}/>}
-                                   </div>
-                                : 
-                                    element.promedio !== undefined ?
-                                        <td>{parseFloat(Math.round(element.resultado * 100) / 100).toFixed(2)}</td> 
-                                    :
-                                        element.resultado === "" ?
-                                            <td>{""}</td>
-                                        :
-                                            <td>{parseFloat(Math.round(element.resultado * 100) / 100).toFixed(2)}%</td> 
-                                }                             
-                                <td>{element.unidad_de_medida}</td>
-                            </tr>
-                        })
-                    }
-                </tbody>
-            </table>
-        </div>
+                    <div className="col-sm-12 col-xl-8">
+                        <table className="table table-striped table-bordered">
+                            <thead className = "table-secondary">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Preguntas</th>
+                                    <th scope="col">Indicador</th>
+                                    <th scope="col">Resultado</th>
+                                    <th scope="col">Unidad de medida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    resultado.map((element) => {
+                                        console.log(element.isTabla !== undefined)
+                                        return  <tr>
+                                            <th scope="row">{element.indicador}</th>
+                                            <td>{element.pregunta}</td>
+                                            <td>{element.contenido}</td>
+                                            {element.isTabla !== undefined ? 
+                                            <div>
+                                                <button className="btn btn-secondary" onClick={() => handleShow(true,element.resultado,element.indicador)}>Resultados</button>
+                                                {show && <DatosTablas handleClose={handleShow} valores = {resultados} is35={is35}/>}
+                                            </div>
+                                            : 
+                                                element.promedio !== undefined ?
+                                                    <td>{parseFloat(Math.round(element.resultado * 100) / 100).toFixed(2)}</td> 
+                                                :
+                                                    element.resultado === "" ?
+                                                        <td>{""}</td>
+                                                    :
+                                                        <td>{parseFloat(Math.round(element.resultado * 100) / 100).toFixed(2)}%</td> 
+                                            }                             
+                                            <td>{element.unidad_de_medida}</td>
+                                        </tr>
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                </div>
     );
 }
 

@@ -110,7 +110,7 @@ const Sidebar = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={logout}>
-                    Cerrar Sesion
+                    Cerrar Sesión
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

@@ -1,7 +1,7 @@
 export default function InfoPage() {
   return (
     <div className="col pt-4">
-      <h1>Pagina de Informacion</h1>
+      <h1>Pagina de Información</h1>
       <br />
       <div className="row">
         <div className="col-sm-6">

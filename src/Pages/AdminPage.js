@@ -45,7 +45,7 @@ export default function AdminPage() {
             onClick={handleClick}
             value="config"
           >
-            Configuracion
+            Configuración
           </button>
         </li>
         <li className="nav-item">
@@ -71,5 +71,5 @@ export default function AdminPage() {
       </ul>
       <>{moduleRender(pantallaActual)}</>
     </div>
-  ); /// abuebo abuebo
+  );
 }

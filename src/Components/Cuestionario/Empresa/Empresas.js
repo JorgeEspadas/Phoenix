@@ -11,10 +11,11 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
     const [respuestas, setRespuesta] = useState([]);
     const [buttonDisabled, setButton] = useState(true);
     const [loading, setLoading] = useState(false);
+    const [isVerified , setVerified] = useState(false);
     var numeroDePreguntas = 0;
 
     const setProperty = (name, value ,tipo) => {    
-
+        let total = numeroDePreguntas;
         //Evitamos duplicados de preguntas.
         for(let i = 0; i < respuestas.length; i++){
             if(respuestas[i].id===name){
@@ -44,12 +45,18 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
                 setRespuesta(prevState=>[...prevState, {id:name,valor:value,modulo:tipo}]);//Jorge siempre se rifa
             }
         }
-        if (respuestas.length === numeroDePreguntas-1){
-           // console.log(buttonDisabled);
+        if(isVerified){
+            total = respuestas.length;
+        }else{
+            total = numeroDePreguntas;
+        }
+        if (respuestas.length === total-1){
             setButton(false);
+            setVerified(true);
         } else{
            // console.log(buttonDisabled);
             setButton(true);
+            setVerified(false);
         }
     }
 
