@@ -5,10 +5,8 @@ import EmpresasForm from './Empresa/Empresas';
 import useAuth from '../auth/useAuth';
 
 function Cuestionario({ snackbar }) {
-    var net = new NetworkManager();
-    const auth = useAuth();
     const [key, setKey] = useState('');
-    const [qloading, setLoading] = useState(false);
+    const [done, setDone] = useState(false);
     const [qrol, setQRol] = useState();
     const [qenabled, enableCuestionario] = useState(false)
     const [qdata, setQData] = useState([]);
@@ -19,8 +17,6 @@ function Cuestionario({ snackbar }) {
         var response = await nm.post('api/validate', { key: key });
         console.log(response);
         if (response.response === "OK") {
-            // La respuesta del codigo temporal es valida, asi que activaremos el cuestionario con la data que nos llego.
-            // response.data.preguntas
             setQData(response.data.preguntas);
             setQRol(response.data.rol);
             enableCuestionario(true);
@@ -38,7 +34,7 @@ function Cuestionario({ snackbar }) {
         switch (qrol) {
             case 0:
             case 1:
-                content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} /></div>
+                content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} complete={setDone}/></div>
                 break;
             case 2:
                 content = <div><EmpresasForm data={qdata} snackbar={snackbar} qkey={key}/></div>

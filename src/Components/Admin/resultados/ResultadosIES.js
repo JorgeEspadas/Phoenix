@@ -11,6 +11,7 @@ function ResultadosIES({ snackbar, rol }) {
         var rl = rol;
         let network = new NetworkManager();
         var response = await network.post('admin/resultados', { 'rol': rl });
+        console.log(response);
         if (response.response === 'OK') {
             setResultData(response.data);
             setResultFormEnabled(true);

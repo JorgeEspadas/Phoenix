@@ -4,7 +4,7 @@ import NetworkManager from '../../../Backend/util/http';
 import PreguntaAbierta from "./Modulos/Pregunta_Abierta";
 import PreguntaMultiple from "./Modulos/Pregunta_Multiple";
 
-function CuestionarioIES({ snackbar, data, qkey }) {
+function CuestionarioIES({ snackbar, data, qkey, complete}) {
     const [respuestas, setRespuesta] = useState([]);
     const [buttonDisabled, setButton] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -22,7 +22,6 @@ function CuestionarioIES({ snackbar, data, qkey }) {
         }
 
         //console.log('name: '+name+', val: '+value+', text: '+texto+' extra: '+extradata);
-
         setRespuesta(prevState => [...prevState, { id: name, valor: value, texto: texto, extra: xtradata }]);
         if ((Object.values(respuestas).length) === total - 1) setButton(false);
     }
