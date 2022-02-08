@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from "react";
-import { Accordion } from "react-bootstrap";
 
 const Tabla = ({pregunta, callback, numero}) => {
     const [ opciones , setOpciones ] = useState([]);

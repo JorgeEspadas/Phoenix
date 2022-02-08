@@ -1,5 +1,4 @@
 import React from "react";
-import {Accordion} from 'react-bootstrap';
 
 const Abierta = ({pregunta,callback, numero}) =>{
     const handleChange = e => {

@@ -23,7 +23,7 @@ function UserEditor({ snackbar }) {
       case 0:
         return (
           <div>
-            <img src={image} style={{ width: "20rem" }}></img>
+            <img src={image} style={{ width: "20rem" }} alt="Imagen"></img>
           </div>
         );
       case 1:

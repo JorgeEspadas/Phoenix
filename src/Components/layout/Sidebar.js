@@ -66,7 +66,7 @@ const Sidebar = () => {
             {/* ========= Modulos que se muestran solo cuando estas logeado ========= */}
             {auth.isLogged() && (
               <>
-                {auth.getRol() == 3 && (
+                {auth.getRol() === 3 && (
                   <li className="nav-item">
                     <a href="/Administrador" className="nav-link px-sm-0 px-2">
                       <i className="fa fa-cog"></i>

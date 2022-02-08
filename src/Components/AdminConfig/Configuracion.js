@@ -25,7 +25,6 @@ function ConfigEditor({ snackbar }) {
         switch (number) {
             case 1:
                 return <StatusModule snackbar={snackbar}/>
-                break;
             default:
                 return <span>you should not see this message</span>;
         }

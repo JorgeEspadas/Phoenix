@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NetworkManager from "../../../Backend/util/http";
-import Util from "../../../Backend/util/Util";
+
 
 function StatusModule({ snackbar }) {
     var net = new NetworkManager();
@@ -12,14 +12,14 @@ function StatusModule({ snackbar }) {
 
     const getBackendStatus = async () => {
         let response = await net.get('admin/status');
-        if (response.response != "OK") {
+        if (response.response !== "OK") {
             //show error.
-            console.log('a')
+            snackbar(response.data.exception.message);
         } else {
             setContentState(<div>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item ">Tiempo en linea: <strong className="text-success">{response.data.uptime}</strong> <strong>Horas.</strong></li>
-                    <li className="list-group-item">Estado de la DB: {(response.data.mongo != "Conectado") ? <strong className="text-danger">{response.data.mongo}</strong> : <strong className="text-success">{response.data.mongo}</strong>}</li>
+                    <li className="list-group-item">Estado de la DB: {(response.data.mongo !== "Conectado") ? <strong className="text-danger">{response.data.mongo}</strong> : <strong className="text-success">{response.data.mongo}</strong>}</li>
                 </ul>
             </div>);
         }
@@ -28,10 +28,6 @@ function StatusModule({ snackbar }) {
     useEffect(() => {
         getBackendStatus();
     }, []);
-
-    let retryButton = <div>
-        <button className="btn-success btn-lg" onClick={getBackendStatus}>Reintentar</button>
-    </div>
 
     return (
         <div className="container">

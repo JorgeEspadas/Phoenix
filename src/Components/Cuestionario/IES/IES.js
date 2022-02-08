@@ -74,6 +74,8 @@ function CuestionarioIES({ snackbar, data, qkey, complete}) {
                                                                             return <PreguntaMultiple id={pregunta.id} texto={pregunta.texto} respuestas={pregunta.respuestas} callback={setProperty} />;
                                                                         case "abierta":
                                                                             return <PreguntaAbierta modulo={pregunta} callback={setProperty} />;
+                                                                        default:
+                                                                            return <div></div>;
                                                                     }
                                                                 })
                                                             }

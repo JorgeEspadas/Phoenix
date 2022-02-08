@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Next } from 'react-bootstrap/esm/PageItem';
 import Util from './Util';
 
 class NetworkManager {
@@ -35,7 +34,7 @@ class NetworkManager {
 
     post = async (endpoint, payload) =>{
         var response = await this.__axios.post(endpoint, payload).then((response) =>{
-            if(response.status != 200){
+            if(response.status !== 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
                 return response;
@@ -51,7 +50,7 @@ class NetworkManager {
 
     put = async (endpoint, payload) => {
         var response = await this.__axios.put(endpoint, payload).then((response) =>{
-            if(response.status != 200){
+            if(response.status !== 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
                 return response;
@@ -68,7 +67,7 @@ class NetworkManager {
     //cambiar a get
     get = async (endpoint) => {
         var response = await this.__axios.get(endpoint).then((response) => {
-            if(response.status != 200){
+            if(response.status !== 200){
                 return Util.Error('Error de Conexion, Codigo: '+response.status);
             }else{
                 return response;

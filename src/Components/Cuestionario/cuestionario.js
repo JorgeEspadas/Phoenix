@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import NetworkManager from '../../Backend/util/http';
 import CuestionarioIES from './IES/IES';
 import EmpresasForm from './Empresa/Empresas';
-import useAuth from '../auth/useAuth';
 
 function Cuestionario({ snackbar }) {
     const [key, setKey] = useState('');

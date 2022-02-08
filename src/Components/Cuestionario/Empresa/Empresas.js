@@ -98,16 +98,17 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
                                         switch(pregunta.tipo){
                                             case "multiple":
                                                 return <Multiple pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
-                                                break;
+                                            
                                             case "abierta":
                                                 return <Abierta pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
-                                                break;
+                                                
                                             case "tabla":
                                                 return <Tabla pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
-                                                break; 
+                                                 
                                             case "rango":
                                                 return <Rango pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
-                                            break;                                                       
+                                            default:
+                                                return <div></div>                                                       
                                         }
                                     })
                                 }

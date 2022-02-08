@@ -16,16 +16,16 @@ export default function AnaliticsPage() {
   const getLista = async () => {
     let network = new NetworkManager();
     var response = await network.post('api/estadisticas/lista', {});
-    if (response.response == "OK") {
+    if (response.response === "OK") {
       setLista(response.data);
     }
   }
 
   const getEstadisticas = async () => {
     let network = new NetworkManager();
-    if (entidad != undefined) {
+    if (entidad !== undefined) {
       var response = await network.post('api/estadisticas', { 'entidad': entidad });
-      if (response.response == "OK") {
+      if (response.response === "OK") {
         setEstadisticas(response.data);
       }
     }
@@ -77,26 +77,26 @@ export default function AnaliticsPage() {
       <br />
       <br />
       {
-        (estadisticas != undefined && estadisticas.total_de_respuestas != 0) ?
+        (estadisticas !== undefined && estadisticas.total_de_respuestas !== 0) ?
           <div><div className="container">
             <div className="row">
               {estadisticas.metadata.map((val, key) => {
                 return (
                   <>
                     {(
-                      val.id == "st_9" ||
-                      val.id == "st_11" ||
-                      val.id == "st_12" ||
-                      val.id == "st_13" ||
-                      val.id == "st_14" ||
-                      val.id == "st_15") ? (
+                      val.id === "st_9" ||
+                      val.id === "st_11" ||
+                      val.id === "st_12" ||
+                      val.id === "st_13" ||
+                      val.id === "st_14" ||
+                      val.id === "st_15") ? (
                       <div className="col-sm-12 col-xl-4 mb-5" style={{ textAlign: "center" }} key={key}><h5>{val.texto}</h5>
                         <GraficaPastel result={val.resultados} /></div>
                     ) : <></>}
                   </>);
               })}
             </div>
-          </div></div> : <div><center><img src={IMGError} style={{ width: "20rem" }}></img></center><br/><center><p className="lead">No hay datos para mostrar</p></center></div>
+          </div></div> : <div><center><img src={IMGError} alt="Imagen de Alerta" style={{ width: "20rem" }}></img></center><br/><center><p className="lead">No hay datos para mostrar</p></center></div>
       }
     </div>
   );
