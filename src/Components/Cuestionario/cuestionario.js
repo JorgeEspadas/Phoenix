@@ -3,7 +3,7 @@ import NetworkManager from '../../Backend/util/http';
 import CuestionarioIES from './IES/IES';
 import EmpresasForm from './Empresa/Empresas';
 import IMGDone from "../../Images/IMG-ENCUESTA-DONE.jpg";
-import { useHistory, useLocation, NavLink } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 function Cuestionario({ snackbar }) {
     const history = useHistory();
@@ -38,7 +38,6 @@ function Cuestionario({ snackbar }) {
 
     const handleDone = (value) => {
         setDone(value);
-        console.log(value);
         if (value) {
             setQRol(3);
         }

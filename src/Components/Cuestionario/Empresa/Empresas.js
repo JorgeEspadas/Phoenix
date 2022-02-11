@@ -3,6 +3,7 @@ import { Accordion, Alert, Spinner } from "react-bootstrap";
 import Multiple from "./tipos/Multiple";
 import Rango from "./tipos/Rango";
 import Abierta from "./tipos/Abierta";
+import Util from "../../../Backend/util/Util";
 import Tabla from "./tipos/Tabla";
 import NetworkManager from '../../../Backend/util/http';
 
@@ -86,9 +87,16 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
        
 
         let network = new NetworkManager();
-        // ENVIAR CUESTIONARIO AL ENDPOINT PUBLICO
+        setLoading(true);
+        await Util.delay(1000);
         var response = await network.post('api/preguntas', {'hash': qkey, respuestas: respuestas});
-        snackbar("Enviado");
+        setLoading(false);
+        if (response['response'] === "OK") {
+            // quitamos el cuestionario, y/o redirijimos a home
+            //complete(true);
+        }else{
+            snackbar(response.data.exception.message);
+        }
         
     }
 

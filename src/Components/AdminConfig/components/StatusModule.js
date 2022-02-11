@@ -19,7 +19,7 @@ function StatusModule({ snackbar }) {
             setContentState(<div>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item ">Tiempo en línea: <strong className="text-success">{response.data.uptime}</strong> <strong>Horas.</strong></li>
-                    <li className="list-group-item">Estado de la DB: {(response.data.mongo != "Conectado") ? <strong className="text-danger">{response.data.mongo}</strong> : <strong className="text-success">{response.data.mongo}</strong>}</li>
+                    <li className="list-group-item">Estado de la DB: {(response.data.mongo !== "Conectado") ? <strong className="text-danger">{response.data.mongo}</strong> : <strong className="text-success">{response.data.mongo}</strong>}</li>
                 </ul>
             </div>);
         }
