@@ -60,17 +60,17 @@ const Multiple = ({pregunta, callback,numero}) => {
     } 
 
     return(
-        <div class="mb-2">
-            <div class="py-2">{numero+") "+pregunta.texto}</div>
+        <div className="mb-2">
+            <div className="py-2">{numero+") "+pregunta.texto}</div>
                 {
                     pregunta.opciones.map( (opcion, i) =>{
                         if(!pregunta.multiples){
-                            return <div key={i}><label class="px-3"><input type="radio" id={opcion.opcion_id} name={pregunta._id} value={opcion.texto} onChange={handleChange}/> {opcion.texto}</label></div>
+                            return <div key={i}><label className="px-3"><input type="radio" id={opcion.opcion_id} name={pregunta._id} value={opcion.texto} onChange={handleChange}/> {opcion.texto}</label></div>
                         }else{
                             if(!opcion.abierta){
-                                return <div key={i}><label class="px-3"><input type="checkbox" id={opcion.opcion_id}  name={pregunta._id} value={opcion.texto} onChange={handleChange}/> {opcion.texto}</label></div>
+                                return <div key={i}><label className="px-3"><input type="checkbox" id={opcion.opcion_id}  name={pregunta._id} value={opcion.texto} onChange={handleChange}/> {opcion.texto}</label></div>
                             }else{
-                                return <div key={i} class="px-3"><input class="col-md-6" type="text" id={pregunta._id +""+opcion.opcion_id} name={pregunta._id} onChange={handleChange} placeholder={opcion.texto} ></input></div>
+                                return <div key={i} className="px-3"><input className="col-md-6" type="text" id={pregunta._id +""+opcion.opcion_id} name={pregunta._id} onChange={handleChange} placeholder={opcion.texto} ></input></div>
                             }
                         }
                         

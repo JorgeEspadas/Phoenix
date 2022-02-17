@@ -28,11 +28,11 @@ const Tabla = ({pregunta, callback, numero}) => {
     } 
     return (
 
-        <div class="mb-2">
-            <div class="py-2">{numero+") "+pregunta.texto}</div>
+        <div className="mb-2">
+            <div className="py-2">{numero+") "+pregunta.texto}</div>
              {
                 pregunta.opciones.map( (opcion, i) =>{
-                    return <div key={i} class="py-1"><label class="px-sm-3 col-lg-3 col-sm-6 col-12">{opcion.texto}</label> <input class="col-lg-1 col-sm-2 col-6" type="number" id={opcion.opcion_id} name={pregunta._id}  onChange={handleChange}></input></div>
+                    return <div key={i} className="py-1"><label className="px-sm-3 col-lg-3 col-sm-6 col-12">{opcion.texto}</label> <input className="col-lg-1 col-sm-2 col-6" type="number" id={opcion.opcion_id} name={pregunta._id}  onChange={handleChange}></input></div>
                 })
             }
         </div>

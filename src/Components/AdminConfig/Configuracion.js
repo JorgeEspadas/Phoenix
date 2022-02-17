@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import StatusModule from "./components/StatusModule";
+import '../../css/Status.css';  
 
 function ConfigEditor({ snackbar }) {
 
@@ -31,12 +32,12 @@ function ConfigEditor({ snackbar }) {
     };
 
     return (
-        <div className="container-fluid" style={{ padding: "1rem" }}>
+        <div className="container-fluid principal">
             <div className="row">
-                <div className="col-sm-12 col-xl-2">
+                <div className="col-sm-12 col-xl-2 ">
                     <center>
                         <ul className="nav nav-tabs flex-column" id="MenuUsuario">
-                            <li className="nav-item">
+                            <li className="nav-item ">
                                 <button
                                     className="nav-link"
                                     href="/#"
@@ -50,8 +51,8 @@ function ConfigEditor({ snackbar }) {
                         </ul>
                     </center>
                 </div>
-                <div className="col-sm-12 col-xl-7">
-                    <div className="container">
+                <div className="col-sm-12 col-xl-7 status">
+                    <div className="container hijo">
                         <>{moduleRender(currentModule)}</>
                     </div>
                 </div>

@@ -21,8 +21,8 @@ const Rango = ({pregunta, callback,numero}) => {
 
     return (
         <div>
-            <div class="py-2">{numero+") "+pregunta.texto}</div>
-            <div class="col-md-2"><select class="form-select" name={pregunta._id} onChange={handleChange}>
+            <div className="py-2">{numero+") "+pregunta.texto}</div>
+            <div className="col-md-2"><select className="form-select" name={pregunta._id} onChange={handleChange}>
                 {
                     rango.map( (r) =>{
                         return <option value={r} key={r}>{r}</option>

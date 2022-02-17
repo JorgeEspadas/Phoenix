@@ -33,7 +33,7 @@ function ResultViewer({ snackbar }) {
             case 2:
                 return <ResultadosIES snackbar={snackbar} rol={0}/>
             case 3:
-                return <ResultadoEmpresas />
+                return <ResultadoEmpresas snackbar={snackbar}/>
             default:
                 return <span>you should not see this message</span>;
         }

@@ -1,0 +1,72 @@
+@media (max-width: 1140px) {
+    .empresasTabla {
+        height: 800px;
+        width: 600px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 1035px) {
+    .empresasTabla {
+        height: 800px;
+        width: 550px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 968px) {
+    .empresasTabla {
+        height: 800px;
+        width: 500px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 902px) {
+    .empresasTabla {
+        height: 800px;
+        width: 450px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 835px) {
+    .empresasTabla {
+        height: 800px;
+        width: 400px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .empresasTabla {
+        height: 800px;
+        width: 350px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 702px) {
+    .empresasTabla {
+        height: 800px;
+        width: 310px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 648px) {
+    .empresasTabla {
+        height: 800px;
+        width: 250px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .empresasTabla {
+        height: auto;
+        width: 100%;
+        overflow: auto;
+    }
+}
+
