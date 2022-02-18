@@ -269,7 +269,7 @@ function CreateUser({ snackbar }) {
               <tbody>
                 {entidades.map((llave, index) =>
                   llave.rol !== 0 ? (
-                    <tr>
+                    <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>
                         <center>{llave.nombre}</center>
@@ -349,7 +349,7 @@ function CreateUser({ snackbar }) {
               <tbody>
                 {entidades.map((llave, index) =>
                   llave.rol === 0 ? (
-                    <tr>
+                    <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>
                         <center>{llave.nombre}</center>

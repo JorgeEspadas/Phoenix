@@ -56,8 +56,8 @@ const ResultadoEmpresas = ({snackbar}) =>{
                     </thead>
                     <tbody>
                         {
-                            resultado.map((element) => {
-                                return  <tr>
+                            resultado.map((element,i) => {
+                                return  <tr key={i}>
                                     <th scope="row">{element.indicador}</th>
                                     <td>{element.pregunta}</td>
                                     <td>{element.contenido}</td>

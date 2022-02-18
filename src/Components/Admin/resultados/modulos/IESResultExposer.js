@@ -27,7 +27,7 @@ function IESResultExposer({ data, number }) {
                                         <tbody>
                                             {respuestas.map((r, i) => {
                                                 return (
-                                                    <tr>
+                                                    <tr key={i}>
                                                         <td>
                                                             <p><strong>{r.texto}</strong></p>
                                                         </td>

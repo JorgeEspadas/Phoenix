@@ -7,7 +7,7 @@ import Util from "../../../Backend/util/Util";
 import Tabla from "./tipos/Tabla";
 import NetworkManager from '../../../Backend/util/http';
 
-const EmpresasForm = ({ snackbar, data, qkey }) => {
+const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
 
     const [respuestas, setRespuesta] = useState([]);
     const [buttonDisabled, setButton] = useState(true);
@@ -93,7 +93,7 @@ const EmpresasForm = ({ snackbar, data, qkey }) => {
         setLoading(false);
         if (response['response'] === "OK") {
             // quitamos el cuestionario, y/o redirijimos a home
-            //complete(true);
+            complete(true);
         }else{
             snackbar(response.data.exception.message);
         }

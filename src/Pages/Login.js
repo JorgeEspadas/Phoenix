@@ -114,7 +114,7 @@ export default function Login({handleClose}){
                 </div>
                 <div className="form-row py-3">
                   <div className="offset-1 col-lg-10">
-                    <button class="btnLogin" onClick={handleLogin}>
+                    <button className="btnLogin" onClick={handleLogin}>
                       Iniciar Sesión
                     </button>
                   </div>

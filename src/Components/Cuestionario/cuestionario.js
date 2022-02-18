@@ -51,7 +51,7 @@ function Cuestionario({ snackbar }) {
                 content = <div><CuestionarioIES data={qdata} snackbar={snackbar} qkey={key} complete={handleDone} /></div>
                 break;
             case 2:
-                content = <div><EmpresasForm data={qdata} snackbar={snackbar} qkey={key} /></div>
+                content = <div><EmpresasForm data={qdata} snackbar={snackbar} qkey={key} complete={handleDone}/></div>
                 break;
             case 3:
                 content = <div className="container">
