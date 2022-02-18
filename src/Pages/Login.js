@@ -1,6 +1,7 @@
 import { useHistory, useLocation, NavLink } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import {useSnackbar} from 'react-simple-snackbar';
+import { Modal } from "react-bootstrap";
 /*Styles*/
 import LogoIcono from "../Images/LogoIcono.svg";
 import "../css/LoginPage.css";
@@ -9,7 +10,7 @@ import NetworkManager from "../Backend/util/http";
 import { AuthContext } from "../Components/auth/AuthProvider";
 import Util from "../Backend/util/Util";
 
-export default function Login(){
+export default function Login({handleClose}){
   const auth = useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
@@ -18,6 +19,8 @@ export default function Login(){
       email:'',
       password:''
   });
+  const [show, setClose] = useState(true);
+  const handleShow = (value) => setClose(value);
 
   const handleChange = e => {
     saveUser({
@@ -32,29 +35,44 @@ export default function Login(){
       return;
     }
     user.password = Util.Hash(user.password);
-    console.log(user.password);
     var net = new NetworkManager();
     var response = await net.post('auth/login',user);
-    console.log(response);
     if(response.response === "OK"){
       // recibimos el token, rol
       var token = response.data.token;
       var decoded = Util.decode(token);
       //hacemos set del usuario y mandamos el payload o auth.login();
       var userData = {
-        'nombre' : decoded[1].nombre,
-        'email' : decoded[1].email,
+        'nombre' : decoded.nombre,
+        'email' : decoded.email,
         'token' : token,
-        'rol' : decoded[1].rol
+        'rol' : decoded.rol
       };
+      handleShow(false);
       auth.Login(userData);
       history.push(location.state?.from || "/");
     }else{
-      openSnackbar('Error de Servicio');
+      handleClose(false);
+      openSnackbar(response.data.exception.message);
     }
   };
 
   return (
+    <div>
+    <Modal
+      show={show}
+      onHide={()=>{
+        handleShow(false);
+        !(handleClose === undefined) ? handleClose(false) : console.log('jejex')
+      }}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+    <Modal.Header closeButton>
+      <Modal.Title id="modalTittle">Inicio de Sesion</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
       <div className="contenedorLoginPage">
         <div className="contLogin container">
           <div className=" rowLogin row g-0 ">
@@ -74,8 +92,11 @@ export default function Login(){
                   <div className="offset-1 col-lg-10">
                     <input
                       type="email"
+                      name="email"
                       className="inputLogin px-3"
                       placeholder="Correo Electronico"
+                      onChange={handleChange}
+                      value={user.email}
                     />
                   </div>
                 </div>
@@ -83,15 +104,18 @@ export default function Login(){
                   <div className="offset-1 col-lg-10">
                     <input
                       type="password"
+                      name="password"
                       className="inputLogin px-3"
                       placeholder="Contraseña"
+                      onChange={handleChange}
+                      value={user.password}
                     />
                   </div>
                 </div>
                 <div className="form-row py-3">
                   <div className="offset-1 col-lg-10">
-                    <button class="btnLogin" onClick={handleLogin}>
-                      Iniciar Sesion
+                    <button className="btnLogin" onClick={handleLogin}>
+                      Iniciar Sesión
                     </button>
                   </div>
                 </div>
@@ -99,12 +123,14 @@ export default function Login(){
               <div className="contactLogin text-center">
                 <span>¿No tienes Cuenta? </span>
                 <NavLink exact to="/Contactanos">
-                  <a id="linkContactanos">Contactanos</a>
+                  <a id="linkContactanos" href="/#">Contáctanos</a>
                 </NavLink>
               </div>
             </div>
           </div>
         </div>
       </div>
-  );
-}
+    </Modal.Body>
+  </Modal>
+  </div>
+  );}

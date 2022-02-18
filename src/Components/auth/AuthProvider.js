@@ -2,7 +2,6 @@ import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
-
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
@@ -26,10 +25,33 @@ const AuthProvider = ({ children }) => {
     Logout() {
       // Se haria la peticion y si resulta exitosa
       setUser(null);
+      localStorage.removeItem("user");
     },
     isLogged() {
       return !!user;
     },
+    getRol() {
+      if(!!user){
+        return user.rol;
+      }else{
+        return 0;
+      }
+    },
+    getToken() {
+      return (!!user ? user.token : 'notoken')
+    },
+    printUser(){
+      console.log(user);
+    },
+    userActions(value){
+      switch(value){
+        case 'login':
+          this.Logout();
+          break;
+        default:
+          break;
+      }
+    }
   };
 
   return (

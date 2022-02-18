@@ -18,27 +18,47 @@ import ContactPage from "../Pages/ContactPage";
 import FormPage from "../Pages/FormPage";
 import AdminPage from "../Pages/AdminPage";
 import NotFoundPage from "../Pages/NotFoundPage";
-
+import Login from "../Pages/Login.js";
 
 export default function AppRouter() {
   return (
     <Router>
-      <div class="container-fluid overflow-hidden">
-        <div class="row vh-100 overflow-auto">
+      <div className="container-fluid overflow-hidden">
+        <div className="row vh-100 overflow-auto" id="AppRouter">
           <Sidebar />
-          <div class="col d-flex flex-column h-sm-100">
-            <main className="row overflow-auto">
+          <div className="col d-flex flex-column h-sm-100">
+            <div
+              className="row"
+              id="RedesSociales"
+              style={{
+                backgroundColor: "var(--main-bg-color)",
+                color: "var(--main-bs-color)",
+                padding: "0.5rem",
+                fontSize: "1.5rem",
+                textAlign: "right",
+              }}
+            >
+              <div className="">
+                <a href="/#">
+                  <i className="fa fa-twitter-square" aria-hidden="true"></i>
+                </a>
+                <a style={{ marginLeft: "1rem" }} href="/#">
+                  <i className="fa fa-facebook-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <main className="row overflow-auto" id="contentido">
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/Estadisticas" component={AnaliticsPage} />
                 <Route exact path="/Info" component={InfoPage} />
                 <Route exact path="/Contactanos" component={ContactPage} />
-
+                <Route exact path="/Login" component={Login} />
+                <Route exact path="/Encuestas" component={FormPage} />
                 <PublicRoute exact path="/Singin">
                   <Redirect to="/" />
                 </PublicRoute>
 
-                <PrivateRoute exact path="/Encuestas" component={FormPage} />
                 <PrivateRoute
                   exact
                   path="/Administrador"
@@ -48,8 +68,8 @@ export default function AppRouter() {
                 <Route exact path="*" component={NotFoundPage} />
               </Switch>
             </main>
-            <footer class=" footer row py-4 mt-auto">
-              <div class="col"> JAM | 2021 </div>
+            <footer className=" footer row py-4 mt-auto">
+              <div className="col"> JAM | 2021 </div>
             </footer>
           </div>
         </div>

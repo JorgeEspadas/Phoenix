@@ -1,57 +1,66 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ModifyUser from './components/ModifyUser';
-import CreateUser from './components/UserCreate'
+import React, { useState } from "react";
+import CreateUser from "./components/UserCreate";
+import "../../css/Usuarios.css";
+import image from "../../Images/Admin-Usuario.jpg";
 
-function UserEditor({snackbar}) {
-    const handleClick = (e) =>{
-        switch(e.target.value){
-            case 'create':
-                ReactDOM.render(
-                    <CreateUser snackbar={snackbar}/>,
-                    document.getElementById('editorContainer')
-                 ); 
-            break;
-            case 'modificar':
-                ReactDOM.render(
-                    <ModifyUser snackbar={snackbar}/>,
-                    document.getElementById('editorContainer')
-                 ); 
-            break;
-            default:
-                ReactDOM.render(
-                    <p>Selecciona alguna opcion :D</p>,
-                    document.getElementById('editorContainer')
-                    ); 
-            break;
-        }
+function UserEditor({ snackbar }) {
+  const [currentModule, setModule] = useState(0);
+
+  const handleClick = (e) => {
+    switch (e.target.value) {
+      case "create":
+        setModule(1);
+        break;
+      default:
+        setModule(0);
+        break;
     }
+  };
 
-    return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className='col-2'>
-                <center>
-                    <ul className="nav nav-tabs flex-column" style={{'border-bottom' : '0px'}}>
-                        <li className="nav-item">
-                            <button className="nav-link" href="#" onClick={handleClick} value="create">
-                                Crear
-                            </button>
-                            <button className="nav-link" href="#" onClick={handleClick} value="modificar">
-                                Modificar
-                            </button>
-                        </li>
-                    </ul>
-                </center>
-                </div>
-                <div className="col-5">
-                    <div className="container" >
-                        <div id="editorContainer"></div>
-                    </div>
-                </div>
-            </div>
+  // render switchcase
+  const moduleRender = (number) => {
+    switch (number) {
+      case 0:
+        return (
+          <div>
+            <img src={image} style={{ width: "20rem" }} alt="Imagen"></img>
+          </div>
+        );
+      case 1:
+        return <CreateUser snackbar={snackbar} />;
+      default:
+        return <span>you should not see this message</span>;
+    }
+  };
+
+  return (
+    <div className="container-fluid" style={{ padding: "1rem" }}>
+      <div className="row">
+        <div className="col-sm-12 col-xl-2">
+          <center>
+            <ul className="nav nav-tabs flex-column" id="MenuUsuario">
+              <li className="nav-item">
+                <button
+                  className="nav-link"
+                  href="/#"
+                  onClick={handleClick}
+                  value="create"
+                >
+                  <i className="fa fa-plus-square"></i>
+                  &nbsp; Accesos
+                </button>
+              </li>
+            </ul>
+          </center>
         </div>
-    );
+        <div className="col-sm-12 col-xl-8">
+          <div className="container">
+            <>{moduleRender(currentModule)}</>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default UserEditor;

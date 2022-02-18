@@ -1,55 +1,75 @@
-import Preguntas from '../Preguntas/Preguntas';
-import UserEditor from '../Components/Admin/Usuarios';
-import ReactDOM from 'react-dom';
-import {useSnackbar} from 'react-simple-snackbar';
-import Util from '../Backend/util/Util';
+import { useState } from "react";
+import UserEditor from "../Components/Admin/Usuarios";
+import { useSnackbar } from "react-simple-snackbar";
+import Util from "../Backend/util/Util";
+import "../css/AdminPage.css";
+import ConfigEditor from "../Components/AdminConfig/Configuracion";
+import ResultViewer from "../Components/Admin/components/Resultados";
 
 export default function AdminPage() {
   const [open] = useSnackbar(Util.snackbarConfig.options);
-  
+  const [pantallaActual, setPantalla] = useState(2);
+
   const handleClick = (e) => {
-    if(e.target.value === "agregar_pregunta"){  
-
-      ReactDOM.render(
-        <Preguntas />,
-        document.getElementById('adminContainer')
-     ); 
-    }else if(e.target.value=== "config"){
-      ReactDOM.render(
-        <span></span>,
-        document.getElementById('adminContainer'));
-    }else if(e.target.value === "usuario"){
-      ReactDOM.render(
-        <UserEditor snackbar={open}/>,
-        document.getElementById('adminContainer'))
+    if (e.target.value === "resultados") {
+      setPantalla(1);
+    } else if (e.target.value === "config") {
+      setPantalla(2);
+    } else if (e.target.value === "usuario") {
+      setPantalla(3);
     }
-  }
+  };
 
+  const moduleRender = (number) => {
+    switch (number) {
+      case 1:
+        return <ResultViewer snackbar={open}/>;
+      case 2:
+        return <ConfigEditor snackbar={open} />;
+      case 3:
+        return <UserEditor snackbar={open} />;
+      default:
+        return <span></span>;
+    }
+  };
 
   return (
-    <div className="col pt-4">
-      <h1>Administrador</h1>
-      <ul className="nav nav-tabs">
+    <div id="AdminPage" className="col pt-4 px-5">
+      <h1>&nbsp;&nbsp; Administrador</h1>
+      <ul className="nav nav-tabs" id="MenuAdmi">
         <li className="nav-item">
-          <button className="nav-link " aria-current="page" href="#"
-          onClick={handleClick} value="config">
-            Configuracion
+          <button
+            className="nav-link "
+            aria-current="page"
+            href="/#"
+            onClick={handleClick}
+            value="config"
+          >
+            Configuración
           </button>
         </li>
         <li className="nav-item">
-          <button className="nav-link " href="#" 
-          onClick={handleClick} value="usuario">
-            Usuarios
+          <button
+            className="nav-link "
+            href="/#"
+            onClick={handleClick}
+            value="usuario"
+          >
+            Encuestas
           </button>
         </li>
         <li className="nav-item">
-          <button exact to="/agregar-pregunta" className="nav-link " href="#" value="agregar_pregunta"
-          onClick={handleClick}>
-            Modificación
+          <button
+            className="nav-link "
+            href="/#"
+            onClick={handleClick}
+            value="resultados"
+          >
+            Resultados
           </button>
         </li>
       </ul>
-      <div id="adminContainer"></div>
+      <>{moduleRender(pantallaActual)}</>
     </div>
-  ); /// abuebo abuebo
+  );
 }

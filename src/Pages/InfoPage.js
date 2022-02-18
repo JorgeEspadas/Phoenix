@@ -1,7 +1,7 @@
 export default function InfoPage() {
   return (
     <div className="col pt-4">
-      <h1>Pagina de Informacion</h1>
+      <h1>Pagina de Información</h1>
       <br />
       <div className="row">
         <div className="col-sm-6">
@@ -12,7 +12,7 @@ export default function InfoPage() {
                 With supporting text below as a natural lead-in to additional
                 content.
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="/#" className="btn btn-primary">
                 Go somewhere
               </a>
             </div>
@@ -26,7 +26,7 @@ export default function InfoPage() {
                 With supporting text below as a natural lead-in to additional
                 content.
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="/#" className="btn btn-primary">
                 Go somewhere
               </a>
             </div>

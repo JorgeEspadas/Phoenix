@@ -1,8 +1,0 @@
-{
-    "response" : "OK",
-    "data" : {
-        "token" : "XXXXXXXXXXXXX",
-        "rol" : 1,
-        "mensaje_al_dev" : "0 usuario, 1 admin"
-    }
-}
