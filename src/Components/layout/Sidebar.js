@@ -17,14 +17,14 @@ const Sidebar = () => {
   const [show, setShow] = useState(false); //Estado Incial
   const handleShow = (value) => setShow(value);
 
-  const logout = () =>{
+  const logout = () => {
     auth.Logout();
-    history.push('/');
-  }
+    history.push("/");
+  };
 
   return (
-    <div className="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-color d-flex sticky-top">
-      <div className="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-1 pb-1">
+    <div className="col-12 col-md-3 col-xl-2 px-md-2 px-0 bg-color d-flex sticky-top">
+      <div className="d-flex flex-md-column flex-row flex-grow-1 align-items-center align-items-md-start px-3 pt-1 pb-1">
         <br />
         {/* ========= Primera Parte: Imagen de la Pagina ========= */}
         <div className=" align-items-center flex-shrink-1" align="center">
@@ -36,7 +36,7 @@ const Sidebar = () => {
               align="center"
             />
             <img
-              className="d-none d-sm-inline"
+              className="d-none d-md-inline"
               src={LogoNombre}
               alt=""
               style={{ width: "70%" }}
@@ -47,16 +47,16 @@ const Sidebar = () => {
         <br />
         {/* ========= Segunda Parte: Modulos del Sidebar ========= */}
         <ul
-          className="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
+          className="nav nav-pills flex-md-column flex-row flex-nowrap flex-shrink-1 flex-md-grow-0 flex-grow-1 mb-0 justify-content-center align-items-center align-items-md-start"
           id="menu"
         >
           <>
             {SidebarData.map((val, key) => {
               return (
                 <li className="nav-item flex-column" key={key}>
-                  <a href={val.Link} className="nav-link  px-sm-0 px-2">
+                  <a href={val.Link} className="nav-link  px-md-0 px-2">
                     <i className={val.Icono}></i>
-                    <span className="ms-1 d-none d-sm-inline">
+                    <span className="ms-1 d-none d-md-inline">
                       {val.Modulo}
                     </span>
                   </a>
@@ -66,11 +66,11 @@ const Sidebar = () => {
             {/* ========= Modulos que se muestran solo cuando estas logeado ========= */}
             {auth.isLogged() && (
               <>
-                {auth.getRol() === 3 && (
+                {auth.getRol() == 3 && (
                   <li className="nav-item">
-                    <a href="/Administrador" className="nav-link px-sm-0 px-2">
+                    <a href="/Administrador" className="nav-link px-md-0 px-2">
                       <i className="fa fa-cog"></i>
-                      <span className="ms-1 d-none d-sm-inline">
+                      <span className="ms-1 d-none d-md-inline">
                         Administrador
                       </span>
                     </a>
@@ -81,14 +81,14 @@ const Sidebar = () => {
           </>
         </ul>
         {/* ========= Tercera Parte: Espacio de Inicio de Sesion ========= */}
-        <div className="dropdown align-self-center show py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+        <div className=" align-self-center show py-md-4  ms-auto ms-md-0 flex-shrink-1">
           <>
             {" "}
             {/* ========= Cuando aun no se Inicia Sesion ========= */}
             {!auth.isLogged() && (
               <>
                 <AccountCircleIcon
-                  className="InicioSesionIcono px-sm-0 px-1"
+                  className="InicioSesionIcono px-md-0 px-1"
                   fontSize="large"
                   onClick={() => {
                     handleShow(true);
@@ -103,15 +103,17 @@ const Sidebar = () => {
                 <Dropdown.Toggle id="">
                   <a>
                     <i className="fa fa-user"></i>
-                    <span className="username ms-1 d-none d-sm-inline">
+                    <span className="username ms-1 d-none d-md-inline">
                       Mi Perfil
                     </span>
                   </a>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item onClick={logout}>
-                    Cerrar Sesión
+                  <Dropdown.Item href="#/action-1">
+                    Cambiar Contraseña
                   </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={logout}>Cerrar Sesion</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             )}

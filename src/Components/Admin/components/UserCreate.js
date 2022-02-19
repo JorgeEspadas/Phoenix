@@ -51,7 +51,7 @@ function CreateUser({ snackbar }) {
     var network = new NetworkManager();
 
     console.log(state);
-    if(state.rol !== 0){
+    if(state.rol != 0){
       if (state.email === "" || state.nombre === "" || state.telefono === "") {
         snackbar("Porfavor llena todos los campos");
         return;
@@ -74,7 +74,7 @@ function CreateUser({ snackbar }) {
     };
 
     var response = await network.post("admin/entidad/generar", payload);
-    if (response.response === "OK") {
+    if (response.response == "OK") {
       setLoading(false);
       setEntidad(response.data.key);
       snackbar("Entidad registrada");
@@ -112,7 +112,7 @@ function CreateUser({ snackbar }) {
           required
         />
       </div>
-      {(state.rol === 0) ?
+      {(state.rol == 0) ?
         <div>
           <div className="form-group">
             <label for="entidad">A qué IES Pertenece</label>
@@ -202,7 +202,7 @@ function CreateUser({ snackbar }) {
           ))}
         </Form.Select>
       </div>
-      {state.rol === 0 ? (
+      {state.rol == 0 ? (
         <div className="form-group">
           <label for="usos">
             Número de veces que puede presentar el cuestionario
@@ -268,14 +268,14 @@ function CreateUser({ snackbar }) {
               </thead>
               <tbody>
                 {entidades.map((llave, index) =>
-                  llave.rol !== 0 ? (
+                  llave.rol != 0 ? (
                     <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>
                         <center>{llave.nombre}</center>
                       </td>
                       <td>
-                        {llave.rol !== 0
+                        {llave.rol != 0
                           ? llave.usos > 0
                             ? "Activo"
                             : "Inactivo"
@@ -283,7 +283,7 @@ function CreateUser({ snackbar }) {
                       </td>
                       <td>
                         <center>
-                          {llave.rol !== 0 ? (
+                          {llave.rol != 0 ? (
                             llave.usos > 0 ? (
                               <button
                                 style={{ width: "120px" }}
@@ -348,7 +348,7 @@ function CreateUser({ snackbar }) {
               </thead>
               <tbody>
                 {entidades.map((llave, index) =>
-                  llave.rol === 0 ? (
+                  llave.rol == 0 ? (
                     <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>
