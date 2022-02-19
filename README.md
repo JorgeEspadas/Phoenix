@@ -7,20 +7,20 @@
 Phoenix Front-End para el proyecto de observatorio de la UAC.<br>
 "Diagnostico de la situacion actual de la industria del software en la ciudad de San Francisco de Campeche".
 
-# Instalacion
+# Notas
+Esta aplicacion es un front-end dummy, que significa que no hace nada sin el backend corriendo detras (ver Hydra)
+Esta escrita en ReactJS con React-Bootstrap para algunos componentes y Boostrap 5 para otros.
 
+
+# Instalacion
 - Clonar el repositorio
 - Ejecutar " npm i " o " npm install " en la terminal en la raiz del proyecto
-- En caso de no tener los siguientes paquetes de dependencias:
-- npm i react-router
-- npm install bootstrap
-- npm install jquery
-- npm install --save cdbreact
-- npm install @material-ui/core
-- npm install @material-ui/icons
-- npm install animate.css --save
-- Para correr el proyecto se ejecuta " npm start " en la raiz del proyecto (rama de desarrollo).
 
-# Reglas
+# Inicio en modo dev
+- Ejectura " npm start " en la terminal en la raiz del proyecto.
 
-- No presiones al Front-End
+# Deploy de la version viva
+- Instalar "npm install serve"
+- En la raiz del proyecto ejecutar "npm run build"
+- Para hacer deploy ahora se ejecuta "serve -s build -l 80"
+
