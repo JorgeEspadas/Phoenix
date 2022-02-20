@@ -19,8 +19,13 @@ Esta escrita en ReactJS con React-Bootstrap para algunos componentes y Boostrap 
 # Inicio en modo dev
 - Ejectura " npm start " en la terminal en la raiz del proyecto.
 
-# Deploy de la version viva
+# Deploy Standalone
 - Instalar "npm install serve"
 - En la raiz del proyecto ejecutar "npm run build"
 - Para hacer deploy ahora se ejecuta "serve -s build -l 80"
+
+# Deploy en Docker
+- Tener docker instalado
+- Ejecutar docker build -t "phoenix" .       en la raiz del proyecto. (donde esta el Dockerfile)
+- Iniciar desde docker.
 
