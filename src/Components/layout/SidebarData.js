@@ -1,6 +1,6 @@
 export const SidebarData = [
   {
-    Modulo: "Home",
+    Modulo: "Página Principal",
     Icono: "fa fa-home",
     Link: "/",
     Activo: true,

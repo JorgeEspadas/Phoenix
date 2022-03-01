@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import StatusModule from "./components/StatusModule";
+import '../../css/Config.css';
 
 function ConfigEditor({ snackbar }) {
 

@@ -50,8 +50,8 @@ export default function AnaliticsPage() {
           <div className="col-sm-12 col-xl-8">
             <h1 style={{ color: "var(--main-bg-color)" }}>Estadísticas</h1>
             <p className="lead">
-              Estadísticas reales de Empresas e Instituciones en materia de
-              Desarrollo de Software.
+            Estadísticas de la Situación actual de la Industria de Software en la ciudad de San Francisco de Campeche. <br></br>
+            Participación de Empresas (PYMES) e Instituciones Educativas de nivel Superior (IES) vinculadas con la Industria de Software.
             </p>
           </div>
           <br />

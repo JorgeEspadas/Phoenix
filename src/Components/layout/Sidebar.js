@@ -113,7 +113,7 @@ const Sidebar = () => {
                     Cambiar Contraseña
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={logout}>Cerrar Sesion</Dropdown.Item>
+                  <Dropdown.Item onClick={logout}>Cerrar Sesión</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             )}

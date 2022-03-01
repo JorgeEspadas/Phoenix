@@ -8,7 +8,7 @@ export default function ContactPage() {
         <div className="row align-items-center">
           <div className="col-sm-12 col-xl-8">
             <h1 style={{ color: "var(--main-bg-color)" }}>
-              &nbsp;&nbsp; ¿Quienes Somos?
+              &nbsp;&nbsp; ¿Quiénes Somos?
             </h1>
             <p className="lead">
             Somos un Cuerpo Académico que pone a disposición del público en general, información de la Situación actual de la 

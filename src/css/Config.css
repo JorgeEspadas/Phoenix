@@ -1,0 +1,10 @@
+.principal{
+    padding: 1rem;
+}
+
+@media (max-width: 810px) {
+    .principal {
+        width: 400px;
+        margin: 0;
+    }
+}
