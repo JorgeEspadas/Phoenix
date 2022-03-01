@@ -284,18 +284,8 @@ function CreateUser({ snackbar }) {
                       <td>
                         <center>
                           {llave.rol != 0 ? (
-                            llave.usos > 0 ? (
-                              <button
-                                style={{ width: "120px" }}
-                                type="button"
-                                class="btn btn-primary"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(llave.hash);
-                                  snackbar("Llave copiada al portapapeles");
-                                }}
-                              >
-                                Copiar Llave
-                              </button>
+                            llave.usos > 0 ? (                            
+                                <>{llave.hash}</>                              
                             ) : (
                               <></>
                             )
@@ -359,17 +349,7 @@ function CreateUser({ snackbar }) {
                       </td>
                       <td>
                         <center>
-                          <button
-                            type="button"
-                            style={{ width: "120px" }}
-                            class="btn btn-primary"
-                            onClick={() => {
-                              navigator.clipboard.writeText(llave.hash);
-                              snackbar("Llave copiada al portapapeles");
-                            }}
-                          >
-                            Copiar Llave
-                          </button>
+                        <>{llave.hash}</>
                         </center>
                       </td>
                       <td>

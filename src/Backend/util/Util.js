@@ -10,7 +10,7 @@ export default class Util {
     }
 
     static Config = {
-        baseURL: 'http://localhost:1337/',
+        baseURL: 'http://192.100.163.15:8080/',
         headers: {
             'Content-Type' : 'application/json',
             'Accept' : 'application/json',
