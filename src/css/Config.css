@@ -8,3 +8,79 @@
         margin: 0;
     }
 }
+
+.user{
+    padding: 1rem;
+}
+
+@media (max-width: 1100px) {
+   .user{
+       overflow: auto;
+       width: 700px;
+       padding: 0;
+       margin: 0;
+   }
+
+   .card {
+       width: 721px;
+   }
+
+   .contenido{
+       overflow: auto;
+   }
+}
+
+@media (max-width: 1062px) {
+    .user{
+         overflow: auto;
+        width: 680px;
+        padding: 0;
+        margin: 0;
+    }
+ }
+
+ @media (max-width: 1035px) {
+    .user{
+         overflow: auto;
+        width: 600px;
+        padding: 0;
+        margin: 0;
+    }
+ }
+
+ @media (max-width: 928px) {
+    .user{
+         overflow: auto;
+        width: 550px;
+        padding: 0;
+        margin: 0;
+    }
+ }
+
+ @media (max-width: 861px) {
+    .user{
+         overflow: auto;
+        width: 500px;
+        padding: 0;
+        margin: 0;
+    }
+ }
+
+ @media (max-width: 794px) {
+    .user{
+         overflow: auto;
+        width: 470px;
+        padding: 0;
+        margin: 0;
+    }
+ }
+
+ @media (max-width: 767px) {
+    .user{
+        width: auto;
+    }
+
+    .card {
+        width: 600px;
+    }
+ }

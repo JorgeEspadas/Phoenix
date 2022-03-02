@@ -34,7 +34,7 @@ function UserEditor({ snackbar }) {
   };
 
   return (
-    <div className="container-fluid" style={{ padding: "1rem" }}>
+    <div className="container-fluid user">
       <div className="row">
         <div className="col-sm-12 col-xl-2">
           <center>

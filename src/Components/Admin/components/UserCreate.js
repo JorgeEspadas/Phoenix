@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Spinner, InputGroup, FormControl, Form } from "react-bootstrap";
 import NetworkManager from "../../../Backend/util/http";
 import { } from "react-bootstrap";
+import '../../../css/Config.css';
 
 function CreateUser({ snackbar }) {
   const roles = [
@@ -247,6 +248,7 @@ function CreateUser({ snackbar }) {
           )}
         </button>
       </div>
+      <div className="contenido">
       <div style={{ paddingTop: "20px" }}>
         <div className="card" id="AreaUserCreate">
           <h5 className="card-header text-center">Entidades en el sistema</h5>
@@ -372,6 +374,7 @@ function CreateUser({ snackbar }) {
             </table>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
