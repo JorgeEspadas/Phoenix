@@ -52,7 +52,7 @@ function CreateUser({ snackbar }) {
     var network = new NetworkManager();
 
     console.log(state);
-    if(state.rol != 0){
+    if(state.rol !== "0"){
       if (state.email === "" || state.nombre === "" || state.telefono === "") {
         snackbar("Porfavor llena todos los campos");
         return;
@@ -60,6 +60,10 @@ function CreateUser({ snackbar }) {
     }else{
       if(state.entidad === undefined){
         snackbar("Porfavor selecciona una entidad para el alumno");
+        return;
+      }
+      if(parseInt(state.usos,10) < 1){
+        snackbar("El número de veces que puede presentar el cuestionario debe ser mayor a 0.");
         return;
       }
     }
@@ -113,7 +117,7 @@ function CreateUser({ snackbar }) {
           required
         />
       </div>
-      {(state.rol == 0) ?
+      {(state.rol === "0") ?
         <div>
           <div className="form-group">
             <label for="entidad">A qué IES Pertenece</label>
@@ -126,7 +130,7 @@ function CreateUser({ snackbar }) {
               <option key="null" disabled selected>Selecciona una opción</option>
               {entidades.map((llave, index) => (
                 <>
-                  {llave.rol === 1 ? <option
+                  {llave.rol === "1" ? <option
                     key={index}
                     value={llave.nombre}
                     style={{ color: "var(--main-bg-primary-color)" }}
@@ -203,7 +207,7 @@ function CreateUser({ snackbar }) {
           ))}
         </Form.Select>
       </div>
-      {state.rol == 0 ? (
+      {state.rol === "0" ? (
         <div className="form-group">
           <label for="usos">
             Número de veces que puede presentar el cuestionario
@@ -214,6 +218,7 @@ function CreateUser({ snackbar }) {
             id="usos"
             name="usos"
             onChange={handleChange}
+            min="1" pattern="^[0-9]+"
             required
           />
         </div>
@@ -270,24 +275,34 @@ function CreateUser({ snackbar }) {
               </thead>
               <tbody>
                 {entidades.map((llave, index) =>
-                  llave.rol != 0 ? (
+                  llave.rol !== "0" ? (
                     <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>
                         <center>{llave.nombre}</center>
                       </td>
                       <td>
-                        {llave.rol != 0
-                          ? llave.usos > 0
+                        {llave.rol !== "0"
+                          ? parseInt(llave.usos,10) > 0
                             ? "Activo"
                             : "Inactivo"
                           : llave.usos}
                       </td>
                       <td>
                         <center>
-                          {llave.rol != 0 ? (
-                            llave.usos > 0 ? (                            
-                                <>{llave.hash}</>                              
+                          {llave.rol !== "0" ? (
+                            parseInt(llave.usos,10) > 0 ? (                            
+                              <button
+                              style={{ width: "120px" }}
+                              type="button"
+                              class="btn btn-primary"
+                              onClick={() => {
+                              navigator.clipboard.writeText(llave.hash);
+                              snackbar("Llave copiada al portapapeles");
+                              }}
+                              >
+                              Copiar Llave
+                            </button>                             
                             ) : (
                               <></>
                             )
@@ -340,19 +355,36 @@ function CreateUser({ snackbar }) {
               </thead>
               <tbody>
                 {entidades.map((llave, index) =>
-                  llave.rol == 0 ? (
+                  llave.rol === "0" ? (
                     <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>
                         <center>{llave.nombre}</center>
                       </td>
                       <td>
-                        <center>{llave.usos}</center>
+                        <center>{llave.rol === "0"
+                          ? parseInt(llave.usos,10) > 0
+                            ? llave.usos
+                            : "Inactivo"
+                          : llave.usos}</center>
                       </td>
                       <td>
-                        <center>
-                        <>{llave.hash}</>
-                        </center>
+                        {parseInt(llave.usos,10) > 0 ?
+                          <center>
+                          <>{ <button
+                             style={{ width: "120px" }}
+                             type="button"
+                             class="btn btn-primary"
+                             onClick={() => {
+                             navigator.clipboard.writeText(llave.hash);
+                             snackbar("Llave copiada al portapapeles");
+                             }}
+                             >
+                             Copiar Llave
+                           </button>}</>
+                          </center>
+                          : <></>
+                      }
                       </td>
                       <td>
                         <center>

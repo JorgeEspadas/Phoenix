@@ -39,10 +39,6 @@
        margin: 0;
    }
 
-   .card {
-       width: 721px;
-   }
-
    .contenido{
        overflow: auto;
    }
@@ -82,6 +78,10 @@
         padding: 0;
         margin: 0;
     }
+
+    .card{
+        width:  500px;
+    }
  }
 
  @media (max-width: 794px) {
@@ -98,7 +98,14 @@
         width: auto;
     }
 
-    .card {
-        width: 600px;
+    .card{
+        width:  auto;
+    }
+ }
+
+ @media (max-width: 615px) {
+    
+    .card{
+        width:  450px;
     }
  }
