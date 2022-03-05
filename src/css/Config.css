@@ -16,30 +16,44 @@
 @media (max-width: 1175px) {
     .user{
         overflow: auto;
-        width: 750px;
+        width: 700px;
         padding: 0;
         margin: 0;
     }
 }
 
-@media (max-width: 1128px) {
+@media (max-width: 1110px) {
     .user{
         overflow: auto;
-        width: 720px;
+        width: 650px;
         padding: 0;
         margin: 0;
     }
 }
+
+@media (max-width: 1400px) {
+    .card{
+        width:  605px;
+        overflow: auto;
+    }
+ }
+
+ @media (max-width: 1199px) {
+    .card{
+        width:  auto;
+        overflow: auto;
+    }
+ }
 
 @media (max-width: 1100px) {
    .user{
        overflow: auto;
-       width: 700px;
+       width: 600px;
        padding: 0;
        margin: 0;
    }
 
-   .contenido{
+   .card{
        overflow: auto;
    }
 }
@@ -47,16 +61,17 @@
 @media (max-width: 1062px) {
     .user{
          overflow: auto;
-        width: 680px;
+        width: 580px;
         padding: 0;
         margin: 0;
     }
  }
 
- @media (max-width: 1035px) {
+
+ @media (max-width: 928px) {
     .user{
          overflow: auto;
-        width: 600px;
+        width: 550px;
         padding: 0;
         margin: 0;
     }
@@ -65,7 +80,7 @@
  @media (max-width: 928px) {
     .user{
          overflow: auto;
-        width: 550px;
+        width: 520px;
         padding: 0;
         margin: 0;
     }
@@ -84,10 +99,19 @@
     }
  }
 
- @media (max-width: 794px) {
+ @media (max-width: 825px) {
     .user{
          overflow: auto;
         width: 470px;
+        padding: 0;
+        margin: 0;
+    }
+ }
+
+ @media (max-width: 800px) {
+    .user{
+         overflow: auto;
+        width: 450px;
         padding: 0;
         margin: 0;
     }

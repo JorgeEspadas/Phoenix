@@ -292,17 +292,7 @@ function CreateUser({ snackbar }) {
                         <center>
                           {llave.rol !== "0" ? (
                             parseInt(llave.usos,10) > 0 ? (                            
-                              <button
-                              style={{ width: "120px" }}
-                              type="button"
-                              class="btn btn-primary"
-                              onClick={() => {
-                              navigator.clipboard.writeText(llave.hash);
-                              snackbar("Llave copiada al portapapeles");
-                              }}
-                              >
-                              Copiar Llave
-                            </button>                             
+                              <>{llave.hash}</>                            
                             ) : (
                               <></>
                             )
@@ -371,17 +361,7 @@ function CreateUser({ snackbar }) {
                       <td>
                         {parseInt(llave.usos,10) > 0 ?
                           <center>
-                          <>{ <button
-                             style={{ width: "120px" }}
-                             type="button"
-                             class="btn btn-primary"
-                             onClick={() => {
-                             navigator.clipboard.writeText(llave.hash);
-                             snackbar("Llave copiada al portapapeles");
-                             }}
-                             >
-                             Copiar Llave
-                           </button>}</>
+                             <>{llave.hash}</>
                           </center>
                           : <></>
                       }
