@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { Accordion, Alert, Spinner } from "react-bootstrap";
 import Multiple from "./tipos/Multiple";
 import Rango from "./tipos/Rango";
@@ -10,13 +10,20 @@ import NetworkManager from '../../../Backend/util/http';
 const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
 
     const [respuestas, setRespuesta] = useState([]);
-    const [buttonDisabled, setButton] = useState(true);
     const [loading, setLoading] = useState(false);
-    const [isVerified , setVerified] = useState(false);
-    var numeroDePreguntas = 0;
+    const [numPreguntas,setNumPreguntas] = useState(0);
 
-    const setProperty = (name, value ,tipo) => {    
-        let total = numeroDePreguntas;
+    useEffect ( () => {
+        let numeroDePreguntas = 0;
+            data.map((categoria,i) => {
+                categoria.preguntas.map((pregunta,i) =>{
+                    numeroDePreguntas=numeroDePreguntas+1;  
+            });
+         });
+        setNumPreguntas(numeroDePreguntas);
+    },[]);
+
+    const setProperty = (name, value ,tipo) => {   
         //Evitamos duplicados de preguntas.
         for(let i = 0; i < respuestas.length; i++){
             if(respuestas[i].id===name){
@@ -43,59 +50,52 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
             }
 
             if(isVacio){//Si el arreglo no esta vacio se agrega la pregunta
-                setRespuesta(prevState=>[...prevState, {id:name,valor:value,modulo:tipo}]);//Jorge siempre se rifa
+                setRespuesta(prevState=>[...prevState, {id:name,valor:value,modulo:tipo}]);
             }
+
         }
-        if(isVerified){
-            total = respuestas.length;
-        }else{
-            total = numeroDePreguntas;
-        }
-        if (respuestas.length === total-1){
-            setButton(false);
-            setVerified(true);
-        } else{
-           // console.log(buttonDisabled);
-            setButton(true);
-            setVerified(false);
-        }
+        
     }
 
     const handleSubmit = async () => {
-        //Ordenamos las respuestas.
-        respuestas.sort(((a, b) => parseFloat(a.id.replace("empresas_","")) - parseFloat(b.id.replace("empresas_",""))));
-        /* Nos aseguramos que las preguntas con respuestas ligadas a otras preguntas tengan almenos un poco de congruencia en sus respuestas.*/
-        for(let i = 0; i < respuestas.length; i++){
-            if(respuestas[i].id==="empresas_37" || respuestas[i].id==="empresas_38" || respuestas[i].id==="empresas_39" || respuestas[i].id==="empresas_40" || respuestas[i].id==="empresas_41"){
-                if(respuestas[i].valor[0]._id === "2"){
-                    respuestas[i+1].valor[0].texto = "0";
+        if(respuestas.length === numPreguntas){
+            //Ordenamos las respuestas.
+            respuestas.sort(((a, b) => parseFloat(a.id.replace("empresas_","")) - parseFloat(b.id.replace("empresas_",""))));
+            /* Nos aseguramos que las preguntas con respuestas ligadas a otras preguntas tengan almenos un poco de congruencia en sus respuestas.*/
+            for(let i = 0; i < respuestas.length; i++){
+                if(respuestas[i].id==="empresas_37" || respuestas[i].id==="empresas_38" || respuestas[i].id==="empresas_39" || respuestas[i].id==="empresas_40" || respuestas[i].id==="empresas_41"){
+                    if(respuestas[i].valor[0]._id === "2"){
+                        respuestas[i+1].valor[0].texto = "0";
+                    }
+                }
+                if(respuestas[i].id==="empresas_60" || respuestas[i].id==="empresas_62"){
+                    if(respuestas[i].valor[0]._id === "3"|| respuestas[i].valor[0]._id === "1"){
+                        respuestas[i+1].valor[0].texto = "Ninguno";
+                        respuestas[i+1].valor[0]._id = "0";
+                    }
+                }
+                if(respuestas[i].id==="empresas_68" || respuestas[i].id==="empresas_70" || respuestas[i].id==="empresas_72"){
+                    if(respuestas[i].valor[0]._id === "2"){
+                        respuestas[i+1].valor[0].texto = "Ninguno";
+                        respuestas[i+1].valor[0]._id = "0";
+                    }
                 }
             }
-            if(respuestas[i].id==="empresas_60" || respuestas[i].id==="empresas_62"){
-                if(respuestas[i].valor[0]._id === "3"|| respuestas[i].valor[0]._id === "1"){
-                    respuestas[i+1].valor[0].texto = "Ninguno";
-                    respuestas[i+1].valor[0]._id = "0";
-                }
-            }
-            if(respuestas[i].id==="empresas_68" || respuestas[i].id==="empresas_70" || respuestas[i].id==="empresas_72"){
-                if(respuestas[i].valor[0]._id === "2"){
-                    respuestas[i+1].valor[0].texto = "Ninguno";
-                    respuestas[i+1].valor[0]._id = "0";
-                }
-            }
-        }
-       
+        
 
-        let network = new NetworkManager();
-        setLoading(true);
-        await Util.delay(1000);
-        var response = await network.post('api/preguntas', {'hash': qkey, respuestas: respuestas});
-        setLoading(false);
-        if (response['response'] === "OK") {
-            // quitamos el cuestionario, y/o redirijimos a home
-            complete(true);
+            let network = new NetworkManager();
+            setLoading(true);
+            await Util.delay(1000);
+            var response = await network.post('api/preguntas', {'hash': qkey, respuestas: respuestas});
+            setLoading(false);
+            if (response['response'] === "OK") {
+                // quitamos el cuestionario, y/o redirijimos a home
+                complete(true);
+            }else{
+                snackbar(response.data.exception.message);
+            }
         }else{
-            snackbar(response.data.exception.message);
+            snackbar("Contesta todas las preguntas.");
         }
         
     }
@@ -109,19 +109,18 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
                             <Accordion.Body>
                                 {
                                     categoria.preguntas.map((pregunta,i) =>{
-                                        numeroDePreguntas = numeroDePreguntas + 1;
                                         switch(pregunta.tipo){
                                             case "multiple":
-                                                return <Multiple key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
+                                                return <Multiple key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={pregunta._id.replace("empresas_","")}/>
                                             
                                             case "abierta":
-                                                return <Abierta key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
+                                                return <Abierta key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={pregunta._id.replace("empresas_","")} snackbar={snackbar}/>
                                                 
                                             case "tabla":
-                                                return <Tabla key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
+                                                return <Tabla key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={pregunta._id.replace("empresas_","")} snackbar={snackbar}/>
                                                  
                                             case "rango":
-                                                return <Rango key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={numeroDePreguntas}/>
+                                                return <Rango key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={pregunta._id.replace("empresas_","")}/>
                                             default:
                                                 return <div></div>                                                       
                                         }
@@ -143,7 +142,6 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
                             fontWeight: "bold",
                         }}
                         onClick={handleSubmit}
-                        disabled={!loading && buttonDisabled}
                     >
                         {loading ? (
                             <Spinner
@@ -158,13 +156,6 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
                         )}
                     </button>
                 </div>
-            </div>
-            <div className="d-grid gap-2 col-4 mx-auto text-center">
-                {buttonDisabled && (<>
-                    <Alert variant="warning">
-                        Contesta todas las preguntas para continuar.
-                    </Alert>
-                </>)}
             </div>
         </div>
 

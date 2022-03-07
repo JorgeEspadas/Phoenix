@@ -29,6 +29,12 @@ export default function Login({handleClose}){
     });
   }
 
+  const handleLoginKeyPress = (e) => {
+    var keycode = e.keyCode || e.which;
+    if (keycode == 13) {
+        handleLogin();
+    }
+  }
   const handleLogin = async () => {
     if(user.email.trim() === "" || user.password.trim() === ""){
       openSnackbar('Porfavor llena todos los campos');
@@ -70,7 +76,7 @@ export default function Login({handleClose}){
       centered
     >
     <Modal.Header closeButton>
-      <Modal.Title id="modalTittle">Inicio de Sesion</Modal.Title>
+      <Modal.Title id="modalTittle">Inicio de Sesión</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <div className="contenedorLoginPage">
@@ -94,8 +100,9 @@ export default function Login({handleClose}){
                       type="email"
                       name="email"
                       className="inputLogin px-3"
-                      placeholder="Correo Electronico"
+                      placeholder="Correo Electrónico"
                       onChange={handleChange}
+                      onKeyPress={handleLoginKeyPress}
                       value={user.email}
                     />
                   </div>
@@ -108,6 +115,7 @@ export default function Login({handleClose}){
                       className="inputLogin px-3"
                       placeholder="Contraseña"
                       onChange={handleChange}
+                      onKeyPress={handleLoginKeyPress}
                       value={user.password}
                     />
                   </div>

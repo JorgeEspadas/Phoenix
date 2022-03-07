@@ -28,6 +28,13 @@ function Cuestionario({ snackbar }) {
         }
     }
 
+    const handleAuthKeyPress = (e) => {
+        var keycode = e.keyCode || e.which;
+        if (keycode == 13) {
+            handleAuth();
+        }
+      }
+
     const handleChange = e => {
         setKey((e.target.value).toString());
     }
@@ -74,7 +81,7 @@ function Cuestionario({ snackbar }) {
             <div className="d-flex justify-content-center"><h1>Acceso a la Encuesta</h1></div>
             <div className="container d-flex justify-content-center col-3">
                 <div className="row d-flex justify-content-center">
-                    <input type="text" className="form-control col-3" name="accessKey" onChange={handleChange}  onKeyPress={handleAuth}></input>
+                    <input type="text" className="form-control col-3" name="accessKey" onChange={handleChange}  onKeyPress={handleAuthKeyPress}></input>
                     <div className="p-2"></div>
                     <button className="btn btn-success btn-lg d-flex justify-content-center col-8" onClick={handleAuth}>Acceder</button>
                 </div>
