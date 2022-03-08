@@ -24,7 +24,7 @@ function CreateUser({ snackbar }) {
     nombre: "",
     telefono: "",
     email: "",
-    rol: 1,
+    rol: "1",
   });
 
   const [loading, setLoading] = useState(false);
@@ -50,8 +50,6 @@ function CreateUser({ snackbar }) {
 
   const handleSubmit = async () => {
     var network = new NetworkManager();
-
-    console.log(state);
     if(state.rol !== "0"){
       if (state.email === "" || state.nombre === "" || state.telefono === "") {
         snackbar("Porfavor llena todos los campos");

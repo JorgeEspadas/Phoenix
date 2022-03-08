@@ -23,7 +23,7 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
         setNumPreguntas(numeroDePreguntas);
     },[]);
 
-    const setProperty = (name, value ,tipo) => {   
+    const setProperty = (name, value ,tipo) => {  
         //Evitamos duplicados de preguntas.
         for(let i = 0; i < respuestas.length; i++){
             if(respuestas[i].id===name){
@@ -111,7 +111,7 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
                                     categoria.preguntas.map((pregunta,i) =>{
                                         switch(pregunta.tipo){
                                             case "multiple":
-                                                return <Multiple key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={pregunta._id.replace("empresas_","")}/>
+                                                return <Multiple key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={pregunta._id.replace("empresas_","")} snackbar={snackbar}/>
                                             
                                             case "abierta":
                                                 return <Abierta key={i} pregunta={pregunta} indice={i} callback={setProperty} numero={pregunta._id.replace("empresas_","")} snackbar={snackbar}/>

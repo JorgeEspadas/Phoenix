@@ -1,20 +1,29 @@
 import React,  {useState} from 'react';
 
-const Multiple = ({pregunta, callback,numero}) => {
+const Multiple = ({pregunta, callback,numero, snackbar}) => {
 
     const [opciones,setOpciones] = useState([]);
     const [id,setId] = useState([]);
+    const  [contestar,setContestar] = useState(false);
     
     const handleChange = e => {
         let multiple = opciones;
         let ids = id;
         
         if(e.target.type === "radio"){
-            multiple = [];
-            multiple.push({
-                _id: e.target.id,
-                texto: e.target.value
-            });
+            if(e.target.name === e.target.value){
+                snackbar("Rellena el campo de texto para validar tu respuesta.");
+                multiple = [];
+                setContestar(true);
+            }else{
+                document.getElementById("empresas_213").value = "";
+                setContestar(false);
+                multiple = [];
+                multiple.push({
+                    _id: e.target.id,
+                    texto: e.target.value
+                });
+            }
         }else{
             if(e.target.placeholder !== ""){
                 if(ids.includes((e.target.id).replace(""+e.target.name,""))){
@@ -51,7 +60,6 @@ const Multiple = ({pregunta, callback,numero}) => {
                 }
             }
         }
-
         let valor = multiple;
 
         setId(ids);
@@ -65,7 +73,11 @@ const Multiple = ({pregunta, callback,numero}) => {
                 {
                     pregunta.opciones.map( (opcion, i) =>{
                         if(!pregunta.multiples){
-                            return <div key={i}><label className="px-3"><input type="radio" id={opcion.opcion_id} name={pregunta._id} value={opcion.texto} onChange={handleChange}/> {opcion.texto}</label></div>
+                            if(!opcion.abierta){
+                                return <div key={i}><label className="px-3"><input type="radio" id={opcion.opcion_id} name={pregunta._id} value={opcion.texto} onChange={handleChange}/> {opcion.texto}</label></div>
+                            }else{
+                                return <div key={i}><label className="px-3"><input type="radio" id={opcion.opcion_id} name={pregunta._id} value={pregunta._id} onChange={handleChange} /></label><input className="" type="text" id={pregunta._id +""+opcion.opcion_id} name={pregunta._id} onChange={handleChange} placeholder={opcion.texto} disabled={!contestar}></input></div>
+                            }
                         }else{
                             if(!opcion.abierta){
                                 return <div key={i}><label className="px-3"><input type="checkbox" id={opcion.opcion_id}  name={pregunta._id} value={opcion.texto} onChange={handleChange}/> {opcion.texto}</label></div>
