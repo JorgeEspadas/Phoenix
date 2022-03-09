@@ -6,20 +6,55 @@ import Abierta from "./tipos/Abierta";
 import Util from "../../../Backend/util/Util";
 import Tabla from "./tipos/Tabla";
 import NetworkManager from '../../../Backend/util/http';
+import VerFaltantes from "../PreguntasFaltantes";
 
 const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
 
     const [respuestas, setRespuesta] = useState([]);
     const [loading, setLoading] = useState(false);
     const [numPreguntas,setNumPreguntas] = useState(0);
+    const [ datosPreguntas , setDatosPreguntas ] = useState([]);
+    const [faltantes, setFaltantes] = useState([]);
+    const [show,setShow] = useState(false);
+    const [index, setIndex] = useState([]);
+    const [ ids , setIds ] = useState([]);
+
+    const handleRevisar = () => {
+        let auxFaltantes = [];
+        let auxIndex = [];
+        setFaltantes(auxFaltantes);
+        setIndex(auxIndex);
+        datosPreguntas.map((datos,i) => {
+            if(!ids.includes(datos._id)){
+                //console.log(document.getElementById(datos._id));
+                setFaltantes(prevState => [...prevState,datos.texto ]);
+                setIndex(prevState => [...prevState,datos.numero ]);
+            }
+        });
+    }
+
+    const handleShow = (isShow) => {
+        console.log("ddds")
+        if(isShow){
+            handleRevisar();
+        }
+        setShow(isShow);
+    }
 
     useEffect ( () => {
         let numeroDePreguntas = 0;
+        let auxDatosPreguntas = [];
             data.map((categoria,i) => {
                 categoria.preguntas.map((pregunta,i) =>{
                     numeroDePreguntas=numeroDePreguntas+1;  
+                    auxDatosPreguntas.push({
+                        texto:pregunta.texto,
+                        numero:parseFloat((pregunta._id).replace("empresas_","")),
+                        _id:pregunta._id
+                    });
             });
          });
+         setDatosPreguntas(auxDatosPreguntas);
         setNumPreguntas(numeroDePreguntas);
     },[]);
 
@@ -28,6 +63,7 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
         for(let i = 0; i < respuestas.length; i++){
             if(respuestas[i].id===name){
                 respuestas.splice(i,1);
+                ids.splice(i,1);
             }
         }
         
@@ -51,6 +87,7 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
 
             if(isVacio){//Si el arreglo no esta vacio se agrega la pregunta
                 setRespuesta(prevState=>[...prevState, {id:name,valor:value,modulo:tipo}]);
+                setIds(prevState => [...prevState,name ]);  
             }
 
         }
@@ -104,8 +141,8 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
         <div>
             
                 {data.map((categoria,i) => {
-                        return <Accordion defaultActiveKey="0" style={{ paddingBottom: '20px' }}>
-                            <Accordion.Item eventKey={i} key={categoria.categoria}>
+                        return <Accordion defaultActiveKey="0" key={categoria.categoria} style={{ paddingBottom: '20px' }}>
+                            <Accordion.Item eventKey={i} >
                             <Accordion.Header>{categoria.categoria}</Accordion.Header>
                             <Accordion.Body>
                                 {
@@ -133,7 +170,20 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
                     })
                 }
                 
-            
+            <div className="container d-flex justify-content-center pt-5">
+                <div className="d-grid gap-2 col-4 mx-auto">
+                    <button
+                        className="btn btn-lg btn btn-outline-warning"
+                        style={{
+                            fontWeight: "bold",
+                        }}   
+                        onClick={()=>handleShow(true)}
+                    >
+                    Revisar Encuesta.
+                    </button>
+                    {show ? <VerFaltantes faltantes={faltantes} handleClose={handleShow} num={index}></VerFaltantes> : <></>}
+                </div>
+            </div>
             <div className="container d-flex justify-content-center p-5">
                 <div className="d-grid gap-2 col-4 mx-auto">
                     <button
