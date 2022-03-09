@@ -102,9 +102,10 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
 
     return (
         <div>
-            <Accordion defaultActiveKey="0">
+            
                 {data.map((categoria,i) => {
-                        return <Accordion.Item eventKey={i} name={i} key={categoria.categoria}>
+                        return <Accordion defaultActiveKey="0" style={{ paddingBottom: '20px' }}>
+                            <Accordion.Item eventKey={i} key={categoria.categoria}>
                             <Accordion.Header>{categoria.categoria}</Accordion.Header>
                             <Accordion.Body>
                                 {
@@ -128,10 +129,11 @@ const EmpresasForm = ({ snackbar, data, qkey,complete }) => {
                                 }
                             </Accordion.Body>
                     </Accordion.Item>
+                    </Accordion>
                     })
                 }
                 
-            </Accordion>
+            
             <div className="container d-flex justify-content-center p-5">
                 <div className="d-grid gap-2 col-4 mx-auto">
                     <button

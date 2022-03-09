@@ -1,29 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion, Alert, Spinner } from "react-bootstrap";
 import NetworkManager from '../../../Backend/util/http';
 import Util from "../../../Backend/util/Util";
 import PreguntaAbierta from "./Modulos/Pregunta_Abierta";
 import PreguntaMultiple from "./Modulos/Pregunta_Multiple";
+import VerFaltantes from "../PreguntasFaltantes";
 
 function CuestionarioIES({ snackbar, data, qkey, complete}) {
     const [respuestas, setRespuesta] = useState([]);
     const [buttonDisabled, setButton] = useState(true);
     const [loading, setLoading] = useState(false);
-
+    const [ datosPreguntas , setDatosPreguntas ] = useState([]);
+    const [ ids , setIds ] = useState([]);
+    const [faltantes, setFaltantes] = useState([]);
+    const [show,setShow] = useState(false);
+    const [index, setIndex] = useState([]);
+    const [primeraRes, setPrimeraRes] = useState("");
     var total = 0;
     var preguntas = data;
-
+    let num = 0;
     const setProperty = (name, value, texto, extradata) => {
         var xtradata = (extradata === undefined) ? '' : extradata;
 
         for (var i = 0; i < respuestas.length; i++) {
             if (respuestas[i].id === name) {
                 respuestas.splice(i, 1);
+                ids.splice(i,1);
             }
         }
 
         //console.log('name: '+name+', val: '+value+', text: '+texto+' extra: '+extradata);
         setRespuesta(prevState => [...prevState, { id: name, valor: value, texto: texto, extra: xtradata }]);
+        setIds(prevState => [...prevState,name ]);  
         if ((Object.values(respuestas).length) === total - 1) setButton(false);
     }
 
@@ -57,30 +65,68 @@ function CuestionarioIES({ snackbar, data, qkey, complete}) {
         }
     }
 
+    useEffect(()=>{
+        let numPregunta = 0;
+        data.map((seccion,i)=>{
+            seccion.indicadores.map((dimension,i) =>{
+                dimension.preguntas.map((pregunta,i)=>{
+                    numPregunta = numPregunta + 1;
+                    let datos = {
+                        texto:pregunta.texto,
+                        _id:pregunta.id,
+                        numPregunta: numPregunta
+                    }
+                    setDatosPreguntas(prevState => [...prevState,datos]);
+                });
+            });
+        });
+    },[]);
+
+    const handleRevisar = () => {
+        let auxFaltantes = [];
+        let auxIndex = [];
+        setFaltantes(auxFaltantes);
+        setIndex(auxIndex);
+        datosPreguntas.map((datos,i) => {
+            if(!ids.includes(datos._id)){
+                //console.log(document.getElementById(datos._id));
+                setFaltantes(prevState => [...prevState,datos.texto ]);
+                setIndex(prevState => [...prevState,datos.numPregunta ]);
+            }
+        });
+    }
+
+    const handleShow = (isShow) => {
+        if(isShow){
+            handleRevisar();
+        }
+        setShow(isShow);
+    }
     return (
         <div>
             {
                 preguntas.map((seccion, i) => {
                     return (
-                        <div>
+                        <div key={seccion.header}>
                             <h1> {seccion.header} </h1>
                             <div>
                                 {
                                     seccion.indicadores.map((dimension, i) => {
                                         total = total + dimension.preguntas.length;
                                         return (
-                                            <div>
+                                            <div key={dimension.titulo}>
                                                 <Accordion style={{ paddingBottom: '20px' }}>
                                                     <Accordion.Item eventKey={i}>
                                                         <Accordion.Header>{dimension.titulo}</Accordion.Header>
                                                         <Accordion.Body>
                                                             {
                                                                 dimension.preguntas.map((pregunta, i) => {
+                                                                    num = num +1;
                                                                     switch (pregunta.modulo) {
                                                                         case "multiple":
-                                                                            return <PreguntaMultiple id={pregunta.id} texto={pregunta.texto} respuestas={pregunta.respuestas} callback={setProperty} />;
+                                                                            return <PreguntaMultiple id={pregunta.id} texto={pregunta.texto} respuestas={pregunta.respuestas} callback={setProperty} num={num} key={pregunta.id}/>;
                                                                         case "abierta":
-                                                                            return <PreguntaAbierta modulo={pregunta} callback={setProperty} />;
+                                                                            return <PreguntaAbierta modulo={pregunta} callback={setProperty} num={num} key={pregunta.id}/>;
                                                                         default:
                                                                             return <div></div>;
                                                                     }
@@ -98,6 +144,20 @@ function CuestionarioIES({ snackbar, data, qkey, complete}) {
                     );
                 })
             }
+            <div className="container d-flex justify-content-center pt-5">
+                <div className="d-grid gap-2 col-4 mx-auto">
+                    <button
+                        className="btn btn-lg btn btn-outline-warning"
+                        style={{
+                            fontWeight: "bold",
+                        }}   
+                        onClick={()=>handleShow(true)}
+                    >
+                    Revisar Encuesta.
+                    </button>
+                    {show ? <VerFaltantes faltantes={faltantes} handleClose={handleShow} num={index} primeraRespuesta ={primeraRes}></VerFaltantes> : <></>}
+                </div>
+            </div>
             <div className="container d-flex justify-content-center p-5">
                 <div className="d-grid gap-2 col-4 mx-auto">
                     <button

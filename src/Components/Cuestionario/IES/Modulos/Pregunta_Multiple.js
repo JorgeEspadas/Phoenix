@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PreguntaMultiple({ id, texto, respuestas, callback }) {
+function PreguntaMultiple({ id, texto, respuestas, callback, num }) {
 
     var hasOpenAnswer = false; // indica si la respuesta es o no abierta.
     var answerTexts = []; // guarda los textos de la respuesta (los labels)
@@ -26,15 +26,16 @@ function PreguntaMultiple({ id, texto, respuestas, callback }) {
     return (
         <div className="container border-bottom px-1">
             <div className="row p-1">
+                <p id={id}></p>
                 <div className="col-sm-12 px-1">
-                    {texto}
+                    {num +") " + texto}
                 </div>
                 <div className="col-sm-8 p-1">
                     {respuestas.map((res, i) => {
                         answerTexts.push(res.texto);
                         if(res.modulo !== undefined) hasOpenAnswer = true;
                         return (
-                            <div className="container">
+                            <div className="container" key = {i}> 
                                 <input type="radio" id={id+res.valor} name={id} value={res.valor} onChange={(handleChange)}/>
                                 <label className="px-2" for={id+res.valor}>{res.texto}</label>
                                 {(res.modulo === undefined) ? <></> : <input type="text" className="col-5" id={id} name={id} onChange={(e=>handleOpenAnswer(e))}/>}
